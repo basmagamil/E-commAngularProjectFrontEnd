@@ -1,0 +1,26 @@
+.navbar-top.navbar {
+    padding-top:    0.25rem; 
+    padding-bottom: 0.25rem;
+    font-size: smaller;      
+    line-height: 0.75em;
+  }
+
+  .navbar-bottom.navbar {
+    padding-top:    0.25rem; 
+    padding-bottom: 0.25rem;
+    font-size: smaller;      
+    line-height: 0.75em;
+  }
+
+  .form-inline{
+    width: 65%!important;
+  }
+
+  .input-group{
+    width: 100%!important;
+  }
+  /* @media screen and (min-width: 1200px) {
+      .search-box{
+        width: 700px!important;
+      }
+  } */

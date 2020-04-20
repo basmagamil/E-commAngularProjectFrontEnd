@@ -1,1 +1,67 @@
-<p>navbar works!</p>
+<nav class="navbar-top navbar navbar-expand navbar-dark bg-dark">
+  <div class="navbar-nav ml-auto">
+    <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="about" class="nav-item nav-link" >About</a>
+    <a href="#" class="nav-item nav-link"><fa-icon [icon]="faGlobe"></fa-icon></a>
+  </div>
+</nav>
+
+<nav class="navbar-middle navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="home" class="navbar-brand">
+    <img src="assets/images/logo/logo.svg" height="28" alt="CompYou">
+  </a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <form class="form-inline">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-secondary">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="navbar-nav ml-auto">
+      <a href="#" class="nav-item nav-link disabled">Hello, {{user.userName}}!</a>
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="profile/{{user.id}}" class="nav-item nav-link">
+        <fa-icon [icon]="faUser"></fa-icon>
+      </a>
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="cart/{{user.id}}" class="nav-item nav-link">
+        <fa-icon [icon]="faShoppingCart"></fa-icon>
+      </a>
+      <a href="#" class="nav-item nav-link">
+        <fa-icon [icon]="faSignOutAlt"></fa-icon>
+      </a>
+      <!-- <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="register" class="nav-item nav-link">Register</a>
+            <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="login" class="nav-item nav-link">Login</a> -->
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar-bottom navbar navbar-expand-md d-md-block d-none navbar-dark bg-primary justify-content-center">
+  <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
+    <ul class="navbar-nav mx-auto text-center">
+      <li ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle" id="dropdownMenuButton" ngbDropdownToggle>Brand</a>
+        <div ngbDropdownMenu>
+          <button ngbDropdownItem>HP</button>
+          <button ngbDropdownItem>Lenovo</button>
+          <button ngbDropdownItem>Dell</button>
+        </div>
+      </li>
+      <li ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle" id="dropdownMenuButton" ngbDropdownToggle>Processor</a>
+        <div ngbDropdownMenu>
+          <button ngbDropdownItem>Core i3</button>
+          <button ngbDropdownItem>Core i5</button>
+          <button ngbDropdownItem>Core i7</button>
+          <button ngbDropdownItem>Core i9</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
