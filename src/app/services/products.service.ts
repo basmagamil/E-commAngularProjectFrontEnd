@@ -8,31 +8,28 @@ export class ProductsService {
   
   baseURL = "http://localhost:3000/products";
   
-  constructor(private myClient:HttpClient) { }
+  constructor(private client:HttpClient) { }
 
   getAllProducts(){
-    return this.myClient.get(this.baseURL, {observe:'body'});
+    return this.client.get(this.baseURL); //, {observe:'body'}
   }
   // TODO
   // getSearchedProducts(){
 
   // }
   getPromotedProducts(){
-    console.log("hey from service")
-    console.log(this.baseURL);
-    console.log(`${this.baseURL}/promoted`)
-    return this.myClient.get(`${this.baseURL}/promoted`, {observe:'body'});
+    return this.client.get(`${this.baseURL}/promoted`);
   }
   getProduct(id){
-    return this.myClient.get(`${this.baseURL}/${id}`);
+    return this.client.get(`${this.baseURL}/${id}`);
   }
   addProduct(product){
-    return this.myClient.post(`${this.baseURL}`, product);
+    return this.client.post(`${this.baseURL}`, product);
   }
   deleteProduct(id){
-    return this.myClient.delete(`${this.baseURL}/${id}`);
+    return this.client.delete(`${this.baseURL}/${id}`);
   }
   updateProduct(id, product){
-    return this.myClient.patch(`${this.baseURL}/${id}`, product);
+    return this.client.patch(`${this.baseURL}/${id}`, product);
   }
 }

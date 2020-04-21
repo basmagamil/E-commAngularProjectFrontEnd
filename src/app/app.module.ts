@@ -20,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductComponent } from './components/product/product.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductsService } from './services/products.service';
+import { UsersService } from './services/users.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { ProductsService } from './services/products.service';
     FontAwesomeModule,
     HttpClientModule
   ],
-  providers: [ProductsService],
+  providers: [ProductsService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
