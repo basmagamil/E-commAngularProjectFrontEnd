@@ -30,13 +30,16 @@
     </form>
 
     <div class="navbar-nav ml-auto">
+
+      <!-- 1 TODO: only show if logged in -->
       <a class="d-md-none" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
         class="nav-item nav-link">
         <fa-icon class="d-md-none" [icon]="faShoppingBag"></fa-icon>
         <span class="d-md-none"> All Laptops</span>
       </a>
 
-      <!-- <a href="#" class="nav-item nav-link disabled d-none d-md-inline-block">Hello, {{user.userName}}!</a>
+      <!-- 1.a TODO: only show if user -->
+      <a href="#" class="nav-item nav-link disabled d-none d-md-inline-block">Hello, {{user.userName}}!</a>
       <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="profile/{{user.id}}"
         class="nav-item nav-link">
         <fa-icon [icon]="faUser"></fa-icon>
@@ -47,19 +50,34 @@
         <fa-icon [icon]="faShoppingCart"></fa-icon>
         <span class="d-md-none">  Cart</span>
       </a>
+      <!-- 1.a end -->
+
+      <!-- 1.b TODO: only show if admin -->
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="orders"
+        class="nav-item nav-link">
+        <fa-icon [icon]="faClipboardList"></fa-icon>
+        <span class="d-md-none">  Orders</span>
+      </a>
+      <!-- 1.b end -->
+
       <a href="#" class="nav-item nav-link">
         <fa-icon [icon]="faSignOutAlt"></fa-icon>
         <span class="d-md-none">  Log Out</span>
-      </a> -->
+      </a>
+      <!-- 1. end -->
 
+      <!-- 2 TODO: only show if not logged in -->
       <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="login"
         class="nav-item nav-link">Login</a>
       <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="register"
         class="nav-item nav-link">Register</a>
+      <!-- 2 end -->
+
     </div>
   </div>
 </nav>
 
+<!-- 3 TODO: only show if logged in -->
 <nav class="navbar-bottom navbar navbar-expand-md d-md-block d-none navbar-dark bg-primary justify-content-center">
   <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
     <ul class="navbar-nav mx-auto text-center">
@@ -98,15 +116,4 @@
     </ul>
   </div>
 </nav>
-<!-- 
-<nav class="navbar-bottom navbar navbar-expand-md d-md-block d-none navbar-dark bg-primary justify-content-center dropdown d-inline-block">
-  <div class="dropdown d-inline-block">
-    <div class="dropdown-content bg-primary">
-      <div class="row">
-          <a href="#" class="nav-link">Link 1</a>
-          <a href="#" class="nav-link">Link 2</a>
-          <a href="#" class="nav-link">Link 3</a>
-      </div>
-    </div>
-  </div>
-</nav> -->
+<!-- 3 end -->
