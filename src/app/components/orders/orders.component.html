@@ -1,1 +1,50 @@
-<p>orders works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10 mt-3 offset-1">
+      <div class="row">
+        <div class="col-xs-12 font-weight-bold mt-3 ml-5">
+          <h2>Orders Table</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 mt-3 ml-auto">
+          <table class="table table-hover table-bordered shadow p-3 mb-3 bg-white rounded">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Date of order</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Product Title</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <th scope="row">{{order.userName}}</th>
+                <!-- <td>{{order.date}}</td>
+                <td>{{order.price}}EGP</td>
+                <td *ngFor="let prod of order.products">
+                    {{prod.productTitle}}
+                </td>
+                <td *ngFor="let prod of order.products">
+                    {{prod.status}}
+                </td>
+                <td *ngFor="let prod of order.products">
+
+                    <select class="browser-default custom-select">
+                        <option value="1" selected>{{prod.status}}</option>
+                        <option value="2" >Pending</option>
+                        <option value="3">Rejected</option>
+                    </select>
+                </td> -->
+               
+                </tr>
+        
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

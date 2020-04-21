@@ -28,7 +28,7 @@ import { LoginComponent } from './components/login/login.component';
     OrdersComponent,
     ProductsComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     NgbModule,
