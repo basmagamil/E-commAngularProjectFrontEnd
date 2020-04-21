@@ -9,6 +9,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ErrorComponent } from './components/error/error.component';
+import { ProductComponent } from './components/product/product.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:'orders', component:OrdersComponent},
   {path:'cart/:id', component:CartComponent},
   {path:'profile/:id', component:ProfileComponent},
+  {path:'products/:id', component:ProductComponent},
   {path:'**',component:ErrorComponent}
 ];
 

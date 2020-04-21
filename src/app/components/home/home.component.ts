@@ -51,9 +51,9 @@ export class HomeComponent implements OnInit {
   promotedLaptops = [
     {
       "_id": "1",
-      "title": "Dell Inspiron-G5-5590 (Intel® Core CI7-9750H -16GB -1TB+512GBSS - Nvidia RTX 2070 8G -15.6) Black",
+      "title": "Dell Inspiron-G5-5590",
       "images": [
-        "https://2b.com.eg/en/computers/laptops.html"
+        "assets\\images\\laptops\\hp-dq1037-laptop-price-in-pakistan-1.jpg"
       ],
       "price": 12319,
       "details": {
@@ -64,14 +64,14 @@ export class HomeComponent implements OnInit {
         "graphicsCard": "Nvidia RTX 2070 8G",
         "color": "orange"
       },
-      "quantity": 5
+      "quantity": 5,
+      "promotionRatio": "0.2",
     },
     {
       "_id": "2",
       "title": "HP 15-da1044ne",
       "images": [
         "assets\\images\\laptops\\81UU-PYPSPL._AC_SL1500_.jpg",
-        "assets\\images\\laptops\\hp-dq1037-laptop-price-in-pakistan-1.jpg"
       ],
       "price": 20000,
       "promotionRatio": "0.5",
@@ -87,9 +87,9 @@ export class HomeComponent implements OnInit {
     },
     {
       "_id": "3",
-      "title": "Dell Inspiron-G5-5590 (Intel® Core CI7-9750H -16GB -1TB+512GBSS - Nvidia RTX 2070 8G -15.6) Black",
+      "title": "Dell Inspiron-G5-5590",
       "images": [
-        "https://2b.com.eg/en/computers/laptops.html"
+        "assets\\images\\laptops\\hp-dq1037-laptop-price-in-pakistan-1.jpg"
       ],
       "price": 12319,
       "details": {
@@ -100,14 +100,15 @@ export class HomeComponent implements OnInit {
         "graphicsCard": "Nvidia RTX 2070 8G",
         "color": "orange"
       },
-      "quantity": 5
+      "quantity": 5,
+      "promotionRatio": "0.2",
     },
     {
       "_id": "4",
       "title": "HP 15-da1044ne",
       "images": [
+        "assets\\images\\laptops\\EliteBook.jpg",
         "assets\\images\\laptops\\81UU-PYPSPL._AC_SL1500_.jpg",
-        "assets\\images\\laptops\\hp-dq1037-laptop-price-in-pakistan-1.jpg"
       ],
       "price": 20000,
       "promotionRatio": "0.5",
@@ -123,9 +124,9 @@ export class HomeComponent implements OnInit {
     },
     {
       "_id": "5",
-      "title": "Dell Inspiron-G5-5590 (Intel® Core CI7-9750H -16GB -1TB+512GBSS - Nvidia RTX 2070 8G -15.6) Black",
+      "title": "Dell Inspiron-G5-5590",
       "images": [
-        "https://2b.com.eg/en/computers/laptops.html"
+        "assets\\images\\laptops\\hp-probook-470-g5-back.jpg"
       ],
       "price": 12319,
       "details": {
@@ -136,20 +137,40 @@ export class HomeComponent implements OnInit {
         "graphicsCard": "Nvidia RTX 2070 8G",
         "color": "orange"
       },
-      "quantity": 5
+      "quantity": 5,
+      "promotionRatio": "0.2",
     },
     {
       "_id": "6",
-      "title": "HP 15-da1044ne",
+      "title": "HP 15-da1044ne ee",
       "images": [
         "assets\\images\\laptops\\81UU-PYPSPL._AC_SL1500_.jpg",
-        "assets\\images\\laptops\\hp-dq1037-laptop-price-in-pakistan-1.jpg"
+        "assets\\images\\laptops\\hp-dq1037-laptop-price-in-pakistan-1.jpg",
       ],
       "price": 20000,
       "promotionRatio": "0.5",
       "quantity": 15,
       "details": {
-        "brand": "intal",
+        "brand": "intel",
+        "processor": "9th Generation Intel® Core i7 9750H 12M Cache, up to 4.50",
+        "ram": "16GB DDR4, 2666MHz",
+        "hardDisk": "1TB+512GB SSD",
+        "graphicsCard": "Nvidia RTX 2070 8G",
+        "color": "orange"
+      },
+    },
+    {
+      "_id": "7",
+      "title": "HP 15-da1044ne ee",
+      "images": [
+        "assets\\images\\laptops\\81UU-PYPSPL._AC_SL1500_.jpg",
+        "assets\\images\\laptops\\hp-dq1037-laptop-price-in-pakistan-1.jpg",
+      ],
+      "price": 20000,
+      "promotionRatio": "0.5",
+      "quantity": 15,
+      "details": {
+        "brand": "intel",
         "processor": "9th Generation Intel® Core i7 9750H 12M Cache, up to 4.50",
         "ram": "16GB DDR4, 2666MHz",
         "hardDisk": "1TB+512GB SSD",
@@ -159,8 +180,16 @@ export class HomeComponent implements OnInit {
     }
   ]
 
-  constructor() {
+  GetKeys(obj){
+    return Object.keys(obj);
+  }
 
+  constructor() {
+    this.promotedLaptops.forEach(laptop => {
+      for (const key in laptop.details) {
+          const val = laptop.details[key];
+      }
+    });
   }
 
   ngOnInit(): void {

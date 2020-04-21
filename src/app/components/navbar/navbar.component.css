@@ -13,14 +13,54 @@
   }
 
   .form-inline{
-    width: 65%!important;
+    width: 70%!important;
   }
 
   .input-group{
     width: 100%!important;
   }
-  /* @media screen and (min-width: 1200px) {
-      .search-box{
-        width: 700px!important;
-      }
-  } */
+ 
+  .dropdown {
+    position: static!important;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.row2 {
+  padding: 10px;
+}
+
+.row2 a {
+  display: inline-block;
+}
+
+.dropdown  a{
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.parent-nav-link{
+  /* font-weight: bold; */
+  color: white!important;
+}
+.parent-nav-link:hover{
+  /* font-weight: bold; */
+  color: lightcyan!important;
+}
+.dropdown .row2 a{
+  color:white;
+}
+
+.dropdown .row2 a:hover{
+  color:lightcyan;
+}

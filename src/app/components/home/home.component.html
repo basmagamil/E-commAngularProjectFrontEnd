@@ -1,180 +1,65 @@
 <ngb-carousel #carousel [interval]="3000" [pauseOnHover]="pauseOnHover" (slide)="onSlide($event)">
     <ng-template ngbSlide *ngFor="let img of sliderImages; index as i">
-        <div class="carousel-caption col-md-5 p-lg-5 mx-auto my-5">
-            <h1 class="display-4 font-weight-normal">{{sliderTitles[i]}}</h1>
+        <div class="carousel-caption col-md-5 p-lg-5 mx-auto my-5 d-md-inline-block d-none">
+            <h1 class="display-4 font-weight-normal d-lg-inline-block d-none">{{sliderTitles[i]}}</h1>
             <p class="lead font-weight-normal">{{sliderCaptions[i]}}</p>
             <a class="btn btn-primary" routerLink="../products">Shop Now</a>
         </div>
-        <a href="https://www.google.fr/?q=Number+{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
-            <div class="picsum-img-wrapper">
-                <img [src]="img" class="w-100">
-            </div>
-        </a>
+        <div class="picsum-img-wrapper">
+            <img [src]="img" class="w-100">
+        </div>
     </ng-template>
 </ngb-carousel>
 
 <div class="container marketing">
     <hr class="featurette-divider">
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">HP 15-da1044ne </h2>
-            <h3 class="text-muted old-price d-inline">20,000 EGP</h3>
-            <h3 class="new-price text-danger d-inline"> 15,000 EGP</h3>
-            <ul class="lead">
-                <li>Hard Disk: 2TB</li>
-                <li>Processor: Core i7</li>
-                <li>Graphics Card: 4 GB</li>
-            </ul>
-            <button type="button" class="btn btn-sm btn-primary">View Details</button>
-        </div>
-        <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" src="assets\images\laptops\81UU-PYPSPL._AC_SL1500_.jpg">
-        </div>
+    <div *ngFor="let laptop of promotedLaptops; index as i">
+        <div *ngIf="i<=1; then featurette"></div>
+        <ng-template #featurette>
+            <div class="row featurette">
+                <div class="col-md-7" [ngClass]="{'order-md-2' : i==0}">
+                    <h2 class="featurette-heading">{{laptop.title}}</h2>
+                    <h3 class="text-muted old-price d-inline">{{laptop.price}} EGP</h3>
+                    <h3 class="new-price text-danger d-inline"> {{laptop.price*laptop.promotionRatio}} EGP</h3>
+                    <ul class="lead">
+                        <li *ngFor="let key of GetKeys(laptop.details)">{{key}}: {{laptop.details[key]}}</li>
+                        <!-- <li>Processor: Core i7</li>
+                        <li>Graphics Card: 4 GB</li> -->
+                    </ul>
+                    <button type="button" class="btn btn-sm btn-primary" routerLink="../products/{{laptop._id}}">View Details</button>
+                </div>
+                <div class="col-md-5">
+                    <img class="featurette-image img-fluid mx-auto"
+                    [src]="laptop.images[0]">
+                </div>
+            </div>
+            <hr class="featurette-divider">
+        </ng-template>
     </div>
-    <hr class="featurette-divider">
-    <div class="row featurette">
-        <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">HP 15-da1044ne </h2>
-            <h3 class="text-muted old-price d-inline">20,000 EGP</h3>
-            <h3 class="new-price text-danger d-inline"> 15,000 EGP</h3>
-            <ul class="lead">
-                <li>Hard Disk: 2TB</li>
-                <li>Processor: Core i7</li>
-                <li>Graphics Card: 4 GB</li>
-            </ul>
-            <button type="button" class="btn btn-sm btn-primary">View Details</button>
-        </div>
-        <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto"
-                src="assets\images\laptops\hp-dq1037-laptop-price-in-pakistan-1.jpg">
-        </div>
-    </div>
-    <hr class="featurette-divider">
-
     <div class="card-columns">
-        <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="assets\images\laptops\hp-probook-470-g5-back.jpg">
-            <div class="card-body">
-                <h5 class="card-title">HP 15-da1044ne</h5>
-                <ul class="card-text">
-                    <li><b>Hard Disk:</b> 2TB</li>
-                    <li><b>Processor:</b> Core i7</li>
-                    <li><b>Graphics Card:</b> 4 GB</li>
-                </ul>
-                <div class="d-flex justify-content-right align-items-right">
-                    <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                    <div>
-
-                        <p class="card-text new-price text-danger">15,000 EGP</p>
-                        <small class="text-muted old-price">20,000 EGP</small>
+        <div *ngFor="let laptop of promotedLaptops; index as i">
+            <div *ngIf="i>=2; then cardcolumn"></div>
+            <ng-template #cardcolumn>
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" [src]="laptop.images[0]">
+                    <div class="card-body">
+                        <h5 class="card-title">{{laptop.title}}</h5>
+                        <ul class="card-text">
+                            <li *ngFor="let key of GetKeys(laptop.details)">{{key}}: {{laptop.details[key]}}</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-primary" routerLink="../products/{{laptop._id}}">View Details</button>
+                            </div>
+                            <div>
+        
+                                <p class="card-text new-price text-danger">{{laptop.price*laptop.promotionRatio}} EGP</p>
+                                <small class="text-muted old-price">{{laptop.price}} EGP</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="assets\images\laptops\5ta66ea.png">
-            <div class="card-body">
-                <h5 class="card-title">HP 15-da1044ne</h5>
-                <ul class="card-text">
-                    <li><b>Hard Disk:</b> 2TB</li>
-                    <li><b>Processor:</b> Core i7</li>
-                    <li><b>Graphics Card:</b> 4 GB</li>
-                </ul>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                    </div>
-                    <div>
-
-                        <p class="card-text new-price text-danger">15,000 EGP</p>
-                        <small class="text-muted old-price">20,000 EGP</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="assets\images\laptops\81UU-PYPSPL._AC_SL1500_.jpg">
-            <div class="card-body">
-                <h5 class="card-title">HP 15-da1044ne</h5>
-                <ul class="card-text">
-                    <li><b>Hard Disk:</b> 2TB</li>
-                    <li><b>Processor:</b> Core i7</li>
-                    <li><b>Graphics Card:</b> 4 GB</li>
-                </ul>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                    </div>
-                    <div>
-
-                        <p class="card-text new-price text-danger">15,000 EGP</p>
-                        <small class="text-muted old-price">20,000 EGP</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="assets\images\laptops\EliteBook.jpg">
-            <div class="card-body">
-                <h5 class="card-title">HP 15-da1044ne</h5>
-                <ul class="card-text">
-                    <li><b>Hard Disk:</b> 2TB</li>
-                    <li><b>Processor:</b> Core i7</li>
-                    <li><b>Graphics Card:</b> 4 GB</li>
-                </ul>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                    </div>
-                    <div>
-
-                        <p class="card-text new-price text-danger">15,000 EGP</p>
-                        <small class="text-muted old-price">20,000 EGP</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="assets\images\laptops\hp-dq1037-laptop-price-in-pakistan-1.jpg">
-            <div class="card-body">
-                <h5 class="card-title">HP 15-da1044ne</h5>
-                <ul class="card-text">
-                    <li><b>Hard Disk:</b> 2TB</li>
-                    <li><b>Processor:</b> Core i7</li>
-                    <li><b>Graphics Card:</b> 4 GB</li>
-                </ul>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                    </div>
-                    <div>
-
-                        <p class="card-text new-price text-danger">15,000 EGP</p>
-                        <small class="text-muted old-price">20,000 EGP</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="assets\images\laptops\hp-probook-470-g5-back.jpg">
-            <div class="card-body">
-                <h5 class="card-title">HP 15-da1044ne</h5>
-                <ul class="card-text">
-                    <li><b>Hard Disk:</b> 2TB</li>
-                    <li><b>Processor:</b> Core i7</li>
-                    <li><b>Graphics Card:</b> 4 GB</li>
-                </ul>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                    </div>
-                    <div>
-
-                        <p class="card-text new-price text-danger">15,000 EGP</p>
-                        <small class="text-muted old-price">20,000 EGP</small>
-                    </div>
-                </div>
-            </div>
+            </ng-template>
         </div>
     </div>
 
