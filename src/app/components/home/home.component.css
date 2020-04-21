@@ -11,6 +11,7 @@ ul.card-text{
 }
 .old-price{
   text-decoration: line-through;
+  font-size: 1rem;
 }
 .card-text.new-price{
   margin-bottom: -0.5rem;
@@ -18,7 +19,7 @@ ul.card-text{
   font-weight: bold;
 }
 .new-price{
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 /* 
   .card-columns {
@@ -29,6 +30,11 @@ ul.card-text{
       column-count: 5;
     }
   } */
+  .vertical-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
@@ -71,8 +77,8 @@ ul.card-text{
   }
 }
 
-@media (min-width: 62em) {
+/* @media (min-width: 62em) {
   .featurette-heading {
     margin-top: 7rem;
   }
-}
+} */
