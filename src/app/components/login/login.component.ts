@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,27 +11,32 @@ export class LoginComponent implements OnInit {
 
   @Output() loginEvent = new EventEmitter();
 
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit(): void {
   }
 
   loginForm = new FormGroup({
-    email:new FormControl('b',Validators.required),
-    password:new FormControl('b',Validators.required),
+    email:new FormControl('',[
+      Validators.required,
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+    ]),
+    password:new FormControl('',Validators.required),
+    remember:new FormControl(false)
   })
 
-  get emailStatus(){
-    return this.loginForm.controls.email.valid;
+  get email(){
+    return this.loginForm.get('email');
   }
-  get passwordStatus(){
-    return this.loginForm.controls.password.valid;
+  get password(){
+    return this.loginForm.get('password');
   }
 
   onClickLoginSubmit(){
-    // console.log(this.registerationForm);
     if(this.loginForm.valid){
-      this.loginEvent.emit(this.loginForm.value)
+      console.log(this.loginForm.value);
+      this.loginEvent.emit(this.loginForm.value);
+      this.router.navigateByUrl('');
     }
   }
 

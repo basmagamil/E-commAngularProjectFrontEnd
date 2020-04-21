@@ -16,21 +16,27 @@
 
 <body>
     <form [formGroup]="loginForm" (ngSubmit)="onClickLoginSubmit()" class="form-signin card mb-4 box-shadow">
-        <h1 class="h4 mb-3 font-weight-normal card-header">Please Sign In</h1>
+        <h1 class="h4 mb-3 font-weight-normal card-header">Sign In</h1>
         <div class="card-body">
+
             <label for="inputEmail">Email</label>
-            <input type="email" id="inputEmail" formControlName="email" class="form-control" placeholder="Email address" required autofocus>
-            <div class="small text-danger" *ngIf="!emailStatus">
-                * Email is not valid.
+            <input [class.is-invalid] = "email.invalid && email.touched"
+            type="email" id="inputEmail" formControlName="email" class="form-control" placeholder="Email address" autofocus>
+            <div *ngIf="(email.invalid && email.touched) || email.dirty">
+                <small *ngIf="email.errors?.required" class="text-danger">Email is required</small>
+                <small *ngIf="email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
             </div>
+
             <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Password" required>
-            <div class="small text-danger" *ngIf="!passwordStatus">
-                * Password is not valid.
+            <input [class.is-invalid] = "password.invalid && password.touched"
+            type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Password">
+            <div *ngIf="(password.invalid && password.touched) || password.dirty">
+                <small *ngIf="password.errors?.required" class="text-danger">Password is required</small>
             </div>
+
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" value="remember-me"> Remember me
+                    <input type="checkbox" value="true" formControlName="remember"> Remember me
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

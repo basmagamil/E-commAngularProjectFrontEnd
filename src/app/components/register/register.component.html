@@ -18,36 +18,39 @@
     <form [formGroup]="registerForm" (ngSubmit)="onClickRegisterSubmit()" class="form-signin card mb-4 box-shadow">
         <h1 class="h4 mb-3 font-weight-normal card-header">Create Account</h1>
         <div class="card-body">
+
             <label for="inputUsername">Username</label>
-            <input type="text" id="inputUsername" formControlName="username" class="form-control" placeholder="Username">
-            <div class="small text-danger" *ngIf="!usernameStatus">
-                * Username is not valid.
+            <input [class.is-invalid] = "username.invalid && username.touched"
+            type="text" id="inputUsername" formControlName="username" class="form-control" placeholder="Username" autofocus>
+            <div *ngIf="(username.invalid && username.touched) || username.dirty">
+                <small *ngIf="username.errors?.required" class="text-danger">Username is required</small>
             </div>
+
             <label for="inputEmail">Email</label>
-            <input type="email" id="inputEmail" formControlName="email" class="form-control" placeholder="Email address" autofocus>
-            <div class="small text-danger" *ngIf="!emailStatus">
-                * Email is not valid.
+            <input [class.is-invalid] = "email.invalid && email.touched"
+            type="email" id="inputEmail" formControlName="email" class="form-control" placeholder="Email address">
+            <div *ngIf="(email.invalid && email.touched) || email.dirty">
+                <small *ngIf="email.errors?.required" class="text-danger">Email is required</small>
+                <small *ngIf="email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
             </div>
+
             <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Password">
-            <div class="small text-danger" *ngIf="!passwordStatus">
-                * Password is not valid.
+            <input [class.is-invalid] = "password.invalid && password.touched"
+            type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Password">
+            <div *ngIf="(password.invalid && password.touched) || password.dirty">
+                <small *ngIf="password.errors?.required" class="text-danger">Password is required</small>
             </div>
 
-            <mat-form-field class="example-full-width w-100">
-                <mat-label>Favorite food</mat-label>
-                <input matInput placeholder="Ex. Pizza" value="Sushi">
-              </mat-form-field>
-
-            <!-- <input type="radio" id="inputUsername" formControlName="username" class="form-control" placeholder="Username"> -->
-            
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="Male"  formControlName="gender" checked>
+                <input type="radio" class="custom-control-input" id="Male" value="male" formControlName="gender" checked>
                 <label class="custom-control-label" for="Male">Male</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="Female"  formControlName="gender" >
+                <input type="radio" class="custom-control-input" id="Female" value="female" formControlName="gender">
                 <label class="custom-control-label" for="Female">Female</label>
+            </div>
+            <div *ngIf="gender.invalid || gender.dirty">
+                <small *ngIf="gender.errors?.required" class="text-danger">Gender is required</small>
             </div>
 
             <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Create Account</button>
