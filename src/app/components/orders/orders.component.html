@@ -8,42 +8,101 @@
       </div>
       <div class="row">
         <div class="col-12 mt-3 ml-auto">
-          <table class="table table-hover table-bordered shadow p-3 mb-3 bg-white rounded">
+          <table
+            class="table table-hover table-bordered shadow p-3 mb-3 bg-white rounded"
+          >
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Username</th>
                 <th scope="col">Date of order</th>
                 <th scope="col">Total Price</th>
-                <th scope="col">Product Title</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Status</th>
+                <th scope="col">Order ID</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Products List</th>
               </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let order of orders">
-                    <th scope="row">{{order.userName}}</th>
-                <!-- <td>{{order.date}}</td>
-                <td>{{order.price}}EGP</td>
-                <td *ngFor="let prod of order.products">
-                    {{prod.productTitle}}
+              <tr *ngFor="let order of orders">
+                <th scope="row">{{ order.userName }}</th>
+                <td>{{ order.date }}</td>
+                <td>{{ order.price }}EGP</td>
+                <td>{{ order.orderId }}</td>
+                <td>
+                  <select class="browser-default custom-select" [(ngModel)]="order.status">
+                    <option value="Accepted">Accepted</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
                 </td>
-                <td *ngFor="let prod of order.products">
-                    {{prod.status}}
+                <td>
+                  <input
+                    type="button"
+                    (click)="openModal(order.orderId)"
+                    class="btn btn-success"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    value="Show Products"
+                  />
                 </td>
-                <td *ngFor="let prod of order.products">
-
-                    <select class="browser-default custom-select">
-                        <option value="1" selected>{{prod.status}}</option>
-                        <option value="2" >Pending</option>
-                        <option value="3">Rejected</option>
-                    </select>
-                </td> -->
-               
-                </tr>
-        
+              </tr>
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Products List of order {{ tempOrderId }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 mt-3 ml-auto">
+            <table
+              class="table table-hover table-bordered shadow p-3 mb-3 bg-white rounded"
+            >
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Product Title</th>
+                  <th scope="col">Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of productsArr">
+                  <th scope="row">{{ product.product }}</th>
+                  <td>{{ product.quantity }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>
