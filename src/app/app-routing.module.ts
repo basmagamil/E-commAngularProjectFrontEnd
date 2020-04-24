@@ -13,7 +13,6 @@ import { ErrorComponent } from './components/error/error.component';
 import { UpdateComponent } from './components/products/update/update.component';
 import { AddComponent } from './components/products/add/add.component';
 import { ViewItemComponent } from './components/products/view-item/view-item.component';
-import { ProductComponent } from './components/product/product.component'; 
 
 
 const routes: Routes = [
@@ -29,7 +28,6 @@ const routes: Routes = [
   {path:'products/update/:id',component:UpdateComponent},
   {path:'products/add',component:AddComponent},
   {path:'products/Details/:id',component:ViewItemComponent},
-  {path:'products/:id', component:ProductComponent}, //unnecessary
   {path:'**',component:ErrorComponent}
 ];
 

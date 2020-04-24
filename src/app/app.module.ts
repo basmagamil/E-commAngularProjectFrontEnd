@@ -21,9 +21,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UpdateComponent } from './components/products/update/update.component';
 import { AddComponent } from './components/products/add/add.component';
 import { ViewItemComponent } from './components/products/view-item/view-item.component';
-
-import { ProductComponent } from './components/product/product.component';
 import { FooterComponent } from './components/footer/footer.component';
+
 import { ProductsService } from './services/products.service';
 import { UsersService } from './services/users.service';
 
@@ -43,7 +42,6 @@ import { UsersService } from './services/users.service';
     UpdateComponent,
     AddComponent,
     ViewItemComponent,
-    ProductComponent,
     FooterComponent
   ],
   imports: [
