@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http'; 
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
@@ -20,6 +22,10 @@ import { UpdateComponent } from './components/products/update/update.component';
 import { AddComponent } from './components/products/add/add.component';
 import { ViewItemComponent } from './components/products/view-item/view-item.component';
 
+import { ProductComponent } from './components/product/product.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ProductsService } from './services/products.service';
+import { UsersService } from './services/users.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +42,9 @@ import { ViewItemComponent } from './components/products/view-item/view-item.com
     LoginComponent,
     UpdateComponent,
     AddComponent,
-    ViewItemComponent
+    ViewItemComponent,
+    ProductComponent,
+    FooterComponent
   ],
   imports: [
     NgbModule,
@@ -45,9 +53,10 @@ import { ViewItemComponent } from './components/products/view-item/view-item.com
     ReactiveFormsModule,
     AppRoutingModule,
     FontAwesomeModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ProductsService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,2 +1,119 @@
-<p>navbar works!</p>
-<a class="nav-item nav-link" [routerLinkActiveOptions]='{exact:true}' routerLinkActive="active" routerLink="products">product</a>
+<nav class="navbar-top navbar navbar-expand navbar-dark bg-dark">
+  <div class="navbar-nav ml-auto">
+    <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="about"
+      class="nav-item nav-link">About</a>
+    <a href="#" class="nav-item nav-link">
+      <fa-icon [icon]="faGlobe"></fa-icon>
+    </a>
+  </div>
+</nav>
+
+<nav class="navbar-middle navbar navbar-expand-md navbar-light bg-light sticky-top navbar-toggleable-md">
+  <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="home" class="navbar-brand">
+    <img src="assets/images/logo/logo.svg" height="28" alt="CompYou">
+  </a>
+  <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
+    <form class="form-inline">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="What are you looking for?">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-secondary" [routerLinkActiveOptions]='{exact:true}'
+            routerLinkActive='active' routerLink="../products">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="navbar-nav ml-auto">
+
+      <!-- 1 TODO: only show if logged in -->
+      <a class="d-md-none" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+        class="nav-item nav-link">
+        <fa-icon class="d-md-none" [icon]="faShoppingBag"></fa-icon>
+        <span class="d-md-none"> All Laptops</span>
+      </a>
+
+      <!-- 1.a TODO: only show if user -->
+      <a href="#" class="nav-item nav-link disabled d-none d-md-inline-block">Hello, {{user.userName}}!</a>
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="profile/{{user.id}}"
+        class="nav-item nav-link">
+        <fa-icon [icon]="faUser"></fa-icon>
+        <span class="d-md-none">  {{user.userName}}</span>
+      </a>
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="cart/{{user.id}}"
+        class="nav-item nav-link">
+        <fa-icon [icon]="faShoppingCart"></fa-icon>
+        <span class="d-md-none">  Cart</span>
+      </a>
+      <!-- 1.a end -->
+
+      <!-- 1.b TODO: only show if admin -->
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="orders"
+        class="nav-item nav-link">
+        <fa-icon [icon]="faClipboardList"></fa-icon>
+        <span class="d-md-none">  Orders</span>
+      </a>
+      <!-- 1.b end -->
+
+      <a href="#" class="nav-item nav-link">
+        <fa-icon [icon]="faSignOutAlt"></fa-icon>
+        <span class="d-md-none">  Log Out</span>
+      </a>
+      <!-- 1. end -->
+
+      <!-- 2 TODO: only show if not logged in -->
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="login"
+        class="nav-item nav-link">Login</a>
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="register"
+        class="nav-item nav-link">Register</a>
+      <!-- 2 end -->
+
+    </div>
+  </div>
+</nav>
+
+<!-- 3 TODO: only show if logged in -->
+<nav class="navbar-bottom navbar navbar-expand-md d-md-block d-none navbar-dark bg-primary justify-content-center">
+  <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
+    <ul class="navbar-nav mx-auto text-center">
+      <a class="nav-link parent-nav-link" routerLink="../products">All Laptops</a>
+
+      <div class="dropdown d-inline-block">
+        <a class="nav-link dropbtn parent-nav-link">Brand <fa-icon [icon]="faAngleDown"></fa-icon></a>
+        <div class="dropdown-content bg-primary">
+          <div class="row2">
+            <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+              class="nav-link">HP</a>
+            <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+              class="nav-link">Lenovo</a>
+            <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+              class="nav-link">Dell</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block">
+        <a class="nav-link dropbtn parent-nav-link">Processor <fa-icon [icon]="faAngleDown"></fa-icon></a>
+        <div class="dropdown-content bg-primary">
+          <div class="row2">
+            <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+              class="nav-link">Core i3</a>
+            <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+              class="nav-link">Core i5</a>
+            <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+              class="nav-link">Core i7</a>
+            <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+              class="nav-link">Core i9</a>
+          </div>
+        </div>
+      </div>
+
+    </ul>
+  </div>
+</nav>
+<!-- 3 end -->

@@ -1,1 +1,85 @@
-<p>cart {{id}} works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-11 mt-3 bg-light">
+      <div class="row">
+        <div class="col-xs-12 font-weight-bold mt-3 ml-5">
+          <h2>Shopping Cart ({{ count }})</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-8 float-xs-left ml-5">
+          <div class="row" *ngFor="let item of product">
+            <div class="card mt-3 col-xs-12 shadow p-3 mb-3 bg-white rounded">
+              <div class="row">
+                <div class="col-xs-2">
+                  <img
+                    src="../../../assets/images/download.jfif"
+                    class="img-fluid mt-3"
+                  />
+                </div>
+
+                <div class="col-xs-10">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <div class="d-flex">
+                      <div class="p-2">
+                        <h6 class="card-subtitle text-primary font-weight-bold">
+                          {{ item.price }}EGP
+                        </h6>
+                      </div>
+
+                      <div class="ml-auto">
+                        QTY
+                        <input
+                          name="myInput"
+                          class="card-text"
+                          type="number"
+                          min="1"
+                          max="3"
+                          value="1"
+                        />
+                      </div>
+                    </div>
+
+                    <p
+                      class="card-text"
+                      *ngFor="let key of objectKeys(item.details)"
+                    >
+                      {{ key + ": " + item.details[key] }}
+                    </p>
+
+                    <div class="d-flex justify-content-end">
+                      <a routerLink="/cart/2" class="btn btn-danger ">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="offset-xs-1"></div>
+        <div class="col-xs-3 float-xs-right offset-md-2 ">
+          <div class="row mt-3 ml-auto">
+            <div class="card shadow p-3 mb-3 bg-white rounded">
+              <div class="card-body">
+                <p class="card-text">Total:</p>
+                <p class="card-title font-weight-bold">Total Price</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  The order arrives in 3-5 working days
+                </li>
+              </ul>
+              <div class="card-body ">
+                <a routerLink="/orders" class="btn btn-success btn-block"
+                  >Checkout</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
