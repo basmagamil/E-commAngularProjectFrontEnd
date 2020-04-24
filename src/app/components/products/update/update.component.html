@@ -1,0 +1,138 @@
+<div class="container">
+    <div class="row">
+        <div class="col-9 mt-3">
+
+            <form class="p-4 " [formGroup]="UpdateProductForm" (ngSubmit)="UpdateProduct()">
+
+
+                <h2>Update item</h2>
+                <div class="form-group row mt-4">
+                    <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputTitle" formControlName="title" placeholder="Title" required>
+                        <div class="text-danger ml-3" *ngIf="!titleStatus">please enter title</div>
+                    </div>
+                    
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Image</label>
+                    <div class="custom-file col-sm-9 ml-3">
+                        <input type="file" class="custom-file-input" 
+                             id="validatedCustomFile" required lang="es"
+                             (change)="FileChange($event)"
+                            formControlName="image"  multiple  >
+                        
+                        <label class="custom-file-label" for="validatedCustomFile"></label>
+                        <div class="text-danger" *ngIf="!imageStatus">please choose image</div>
+                    </div>
+                    
+                </div>
+
+                <div class="form-group row mt-5">
+                    <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="inputPrice"
+                            placeholder="please enter Price" formControlName="price" required>
+                            <div class="text-danger ml-3" *ngIf="!priceStatus">please enter price</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputBrand" class="col-sm-2 col-form-label">Brand Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputBrand"
+                            placeholder="please enter Brand Name" formControlName="brand">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputProcessor" class="col-sm-2 col-form-label">Processor</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputProcessor"
+                            placeholder="please enter Processor" formControlName="processor">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputRam" class="col-sm-2 col-form-label">Ram</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputRam" 
+                        placeholder="please enter Ram" formControlName="ram">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputHardDisk" class="col-sm-2 col-form-label">Hard Disk</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputHardDisk"
+                            placeholder="please enter Hard Disk" formControlName="hardDisk">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputGraphicsCard" class="col-sm-2 col-form-label">Graphics Card</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputGraphicsCard"
+                            placeholder="please enter Graphics Card" formControlName="graphicsCard">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputColor" class="col-sm-2 col-form-label">Color</label>
+                    <div class="col-sm-10">
+                        <input type="color" class="form-control" id="inputColor" 
+                            placeholder="please enter Color" formControlName="color" >
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputRatioOfPromotion" class="col-sm-2 col-form-label">Promotion</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="inputRatioOfPromotion"
+                            placeholder="please enter Ratio Of Promotion" formControlName="promotion">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="inputQuantity" required
+                            placeholder="please enter Quantity Number"  formControlName="quantity">
+                            <div class="text-danger ml-3" *ngIf="!quantityStatus">please enter quantity</div>
+                        </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-secondary m-2" routerLink="/products">Back</button>
+                            <button type="submit" class="btn btn-primary m-2" 
+                            data-toggle="modal" data-target="#UpdateModal">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{SuccesOrNoToUpdate}}
+        </div>
+        <div class="modal-footer row justify-content-center">
+          <button type="button" class="btn btn-primary col-2" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
