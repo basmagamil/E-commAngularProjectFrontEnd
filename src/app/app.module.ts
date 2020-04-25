@@ -25,6 +25,7 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { ProductsService } from './services/products.service';
 import { UsersService } from './services/users.service';
+import { OrdersService } from './services/orders.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { UsersService } from './services/users.service';
     CommonModule,
     HttpClientModule
   ],
-  providers: [ProductsService, UsersService],
+  providers: [ProductsService, UsersService,OrdersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
