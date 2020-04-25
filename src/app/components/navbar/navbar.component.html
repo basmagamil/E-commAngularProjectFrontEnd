@@ -40,12 +40,12 @@
 
       <!-- 1.a TODO: only show if user -->
       <a href="#" class="nav-item nav-link disabled d-none d-md-inline-block">Hello, {{user.userName}}!</a>
-      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="profile/{{user.id}}"
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="profile/{{this.id}}"
         class="nav-item nav-link">
         <fa-icon [icon]="faUser"></fa-icon>
         <span class="d-md-none">  {{user.userName}}</span>
       </a>
-      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="cart/{{user.id}}"
+      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="cart/{{this.id}}"
         class="nav-item nav-link">
         <fa-icon [icon]="faShoppingCart"></fa-icon>
         <span class="d-md-none">  Cart</span>

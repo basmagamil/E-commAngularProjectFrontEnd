@@ -25,6 +25,7 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { ProductsService } from './services/products.service';
 import { UsersService } from './services/users.service';
+import { EdituserComponent } from './components/profile/edituser/edituser.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { UsersService } from './services/users.service';
     UpdateComponent,
     AddComponent,
     ViewItemComponent,
-    FooterComponent
+    FooterComponent,
+    EdituserComponent
   ],
   imports: [
     NgbModule,
@@ -55,6 +57,7 @@ import { UsersService } from './services/users.service';
     HttpClientModule
   ],
   providers: [ProductsService, UsersService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EdituserComponent]
 })
 export class AppModule { }

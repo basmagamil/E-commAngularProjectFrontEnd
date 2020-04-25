@@ -20,7 +20,8 @@ export class UsersService {
     return this.client.delete(`${this.baseURL}/${id}`);
   }
   registerUser(user){
-    return this.client.post(`${this.baseURL}/signup`, user);
+    // return this.client.post(`${this.baseURL}/signup`, user);
+    return this.client.post(`${this.baseURL}`, user);
   }
   loginUser(user){
     return this.client.post(`${this.baseURL}/login`, user);

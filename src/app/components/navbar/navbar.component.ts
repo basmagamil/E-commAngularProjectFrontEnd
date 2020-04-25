@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faSearch, faUser, faShoppingCart, faSignOutAlt, faSignInAlt, faGlobe, faAngleDown, faShoppingBag, faClipboardList } from '@fortawesome/free-solid-svg-icons';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,18 +18,34 @@ export class NavbarComponent implements OnInit {
   faShoppingBag = faShoppingBag;
   faClipboardList = faClipboardList;
   
-  user={
-    id: "5e9f37a4a44da6767f00bda7",
-    userName: "Basma"
-  }
+
+  id;
+  user;
+  subscriber;
 
   isCollapsed: boolean;
 
-  constructor() {
+  constructor(private usersService:UsersService) {
     this.isCollapsed=true;
+    this.id = "5ea33e292b361551e0d428fb";
   }
 
   ngOnInit(): void {
+    this.getUser();
   }
 
+  getUser(){
+    this.subscriber = this.usersService.getUser(this.id).subscribe(
+      user=>{
+        this.user = user;
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
+
+  ngOnDestroy():void{
+    this.subscriber.unsubscribe();
+  }
 }
