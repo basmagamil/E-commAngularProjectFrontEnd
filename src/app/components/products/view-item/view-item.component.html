@@ -1,0 +1,84 @@
+<div class="container mt-3">
+  <div class="row">
+
+
+    <div class=' col-sm-4'>
+      <ngb-carousel *ngIf="images" id="carouselExampleIndicators">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[0]" alt="Random first slide">
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[1]" alt="Random second slide">
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[2]" alt="Random third slide">
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images[3]" alt="Random fourth slide">
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+
+    <div class="card col-sm-8">
+      <h2 class="card-title card-header bg-white">{{product.title}}</h2>
+      <div class="card-body m-1">
+        <div class="text-dark  card-text">
+          <span class="font-weight-bold">Brand: </span>{{product.details.brand}}
+        </div>
+        <div class="card-text text-dark ">
+          <span class="font-weight-bold">Processor: </span>{{product.details.processor}}
+        </div>
+        <div class="card-text text-dark ">
+          <span class="font-weight-bold">Ram: </span>{{product.details.ram}}
+        </div>
+        <div class="card-text text-dark ">
+          <span class="font-weight-bold">Hard Disk: </span>{{product.details.hardDisk}}
+        </div>
+        <div class="card-text text-dark ">
+          <span class="font-weight-bold">Graphics Card: </span>{{product.details.graphicsCard}}
+        </div>
+        <div class="card-text text-dark ">
+          <span class="font-weight-bold">Color: </span>{{product.details.color}}
+        </div>
+      
+        <div class="container mt-5">
+          <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+              <h5 style="color:cornflowerblue; font-size: 28px;" class="font-weight-bold">{{product.price}}</h5>
+              <h6 style="text-decoration: line-through;font-size: 28px;" class="text-muted text-dark" 
+              *ngIf="product.ratioOfPromotion">{{product.price}}</h6>
+            </div>
+            <div class="col col-lg-8">
+              <div class="container">
+                <div class="row">
+                  <div class="col col-lg-6 ">
+                    <label class="m-2 text-dark">No:</label>
+                    <input type="number" required class="w-75">
+                  </div>
+                  <div class="col col-lg-6">
+                    <button type="button" class="btn btn-dark btn-lg">Add To Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+    
+  </div>
+  <!-- <div class="row justify-content-center mt-2">
+    <button type="button" class="btn btn-secondary  col-2" routerLink="/products">Back</button>
+  
+  </div> -->
+</div>

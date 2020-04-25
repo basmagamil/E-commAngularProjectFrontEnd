@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http'; 
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,6 +20,15 @@ import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { CartService } from './services/cart.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UpdateComponent } from './components/products/update/update.component';
+import { AddComponent } from './components/products/add/add.component';
+import { ViewItemComponent } from './components/products/view-item/view-item.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+import { ProductsService } from './services/products.service';
+import { UsersService } from './services/users.service';
+import { EdituserComponent } from './components/profile/edituser/edituser.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +43,11 @@ import { CartService } from './services/cart.service';
     ProductsComponent,
     RegisterComponent,
     LoginComponent,
+    UpdateComponent,
+    AddComponent,
+    ViewItemComponent,
+    FooterComponent,
+    EdituserComponent
   ],
   imports: [
     NgbModule,
@@ -38,11 +55,13 @@ import { CartService } from './services/cart.service';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule,
+    CommonModule,
   ],
-  providers: [
-    CartService
-  ],
-  bootstrap: [AppComponent]
+ 
+  providers: [ProductsService, UsersService, CartService],
+  bootstrap: [AppComponent],
+  entryComponents: [EdituserComponent]
 })
 export class AppModule { }

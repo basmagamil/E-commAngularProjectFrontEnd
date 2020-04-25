@@ -7,6 +7,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
+  team = [
+    {
+      "Name": "Ashimaa",
+      "Track": "System Development",
+      "SubTrack": "Mobile Applications Cross Platform",
+      "Organization": "ITI Smart Village",
+      "Image": "assets/images/profilepics/defaultfemale.jpeg"
+    },
+    {
+      "Name": "Azhar",
+      "Track": "System Development",
+      "SubTrack": "Mobile Applications Cross Platform",
+      "Organization": "ITI Smart Village",
+      "Image": "assets/images/profilepics/defaultfemale.jpeg"
+    },
+    {
+      "Name": "Basma",
+      "Track": "System Development",
+      "SubTrack": "Mobile Applications Cross Platform",
+      "Organization": "ITI Smart Village",
+      "Image": "assets/images/profilepics/defaultfemale.jpeg"
+    },
+    {
+      "Name": "Rawan",
+      "Track": "System Development",
+      "SubTrack": "Mobile Applications Cross Platform",
+      "Organization": "ITI Smart Village",
+      "Image": "assets/images/profilepics/defaultfemale.jpeg"
+    },
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
