@@ -1,91 +1,103 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { OrdersService } from 'src/app/services/orders.service';
+import { UsersService } from 'src/app/services/users.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit , OnDestroy{
 
-  constructor() { }
+  constructor(private ordersService:OrdersService,
+              private userService:UsersService,
+              private productService:ProductsService) { }
 
   ngOnInit(): void {
+    this.getAllOrders();
   }
-  openModal(orderId): void{
-    this.tempOrderId= orderId;
-    this.productsArr = this.orders.find(o=> o.orderId == orderId).products;
-    //this.productsArr = this.tempOrder.products;
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
+  }
+
+  openModal(orderId,IDVirtual): void{
+    this.tempOrderId= IDVirtual;
+    this.productsArr = this.orders.find(o=> o._id == orderId).products;
+    console.log(this.productsArr)
+    for(var i=0;i<this.productsArr.length;i++)
+          {
+            this.subscriberToGetProductTitle=this.productService.getProduct(this.productsArr[i].product).subscribe(
+              (products)=>{
+                if(products)
+                {
+                  this.productTitle.push(products[0].title);
+                }
+              },(err)=>{
+                console.log(err);
+              }
+            )
+          }
   }
   tempOrderId;
-  //tempOrder;
+  tempOrder;
   productsArr = [];
-  orders = [
-    {
-      userName: "Rawan",
-      date: "12-3-2020",
-      price: 12000,
-      orderId: "Order 1",
-      status: "Accepted",
-      products: [{
-        product: "Id 11",
-        //productTitle: "Laptop1",
-        quantity: 1,
-        isDeleted: false,
+  
+
+  //Azhar updates
+  subscriber;
+  subscriberToGetUserName;
+  subscriberToGetProductTitle;
+  subscriberToUpdateOrder;
+  orders;
+  userName=[];
+  productTitle=[];
+  getAllOrders(){
+    this.subscriber = this.ordersService.getOrders().subscribe(
+      (orders)=>{
+        if(orders)
+         { 
+          this.orders = orders;
+          for(var i=0;i<this.orders.length;i++)
+          {
+            this.subscriberToGetUserName=this.userService.getUser(orders[i].user).subscribe(
+              (user)=>{
+                if(user)
+                {
+                  this.userName.push(user["userName"]);
+                }
+              },(err)=>{
+                console.log(err);
+              }
+            )
+          }
+          
+         }
       },
-      {
-        product: "Id 12",
-        //productTitle: "Laptop2",
-        quantity: 1,
-        isDeleted: false,
-      },
-      ],
+      (err)=>{
+        console.log(err);
+      })
+
+      console.log(this.orders)
+  }
+
+
+  UpdateOrderState(){
+    
+  }
+
+
+
+  onChange(deviceValue,order){
+    console.log(deviceValue);
+    console.log(order)
+    this.subscriberToUpdateOrder = this.ordersService.updateOrder(order._id,order)
+    .subscribe((order)=>{
+      console.log("No error")
+      console.log(order)
     },
-    {
-
-      userName: "Rawan",
-      date: "12-3-2020",
-      price: 12000,
-      orderId: "Order 2",
-      status: "Rejected",
-      products: [{
-        product: "Id 21",
-        //productTitle: "Laptop1",
-        quantity: 1,
-        isDeleted: false,
-      },
-      {
-        product: "Id 22",
-        //productTitle: "Laptop2",
-        quantity: 1,
-        isDeleted: false,
-      },
-
-      ],
-    },
-    {
-
-      userName: "Rawan",
-      date: "12-3-2020",
-      price: 12000,
-      orderId: "Order 3",
-      status: "Pending",
-      products: [{
-        product: "Id 31",
-        //productTitle: "Laptop1",
-        quantity: 1,
-        isDeleted: false,
-      },
-      {
-        product: "Id 32",
-        //productTitle: "Laptop2",
-        quantity: 1,
-        isDeleted: false,
-      },
-
-      ],
-    }
-  ]
-
-
-
+    (err)=>{
+      console.log(err)
+    })
+  }
 }

@@ -28,6 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { ProductsService } from './services/products.service';
 import { UsersService } from './services/users.service';
+import { OrdersService } from './services/orders.service';
 import { EdituserComponent } from './components/profile/edituser/edituser.component';
 
 @NgModule({
@@ -60,7 +61,7 @@ import { EdituserComponent } from './components/profile/edituser/edituser.compon
     CommonModule,
   ],
  
-  providers: [ProductsService, UsersService, CartService],
+  providers: [ProductsService, UsersService, CartService, OrdersService],
   bootstrap: [AppComponent],
   entryComponents: [EdituserComponent]
 })
