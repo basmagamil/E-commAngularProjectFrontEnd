@@ -2,15 +2,17 @@
     <div class="row">
         <div class="col-9 mt-3">
 
-            <form class="p-4 " [formGroup]="UpdateProductForm" (ngSubmit)="UpdateProduct()">
+            <form class="p-4 " [formGroup]="UpdateProductForm" (ngSubmit)="onClickUpdateProductSubmit()">
 
 
                 <h2>Update item</h2>
                 <div class="form-group row mt-4">
                     <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputTitle" formControlName="title" placeholder="Title" required>
-                        <div class="text-danger ml-3" *ngIf="!titleStatus">please enter title</div>
+                        <input [class.is-invalid] = "title.invalid && title.touched" type="text" class="form-control" id="inputTitle" formControlName="title" placeholder="Title" required>
+                        <div *ngIf="(title.invalid && title.touched) || title.dirty">
+                            <small *ngIf="title.errors?.required" class="text-danger">Title is required</small>
+                        </div>
                     </div>
                     
                 </div>
@@ -24,7 +26,7 @@
                             formControlName="image"  multiple  >
                         
                         <label class="custom-file-label" for="validatedCustomFile"></label>
-                        <div class="text-danger" *ngIf="!imageStatus">please choose image</div>
+                        <!-- <div class="text-danger" *ngIf="!imageStatus">please choose image</div> -->
                     </div>
                     
                 </div>
@@ -32,9 +34,12 @@
                 <div class="form-group row mt-5">
                     <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="inputPrice"
+                        <input [class.is-invalid] = "price.invalid && price.touched" type="number" class="form-control" id="inputPrice"
                             placeholder="please enter Price" formControlName="price" required>
-                            <div class="text-danger ml-3" *ngIf="!priceStatus">please enter price</div>
+                            <div *ngIf="(price.invalid && price.touched) || price.dirty">
+                                <small *ngIf="price.errors?.required" class="text-danger">Price is required</small>
+                                <small *ngIf="price.errors?.pattern" class="text-danger">Please provide a valid price</small>
+                            </div>
                     </div>
                 </div>
 
@@ -91,15 +96,21 @@
                     <div class="col-sm-10">
                         <input type="number" class="form-control" id="inputRatioOfPromotion"
                             placeholder="please enter Ratio Of Promotion" formControlName="promotion">
+                            <div *ngIf="(promotion.invalid && promotion.touched) || promotion.dirty">
+                                <small *ngIf="promotion.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+                            </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="inputQuantity" required
+                        <input [class.is-invalid] = "quantity.invalid && quantity.touched" type="number" class="form-control" id="inputQuantity" required
                             placeholder="please enter Quantity Number"  formControlName="quantity">
-                            <div class="text-danger ml-3" *ngIf="!quantityStatus">please enter quantity</div>
+                            <div *ngIf="(quantity.invalid && quantity.touched) || title.dirty">
+                                <small *ngIf="quantity.errors?.required" class="text-danger">Quantity is required</small>
+                                <small *ngIf="quantity.errors?.pattern" class="text-danger">Please provide a valid quantity</small>
+                            </div>
                         </div>
                 </div>
 
