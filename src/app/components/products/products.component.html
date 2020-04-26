@@ -21,7 +21,7 @@
                     routerLink="../products/add">Add new product</button>
 
                 <!--  -->
-                <div class="row" *ngFor="let product of products">
+                <div class="row" *ngFor="let product of Myproducts">
                     <div class="card mb-3 mt-2 col-9">
                         <div class="row no-gutters">
                             <div class="col-md-3">
@@ -32,23 +32,24 @@
                                 <div class="card-body m-1">
                                     <h5 class="card-title">{{product.title}}</h5>
                                     <li class="card-text"><small class="text-muted"><b>Brand:</b>
-                                        {{product.details.brand}}</small></li>
+                                        {{product.details.Brand}}</small></li>
                                     <li class="card-text"><small class="text-muted"><b>Processor:</b> 
-                                        {{product.details.processor}}</small></li>
+                                        {{product.details.Processor}}</small></li>
                                     <li class="card-text"><small class="text-muted"><b>Ram:</b>
-                                        {{product.details.ram}}</small></li>
+                                        {{product.details.RAM}}</small></li>
                                     <li class="card-text"><small class="text-muted"><b>Hard Disk:</b>
-                                        {{product.details.hardDisk}}</small></li>
+                                        {{product.details.HardDisk}}</small></li>
                                     <li class="card-text"><small class="text-muted"><b>Graphics Card</b>
-                                        {{product.details.graphicsCard}}</small></li>
+                                        {{product.details.GPU}}</small></li>
                                     <li class="card-text"><small class="text-muted"><b>Color</b>
-                                        {{product.details.color}}</small></li>
+                                        {{product.details.Color}}</small></li>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="mt-4">
                                     <h5 style="color:cornflowerblue;">{{product.price}}</h5>
-                                    <h6 style="text-decoration: line-through;" class="text-muted" *ngIf="product.ratioOfPromotion">{{product.price}}</h6>
+                                    <h6 style="text-decoration: line-through;" class="text-muted"
+                                     *ngIf="product.isPromoted">{{product.price}}</h6>
                                     <button type="button" class="btn btn-outline-info mt-5"
                                     routerLink="../products/Details"
                                     (click)="Details(product)">View Full Product Details</button>

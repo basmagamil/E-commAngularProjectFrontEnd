@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faSearch ,faPercent} from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery'  
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router) { 
+  constructor(private router: Router,private productService:ProductsService) { 
    
   }
   
@@ -101,7 +102,7 @@ export class ProductsComponent implements OnInit {
  
 
   ngOnInit(): void {
-    
+    this.GetProductByBrandName();
   }
   faSearch = faSearch;
   faPercent=faPercent;
@@ -111,7 +112,7 @@ export class ProductsComponent implements OnInit {
 
   Delete(product1)
   {
-    this.DeleteProductItem=product1.id;
+    this.DeleteProductItem=product1._id;
     console.log(this.DeleteProductItem);
   }
   DeletedModal(product)
@@ -121,11 +122,107 @@ export class ProductsComponent implements OnInit {
   Update(product)
   {
     this.UpdateProductItem=product;
-    this.router.navigate(['../products/update/',product.id]);
+    this.router.navigate(['../products/update/',product._id]);
     console.log(this.UpdateProductItem.title);
   }
   Details(product)
   {
-    this.router.navigate(['../products/Details/',product.id]);
+    this.router.navigate(['../products/Details/',product._id]);
+  }
+  Myproducts
+  subscriberSearchBrand
+  subscriberProductBrandHp
+  GetProductByBrandName()
+  {
+    this.subscriberSearchBrand = this.productService._MessageSearch$.subscribe(
+      (message)=>{
+        if(message==="HP")
+        {
+          this.subscriberProductBrandHp = this.productService.getSearchByBrand('HP').subscribe(
+            (products)=>{
+              this.Myproducts = products;
+              console.log("Product Name In Product page HP")
+              console.log(this.Myproducts)
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Lenovo")
+        {
+          this.subscriberProductBrandHp = this.productService.getSearchByBrand('Lenovo').subscribe(
+            (products)=>{
+              this.Myproducts = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Dell")
+        {
+          this.subscriberProductBrandHp = this.productService.getSearchByBrand('Dell').subscribe(
+            (products)=>{
+              this.Myproducts = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Core i3")
+        {
+          this.subscriberProductBrandHp = this.productService.getSearchByProcessor('Core i3').subscribe(
+            (products)=>{
+              this.Myproducts = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Core i5")
+        {
+          this.subscriberProductBrandHp = this.productService.getSearchByProcessor('Core i5').subscribe(
+            (products)=>{
+              this.Myproducts = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Core i7")
+        {
+          this.subscriberProductBrandHp = this.productService.getSearchByProcessor('Core i7').subscribe(
+            (products)=>{
+              this.Myproducts = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Core i9")
+        {
+          this.subscriberProductBrandHp = this.productService.getSearchByProcessor('Core i9').subscribe(
+            (products)=>{
+              this.Myproducts = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
+  ngOnDestroy():void{
+    this.subscriberSearchBrand.unsubscribe();
+    this.subscriberProductBrandHp.unsubscribe();
   }
 }
