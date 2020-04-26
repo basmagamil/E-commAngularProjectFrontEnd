@@ -26,19 +26,21 @@
                 <th scope="row">{{ userName[i] }}</th>
                 <td>{{ order.date.split("T")[0] }}</td>
                 <td>{{ order.price }}EGP</td>
-                <td>{{ i+1 }}</td>
+                <td>{{ order._id }}</td>
                 <td>
                   <select class="browser-default custom-select" [(ngModel)]="order.status"
-                  (change)="onChange($event.target.value,order)">
+                  (change)="onChange($event.target.value,order)" 
+                  [disabled]="order.status=='cancelled'" >
                     <option value="accepted">Accepted</option>
                     <option value="pending">Pending</option>
                     <option value="rejected">Rejected</option>
+                    <option value="cancelled" [hidden]="order.status!='cancelled'">Cancelled</option>
                   </select>
                 </td>
                 <td>
                   <input
                     type="button"
-                    (click)="openModal(order._id,i+1)"
+                    (click)="openModal(order._id)"
                     class="btn btn-success"
                     data-toggle="modal"
                     data-target="#exampleModal"
