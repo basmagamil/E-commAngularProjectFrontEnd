@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { faSearch, faPercent } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { faSearch ,faPercent} from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as $ from 'jquery'
+import * as $ from 'jquery'  
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private productsService: ProductsService) {
 
@@ -106,11 +106,13 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.GetProductByBrandName();
   }
 
   ngOnDestroy(): void {
-    this.subscriber.unsubscribe();
-    // this.subscriber2.unsubscribe();
+    // this.subscriber.unsubscribe();
+    // this.subscriberSearchBrand.unsubscribe();
+    // this.subscriberProductBrandHp.unsubscribe();
   }
 
   GetKeys(obj) {
@@ -163,4 +165,98 @@ export class ProductsComponent implements OnInit {
   // {
   //   this.router.navigate(['../products/Details/',product.id]);
   // }
+
+  // Myproducts
+  subscriberSearchBrand
+  subscriberProductBrandHp
+  GetProductByBrandName()
+  {
+    this.subscriberSearchBrand = this.productsService._MessageSearch$.subscribe(
+      (message)=>{
+        if(message==="HP")
+        {
+          this.subscriberProductBrandHp = this.productsService.getSearchByBrand('HP').subscribe(
+            (products)=>{
+              this.products = products;
+              console.log("Product Name In Product page HP")
+              console.log(this.products)
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Lenovo")
+        {
+          this.subscriberProductBrandHp = this.productsService.getSearchByBrand('Lenovo').subscribe(
+            (products)=>{
+              this.products = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Dell")
+        {
+          this.subscriberProductBrandHp = this.productsService.getSearchByBrand('Dell').subscribe(
+            (products)=>{
+              this.products = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Core i3")
+        {
+          this.subscriberProductBrandHp = this.productsService.getSearchByProcessor('Core i3').subscribe(
+            (products)=>{
+              this.products = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Core i5")
+        {
+          this.subscriberProductBrandHp = this.productsService.getSearchByProcessor('Core i5').subscribe(
+            (products)=>{
+              this.products = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Core i7")
+        {
+          this.subscriberProductBrandHp = this.productsService.getSearchByProcessor('Core i7').subscribe(
+            (products)=>{
+              this.products = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="Core i9")
+        {
+          this.subscriberProductBrandHp = this.productsService.getSearchByProcessor('Core i9').subscribe(
+            (products)=>{
+              this.products = products;
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
+  
 }
