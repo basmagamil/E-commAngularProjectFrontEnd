@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +19,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { CartService } from './services/cart.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UpdateComponent } from './components/products/update/update.component';
 import { AddComponent } from './components/products/add/add.component';
@@ -53,11 +56,12 @@ import { EdituserComponent } from './components/profile/edituser/edituser.compon
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
     FontAwesomeModule,
     CommonModule,
-    HttpClientModule
   ],
-  providers: [ProductsService, UsersService,OrdersService],
+ 
+  providers: [ProductsService, UsersService, CartService, OrdersService],
   bootstrap: [AppComponent],
   entryComponents: [EdituserComponent]
 })
