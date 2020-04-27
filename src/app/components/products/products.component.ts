@@ -138,7 +138,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   faPercent = faPercent;
   DeleteProductItemID;
   UpdateProductItem;
-
+  search:string;
 
   DeleteModal(product) {
     this.DeleteProductItemID = product._id;
@@ -178,8 +178,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.subscriberProductBrandHp = this.productsService.getSearchByBrand('HP').subscribe(
             (products)=>{
               this.products = products;
-              console.log("Product Name In Product page HP")
-              console.log(this.products)
+              this.search=""
+              console.log("search on HP only")
+              
             },
             err=>{
               console.log(err);
@@ -191,6 +192,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.subscriberProductBrandHp = this.productsService.getSearchByBrand('Lenovo').subscribe(
             (products)=>{
               this.products = products;
+              this.search=""
+              console.log("search on lenovo only")
             },
             err=>{
               console.log(err);
@@ -202,6 +205,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.subscriberProductBrandHp = this.productsService.getSearchByBrand('Dell').subscribe(
             (products)=>{
               this.products = products;
+              this.search=""
+              console.log("search on Dell only")
             },
             err=>{
               console.log(err);
@@ -213,6 +218,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.subscriberProductBrandHp = this.productsService.getSearchByProcessor('Core i3').subscribe(
             (products)=>{
               this.products = products;
+              this.search=""
+              console.log("search on Core i3 only")
             },
             err=>{
               console.log(err);
@@ -224,6 +231,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.subscriberProductBrandHp = this.productsService.getSearchByProcessor('Core i5').subscribe(
             (products)=>{
               this.products = products;
+              this.search=""
+              console.log("search on Core i5 only")
             },
             err=>{
               console.log(err);
@@ -235,6 +244,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.subscriberProductBrandHp = this.productsService.getSearchByProcessor('Core i7').subscribe(
             (products)=>{
               this.products = products;
+              this.search=""
+              console.log("search on Core i7 only")
             },
             err=>{
               console.log(err);
@@ -243,7 +254,36 @@ export class ProductsComponent implements OnInit, OnDestroy {
         }
         else if(message==="Core i9")
         {
+          console.log("search on Core i9 only")
           this.subscriberProductBrandHp = this.productsService.getSearchByProcessor('Core i9').subscribe(
+            (products)=>{
+              this.products = products;
+              this.search=""
+              console.log("search on Core i9 only")
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message==="All Laptop")
+        {
+          this.subscriberProductBrandHp = this.productsService.getAllProducts().subscribe(
+            (products)=>{
+              this.products = products;
+              this.search=""
+            },
+            err=>{
+              console.log(err);
+            }
+          )
+        }
+        else if(message.includes("searchBar: "))
+        {
+          console.log("yes");
+          console.log(message.split("searchBar: ")[1])
+          this.search=message.split("searchBar: ")[1];
+          this.subscriberProductBrandHp = this.productsService.getAllProducts().subscribe(
             (products)=>{
               this.products = products;
             },

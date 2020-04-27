@@ -29,6 +29,8 @@ import { UsersService } from './services/users.service';
 import { OrdersService } from './services/orders.service';
 import { EdituserComponent } from './components/profile/edituser/edituser.component';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +59,7 @@ import { EdituserComponent } from './components/profile/edituser/edituser.compon
     HttpClientModule,
     FontAwesomeModule,
     CommonModule,
+    Ng2SearchPipeModule
   ],
  
   providers: [ProductsService, UsersService, CartService, OrdersService],

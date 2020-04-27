@@ -21,7 +21,7 @@
                     routerLink="../products/add">Add new product</button>
 
                 <!--  -->
-                <div class="row" *ngFor="let product of products">
+                <div class="row" *ngFor="let product of products | filter:search" >
                     <div class="card mb-3 mt-2 col-12">
                         <div class="row no-gutters">
                             <div class="col-md-3">

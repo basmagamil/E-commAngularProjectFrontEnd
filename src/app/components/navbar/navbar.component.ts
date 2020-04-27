@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faSearch, faUser, faShoppingCart, faSignOutAlt, faSignInAlt, faGlobe, faAngleDown, faShoppingBag, faClipboardList } from '@fortawesome/free-solid-svg-icons';
 import { UsersService } from 'src/app/services/users.service';
 import { ProductsService } from 'src/app/services/products.service';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -26,10 +27,11 @@ export class NavbarComponent implements OnInit {
 
   isCollapsed: boolean;
 
-  constructor(private usersService:UsersService,private productService:ProductsService) {
+  constructor(private usersService:UsersService,private productService:ProductsService,
+    private router: Router) {
     this.isCollapsed=true;
     // this.id = "5ea464c3b4ec50572cccc954";
-    this.id = "5ea33e292b361551e0d428fb";
+    this.id = "5ea464c3b4ec50572cccc954";
   }
 
   ngOnInit(): void {
@@ -73,6 +75,20 @@ export class NavbarComponent implements OnInit {
   SearchOnLaptopCore_i9()
   {
     this.productService.sendMessageSearch('Core i9');
+  }
+  SearchOnAllLaptop()
+  {
+    this.router.navigate(['../products']);
+    this.productService.sendMessageSearch('All Laptop');
+  }
+ search:string;
+  GeneralSearch()
+  {
+    console.log(`search ${this.search}`)
+    let x=`searchBar: azhar kamel search`
+   let u= x.split("searchBar: ");
+   console.log(u[1])
+    this.productService.sendMessageSearch(`searchBar: ${this.search}`);
   }
   ngOnDestroy():void{
     this.subscriber.unsubscribe();

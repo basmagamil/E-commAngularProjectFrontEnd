@@ -19,10 +19,11 @@
   <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
     <form class="form-inline">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="What are you looking for?">
+        <input type="text" class="form-control" placeholder="What are you looking for?"
+         [(ngModel)]="search" name="search">
         <div class="input-group-append">
           <button type="button" class="btn btn-secondary" [routerLinkActiveOptions]='{exact:true}'
-            routerLinkActive='active' routerLink="../products">
+            routerLinkActive='active' routerLink="../products" (click)="GeneralSearch()">
             <fa-icon [icon]="faSearch"></fa-icon>
           </button>
         </div>
@@ -81,7 +82,7 @@
 <nav class="navbar-bottom navbar navbar-expand-md d-md-block d-none navbar-dark bg-primary justify-content-center">
   <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
     <ul class="navbar-nav mx-auto text-center">
-      <a class="nav-link parent-nav-link" routerLink="../products">All Laptops</a>
+      <a class="nav-link parent-nav-link" routerLink="../products" (click)="SearchOnAllLaptop()">All Laptops</a>
 
       <div class="dropdown d-inline-block">
         <a class="nav-link dropbtn parent-nav-link">Brand <fa-icon [icon]="faAngleDown"></fa-icon></a>
