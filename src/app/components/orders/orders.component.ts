@@ -21,8 +21,8 @@ export class OrdersComponent implements OnInit , OnDestroy{
     this.subscriber.unsubscribe();
   }
 
-  openModal(orderId,IDVirtual): void{
-    this.tempOrderId= IDVirtual;
+  openModal(orderId): void{
+    this.tempOrderId= orderId;
     this.productsArr = this.orders.find(o=> o._id == orderId).products;
     console.log(this.productsArr)
     for(var i=0;i<this.productsArr.length;i++)

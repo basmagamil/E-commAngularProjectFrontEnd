@@ -1,76 +1,122 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators,ValidatorFn, AbstractControl} from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductsService } from 'src/app/services/products.service';
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.css']
 })
 export class UpdateComponent implements OnInit {
- 
-  constructor() {
- 
-   }
 
-  UpdateProductForm = new FormGroup({
-    title:new FormControl('',[Validators.required]),
-    image:new FormControl('',[Validators.required]),
-    price:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
-    brand:new FormControl(),
-    processor:new FormControl(),
-    ram:new FormControl(),
-    hardDisk:new FormControl(),
-    graphicsCard:new FormControl(),
-    color:new FormControl(),
-    quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
-    promotion:new FormControl('',[Validators.pattern("^[0-9]*$")])
-  })
-  get titleStatus(){return this.UpdateProductForm.controls.title.valid}
-  get imageStatus(){return this.UpdateProductForm.controls.image.valid}
-  get priceStatus(){return this.UpdateProductForm.controls.price.valid}
-  get quantityStatus(){return this.UpdateProductForm.controls.quantity.valid}
+  UpdateProductForm:FormGroup;
+
+  constructor(fb: FormBuilder, private router: Router, private productsService: ProductsService, private activeRouterLink:ActivatedRoute) {
+    console.log("ctor")
+    this.id=this.activeRouterLink.snapshot.params.id;
+    console.log("id",this.id);
+    this.UpdateProductForm = fb.group({
+      title: fb.control('', [Validators.required]),
+      image: fb.control(''),
+      price: fb.control('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+      brand: fb.control(''),
+      processor: fb.control(''),
+      ram: fb.control(''),
+      hardDisk: fb.control(''),
+      graphicsCard: fb.control(''),
+      color: fb.control(''),
+      quantity: fb.control('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+      promotion: fb.control('0.5', [Validators.pattern("^[0-9]*$")])
+      //(0(\.[0-9]{1,4})?|1$
+    })
+
+  }
+
+
 
   ngOnInit(): void {
+    console.log("ngoninit")
+    this.GetProduct(this.id);
+    console.log("product",this.product)
+    this.UpdateProductForm.reset({
+      title: this.product.title,
+      image:this.product.image,
+      price: this.product.price,
+      brand: this.product.details.Brand,
+      processor: this.product.details.Processor,
+      ram: this.product.details.RAM,
+      hardDisk: this.product.details.HardDisk,
+      graphicsCard: this.product.details.GPU,
+      color: this.product.details.Color,
+      quantity: this.product.details.quantity,
+      promotion: this.product.ratioOfPromotion
+    })
+    console.log("formgroup in oninit",this.UpdateProductForm);
   }
-  product={
-    title: new String(),
-    ImagesList:new Array(),
-    price: new Number(),
-    details:
-    {
-      brand: new String(),
-      processor: new String(),
-      ram: new String(),
-      hardDisk: new String(),
-      graphicsCard:new String(),
-      color: new String()
-    },
-    quantity:new Number() ,
-    promotion:new Number() 
-}
-SuccesOrNoToUpdate;
-  FileChange(event)
-  {
-    for (let i=0;i<event.target.files.length;i++) {
-      this.product.ImagesList.push(event.target.files[i].name);
+
+  get title() { return this.UpdateProductForm.get('title'); }
+  get price() { return this.UpdateProductForm.get('price'); }
+  get quantity() { return this.UpdateProductForm.get('quantity'); }
+  get promotion() { return this.UpdateProductForm.get('promotion'); }
+
+  //   product={
+  //     title: new String(),
+  //     ImagesList:new Array(),
+  //     price: new Number(),
+  //     details:
+  //     {
+  //       Brand: new String(),
+  //       Processor: new String(),
+  //       RAM: new String(),
+  //       HardDisk: new String(),
+  //       GPU:new String(),
+  //       Color: new String()
+  //     },
+  //     quantity:new Number() ,
+  //     promotion:new Number() 
+  // }
+  
+  id;
+  updatedProduct;
+  subscriber;
+  SuccesOrNoToUpdate;
+  product;
+  FileChange(event) {
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.updatedProduct.ImagesList.push(event.target.files[i].name);
     }
   }
-  UpdateProduct(){
-    if(this.UpdateProductForm.valid){
-      this.product.title=this.UpdateProductForm.value.title;
-      this.product.price=this.UpdateProductForm.value.price;
-      this.product.details.brand=this.UpdateProductForm.value.brand;
-      this.product.details.processor=this.UpdateProductForm.value.processor;
-      this.product.details.ram=this.UpdateProductForm.value.ram;
-      this.product.details.hardDisk=this.UpdateProductForm.value.hardDisk;
-      this.product.details.graphicsCard=this.UpdateProductForm.value.graphicsCard;
-      this.product.details.color=this.UpdateProductForm.value.color;
-      this.product.quantity=this.UpdateProductForm.value.quantity;
-      this.product.promotion=this.UpdateProductForm.value.promotion;
-      console.log(this.UpdateProductForm.value);
-      console.log(this.product);
-      this.SuccesOrNoToUpdate="Update Success";
+  onClickUpdateProductSubmit() {
+    if (this.UpdateProductForm.valid) {
+      let updatedProduct = this.UpdateProductForm.value;
+      this.UpdateProduct(this.product._id, updatedProduct)
+      this.router.navigate(['../']);
     }
-    else
-      this.SuccesOrNoToUpdate="You miss something";
+  }
+  UpdateProduct(id, updatedProduct) {
+    this.subscriber = this.productsService.updateProduct(id, updatedProduct).subscribe(
+      res => {
+        this.updatedProduct = res;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+  GetProduct(id) {
+    console.log("getting product")
+    this.subscriber = this.productsService.getProduct(id).subscribe(
+      res => {
+        console.log("success")
+        this.product = res[0];
+        // this.user._id=this.id;
+        console.log(this.product);
+      },
+      err => {
+        console.log("fail")
+
+        console.log(err);
+      }
+    )
   }
 }

@@ -1,10 +1,16 @@
 img {
-    width: 340px;
-    height: 450px;
+    /* width: 340px;
+    height: 450px; */
 }
 ::ng-deep .carousel-control-prev-icon{
     background-image: url('https://apufpel.com.br/assets/img/seta_prim.png');
   }
   ::ng-deep .carousel-control-next-icon{
     background-image: url('https://apufpel.com.br/assets/img/seta_ult.png');
+  }
+
+  .vertical-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
