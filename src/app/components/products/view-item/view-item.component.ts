@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap'; 
 import { ProductsService } from 'src/app/services/products.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewItemComponent implements OnInit {
   // images = [1, 2, 3, 4].map((n) => `assets/images/${n}.jpg`);
-  constructor(config: NgbCarouselConfig, private productsService:ProductsService, public activeRouterLink:ActivatedRoute) { 
+  constructor(config: NgbCarouselConfig, private productsService:ProductsService,private cartService:CartService, public activeRouterLink:ActivatedRoute) { 
     config.interval = 4000;
     config.wrap = true;
     config.keyboard = false;
@@ -18,6 +19,7 @@ export class ViewItemComponent implements OnInit {
 
     this.id=this.activeRouterLink.snapshot.params.id;
     console.log(this.id)
+
 
   }
   // product={
@@ -41,7 +43,7 @@ export class ViewItemComponent implements OnInit {
   id;
   product;
   subscriber;
-
+  qtyInput;
   ngOnInit(): void {
     this.id=this.activeRouterLink.snapshot.params.id;
     console.log(this.id)
@@ -73,5 +75,9 @@ export class ViewItemComponent implements OnInit {
       })
 
     console.log(this.product)
+  }
+  addToCartHandler(product, qtyInput){
+    console.log("prod ID", product._id,"qty" ,qtyInput);
+    this.cartService.addProductToCart(product, this.qtyInput)
   }
 }

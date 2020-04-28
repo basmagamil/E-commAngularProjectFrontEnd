@@ -1,51 +1,60 @@
 <div class="container mt-3">
   <div class="row">
-
-
-    <div class= "col-sm-4 vertical-center">
-      <ngb-carousel *ngIf="product.images" id="carouselExampleIndicators">
-        <ng-template ngbSlide *ngFor="let img of product.images">
-          <div class="picsum-img-wrapper">
-            <img [src]="img" style="max-width: 100%;">
-          </div>
-        </ng-template>
-      </ngb-carousel>
-    </div>
-
-    <div class="card col-sm-8">
-      <h2 class="card-title card-header bg-white">{{product.title}}</h2>
-      <div class="card-body m-1">
-        <ul class="card-text">
-          <li *ngFor="let key of GetKeys(product.details)"><b>{{key}}:</b> {{product.details[key]}}</li>
-      </ul>
-      
-        <div class="container mt-5">
-          <div class="row justify-content-md-center">
-            <div class="col col-lg-4">
-              <h5 style="font-size: 28px;" class="font-weight-bold">{{product.price}} EGP</h5>
-              <h6 style="text-decoration: line-through;font-size: 22px;" class="text-danger" 
-              *ngIf="product.ratioOfPromotion">{{product.price-product.price*product.ratioOfPromotion}} EGP</h6>
+      <div class="col-sm-4 vertical-center">
+        <ngb-carousel *ngIf="product.images" id="carouselExampleIndicators">
+          <ng-template ngbSlide *ngFor="let img of product.images">
+            <div class="picsum-img-wrapper">
+              <img [src]="img" style="max-width: 100%;" />
             </div>
-            <div class="col col-lg-8">
-              <div class="container">
-                <div class="row">
-                  <div class="col col-lg-6 ">
-                    <label class="m-2 text-dark">No:</label>
-                    <input type="number" required class="w-75">
-                  </div>
-                  <div class="col col-lg-6">
-                    <button type="button" class="btn btn-dark btn-lg">Add To Cart</button>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+
+      <div class="card col-sm-8">
+        <h2 class="card-title card-header bg-white">{{ product.title }}</h2>
+        <div class="card-body m-1">
+          <ul class="card-text">
+            <li *ngFor="let key of GetKeys(product.details)">
+              <b>{{ key }}:</b> {{ product.details[key] }}
+            </li>
+          </ul>
+
+          <div class="container mt-5">
+            <div class="row justify-content-md-center">
+              <div class="col col-lg-4">
+                <h5 style="font-size: 28px;" class="font-weight-bold">
+                  {{ product.price }} EGP
+                </h5>
+                <h6
+                  style="text-decoration: line-through;font-size: 22px;"
+                  class="text-danger"
+                  *ngIf="product.ratioOfPromotion"
+                >
+                  {{
+                    product.price - product.price * product.ratioOfPromotion
+                  }}
+                  EGP
+                </h6>
+              </div>
+              <div class="col col-lg-8">
+                <div class="container">
+                  <div class="row">
+                    <div class="col col-lg-6 ">
+                      <label class="m-2 text-dark">No:</label>
+                      <input type="number" min="1" max="100" required class="w-75" [(ngModel)]="qtyInput"/>
+                    </div>
+                    <div class="col col-lg-6">
+                      <button type="button" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)">
+                        Add To Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      
       </div>
-      
-    </div>
-    
   </div>
   <!-- <div class="row justify-content-center mt-2">
     <button type="button" class="btn btn-secondary  col-2" routerLink="/products">Back</button>

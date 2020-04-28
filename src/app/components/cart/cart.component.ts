@@ -30,64 +30,36 @@ export class CartComponent implements OnInit {
         }
         console.log(productsId)
         for(let i=0; i<productsId.length; i++){
-          //call prod service
           this.productsService.getProduct(productsId[i]).subscribe((prod)=>{
             this.productsList.push(prod[0]);
             console.log("prooood",prod[0]);
-          }, (err)=>{console.log(err);})
-          //push prod in productsList
-          //this.productsList.push(this.userCart.productsList[i].productId)
+            this.totalPrice+= prod[0].price;
+            //console.log(this.totalPrice);
+          }
+          , (err)=>{console.log(err);})
         }
       },
         (err) => {
           console.log(err);
         });
+        
+        this.myService.addProductToCart(this.newProd, this.newProdQty).subscribe((prod)=>{
+          console.log(prod)
+        },
+        (err)=>{
+          console.log(err)
+        })
   }
 
   id: string = "5ea457ee4387c02984646e91";
   userCart; //from service
   productsList= []; //from service
   count;
+  totalPrice = 0;
   objectKeys = Object.keys;
+  newProd;
+  newProdQty;
 
-  // cartItems = {
-  //   userId: 123,
-
-  //   productsList: [{
-  //     productId: "P1",
-  //     quantity: 1,
-  //     isDeleted: false
-  //   },
-  //   {
-  //     productId: "P2",
-  //     quantity: 1,
-  //     isDeleted: false
-  //   }
-  //   ]
-  // }
-  //count = this.cartItems.productsList.length;
-  // product = [{
-  //   price: "12000",
-  //   title: "HP Laptop",
-  //   details: {
-  //     brand: "HP",
-  //     processor: "i core",
-  //     ram: "256",
-  //     hardDisk: "256",
-  //     graphicsCard: "bla bla",
-  //     color: "black"
-  //   }
-  // },
-  // {
-  //   title: "HP Laptop2",
-  //   price: "12000",
-  //   details: {
-  //     brand: "HP",
-  //     processor: "i core",
-  //     ram: "256",
-  //     hardDisk: "256",
-  //   }
-  // },
-  // ]
+ 
 
 }
