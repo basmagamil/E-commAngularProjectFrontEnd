@@ -67,51 +67,43 @@ export class CartComponent implements OnInit, OnChanges {
   totalPrice = 0;
   objectKeys = Object.keys;
   subscriberToAddOrder
-  orderAdd=new Order();
+  orderProduct; //azhar
+
+
   CheckOut()
   {
     console.log("CheckOut")
-    this.orderAdd.user=this.id;
-    this.orderAdd.price=this.totalPrice;
     console.log("List with Out Quntity")
     
-  //  console.log(this.productsList)
-  //   for(let i=0;i<this.productsList.length;i++)
-  //   {
-  //     this.orderAdd.products[i].product=this.productsList[i]['_id']
-  //     this.orderAdd.products[i].quantity[i]=this.productsList[i]['quantity']
-  //   }
-    console.log("USERCART",this.userCart)
-    console.log(this.orderAdd)
-    console.log("List with Quntity")
-    // for(let i=0;i<this.orderAdd.products.length;i++)
-    // this.orderAdd.products["quantity"].push(this.productsList[i]["quantity"]);
-    console.log(this.orderAdd)
-    // this.subscriberToAddOrder = this.orderService.addOrder(this.orderAdd)
-    // .subscribe((order)=>{
-    // },
-    // (err)=>{
-    //   console.log(err)
-    // })
+  console.log(this.orderProduct)
+  let temp = {
+    user : this.id,
+     date: new Date(),
+     price: this.totalPrice,
+     products:[
+      ],
+     
+     status:"pending",
   }
-  orderProduct; //azhar
-
-}
-class Order {
-  user: string;
-   date:Date = new Date();
-   price: number;
-   products:[
+    for(let i=0;i<this.orderProduct.length;i++)
     {
-      product:string;
-      quantity: number;
+      temp.products.push({
+        product: this.orderProduct[i].productId,
+        quantity: this.orderProduct[i].productQty
+      });
     }
-    ]
-   
-   status:string;
-  constructor() {
-      this.date.getDate();
-      this.status="pending";
-  }
   
+    this.subscriberToAddOrder = this.orderService.addOrder(temp)
+    .subscribe((order)=>{
+      console.log("subscribe");
+      if(order)
+      console.log(order);
+    },
+    (err)=>{
+      console.log(err)
+    })
+  }
+
+  
+
 }
