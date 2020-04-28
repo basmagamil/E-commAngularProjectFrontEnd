@@ -26,7 +26,7 @@ export class UpdateComponent implements OnInit {
       graphicsCard: fb.control(''),
       color: fb.control(''),
       quantity: fb.control('', [Validators.required, Validators.pattern("^[0-9]*$")]),
-      promotion: fb.control('0.5', [Validators.pattern("^[0-9]*$")])
+      promotion: fb.control('0', [Validators.pattern("^[0-9]*$")])
       //(0(\.[0-9]{1,4})?|1$
     })
 
@@ -79,6 +79,7 @@ export class UpdateComponent implements OnInit {
   id;
   updatedProduct;
   subscriber;
+  subscriber2;
   SuccesOrNoToUpdate;
   product;
   FileChange(event) {
@@ -94,7 +95,7 @@ export class UpdateComponent implements OnInit {
     }
   }
   UpdateProduct(id, updatedProduct) {
-    this.subscriber = this.productsService.updateProduct(id, updatedProduct).subscribe(
+    this.subscriber2 = this.productsService.updateProduct(id, updatedProduct).subscribe(
       res => {
         this.updatedProduct = res;
       },

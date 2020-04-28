@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
     ]),
     password: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
+    image: new FormControl(),
   })
 
   get userName() {
@@ -45,6 +46,12 @@ export class RegisterComponent implements OnInit {
   onClickRegisterSubmit() {
     if (this.registerForm.valid) {
       let user = this.registerForm.value;
+      if(user.gender == "female"){
+        user.image = "/assets/images/profilepics/defaultfemale.jpeg";
+      }
+      else{
+        user.image = "/assets/images/profilepics/defaultmale.jpg";
+      }
       this.registerEvent.emit(user);
       this.registerUser(user);
       this.router.navigateByUrl('');

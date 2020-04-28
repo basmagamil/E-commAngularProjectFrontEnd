@@ -97,7 +97,7 @@
                         <input type="number" class="form-control" id="inputRatioOfPromotion"
                             placeholder="please enter Ratio Of Promotion" formControlName="promotion">
                             <div *ngIf="(promotion.invalid && promotion.touched) || promotion.dirty">
-                                <small *ngIf="promotion.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+                                <small *ngIf="promotion.errors?.pattern" class="text-danger">Please provide a valid promotion rate between 0 and 1</small>
                             </div>
                     </div>
                 </div>
