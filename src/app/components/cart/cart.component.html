@@ -14,37 +14,31 @@
                 <div class="col-md-4 col-12">
                   <img
                   class="img-fluid"
-                  src={{item.images[0]}}
+                  src={{item.product.images[0]}}
                   />
                 </div>
                 <div class="col-md-8 col-12">
                   <div class="card-body ">
-                    <h5 class="card-title">{{ item.title }}</h5>
+                    <h5 class="card-title">{{ item.product.title }}</h5>
                     <div class="d-flex">
                       <div class="p-2">
                         <h6 class="card-subtitle text-primary font-weight-bold">
-                          {{ item.price }}EGP
+                          {{ item.product.price }}EGP
                         </h6>
                       </div>
 
                       <div class="ml-auto">
-                        QTY
-                        <input
-                          name="myInput"
-                          class="card-text"
-                          type="number"
-                          min="1"
-                          max="100"
-                          value={{item.quantity}}
-                        />
+                        <label class="card-text">
+                          QTY: {{item.productQty}}
+                        </label>
                       </div>
                     </div>
 
                     <p
                       class="card-text"
-                      *ngFor="let key of objectKeys(item.details)"
+                      *ngFor="let key of objectKeys(item.product.details)"
                     >
-                      {{ key + ": " + item.details[key] }}
+                      {{ key + ": " + item.product.details[key] }}
                     </p>
 
                     <div class="d-flex justify-content-end">
