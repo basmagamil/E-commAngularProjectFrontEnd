@@ -92,6 +92,11 @@ export class NavbarComponent implements OnInit {
    console.log(u[1])
     this.productService.sendMessageSearch(`searchBar: ${this.search}`);
   }
+  GoToAllProduct()
+  {
+    console.log(`I am Onclick`)
+    this.router.navigate(['../products']);
+  }
   ngOnDestroy():void{
     this.subscriber.unsubscribe();
   }

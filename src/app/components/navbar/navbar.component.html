@@ -20,7 +20,8 @@
     <form class="form-inline">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="What are you looking for?"
-         [(ngModel)]="search" name="search">
+         [(ngModel)]="search" name="search" (click)="GoToAllProduct()"
+         (keyup.enter)="GeneralSearch()">
         <div class="input-group-append">
           <button type="button" class="btn btn-secondary" [routerLinkActiveOptions]='{exact:true}'
             routerLinkActive='active' routerLink="../products" (click)="GeneralSearch()">
