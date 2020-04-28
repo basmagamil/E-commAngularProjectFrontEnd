@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnChanges, Input, SimpleChange } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
@@ -9,47 +9,53 @@ import { ProductsService } from 'src/app/services/products.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnChanges {
 
 
 
   constructor(activeRouterLink: ActivatedRoute, public router: Router, private myService: CartService, private productsService :ProductsService) {
     this.id = activeRouterLink.snapshot.params.id;
   }
+  ngOnChanges(changes: SimpleChanges): void {
+  
+  }
+ 
   ngOnInit() {
     this.myService.getUserCart(this.id)
-      .subscribe((userCart) => {
-        console.log("userCart", userCart);
-        this.userCart = userCart[0].productsList;
-        console.log("this.userCart.productsList", this.userCart);
-        this.count = this.userCart.length;
+    .subscribe((userCart) => {
 
-        const productsId = [];
-        for (let i = 0; i < this.userCart.length; i++) {
-          productsId.push(this.userCart[i].productId)
+      this.userCart = userCart[0].productsList; //contains prod id and qty
+      this.count = this.userCart.length;
+
+      const products = [];
+      for (let i = 0; i < this.userCart.length; i++) {
+        products.push({productId: this.userCart[i].productId, productQty: this.userCart[i].quantity})
+      }
+      console.log("PROD",products)
+      this.orderProduct = products;
+
+      console.log("azhar",this.orderProduct) //azhar
+
+      
+      for(let i=0; i<products.length; i++){
+        this.productsService.getProduct(products[i].productId).subscribe((prod)=>{
+
+          this.productsList.push({product:prod[0], productQty: products[i].productQty}); //details of each product
+          // console.log("prooood",prod[0]); 
+          this.totalPrice+= prod[0].price;
+         
+          //console.log(this.productsList);
+  
         }
-        console.log(productsId)
-        for(let i=0; i<productsId.length; i++){
-          this.productsService.getProduct(productsId[i]).subscribe((prod)=>{
-            this.productsList.push(prod[0]);
-            console.log("prooood",prod[0]);
-            this.totalPrice+= prod[0].price;
-            //console.log(this.totalPrice);
-          }
-          , (err)=>{console.log(err);})
-        }
-      },
-        (err) => {
-          console.log(err);
-        });
-        
-        this.myService.addProductToCart(this.newProd, this.newProdQty).subscribe((prod)=>{
-          console.log(prod)
-        },
-        (err)=>{
-          console.log(err)
-        })
-  }
+        , (err)=>{console.log(err);})
+      }
+    },
+      (err) => {
+        console.log(err);
+      });
+    
+       
+      }
 
   id: string = "5ea457ee4387c02984646e91";
   userCart; //from service
@@ -57,9 +63,6 @@ export class CartComponent implements OnInit {
   count;
   totalPrice = 0;
   objectKeys = Object.keys;
-  newProd;
-  newProdQty;
-
- 
+  orderProduct; //azhar
 
 }
