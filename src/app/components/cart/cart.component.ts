@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,9 @@ export class CartComponent implements OnInit {
 
 
 
-  constructor(activeRouterLink: ActivatedRoute, public router: Router, private myService: CartService, private productsService :ProductsService) {
+  constructor(activeRouterLink: ActivatedRoute, public router: Router, 
+    private myService: CartService, private productsService :ProductsService,
+    private orderService:OrdersService) {
     this.id = activeRouterLink.snapshot.params.id;
   }
   ngOnInit() {
@@ -59,7 +62,50 @@ export class CartComponent implements OnInit {
   objectKeys = Object.keys;
   newProd;
   newProdQty;
-
- 
-
+  subscriberToAddOrder
+  orderAdd=new Order();
+  CheckOut()
+  {
+    console.log("CheckOut")
+    this.orderAdd.user=this.id;
+    this.orderAdd.price=this.totalPrice;
+    console.log("List with Out Quntity")
+    
+  //  console.log(this.productsList)
+  //   for(let i=0;i<this.productsList.length;i++)
+  //   {
+  //     this.orderAdd.products[i].product=this.productsList[i]['_id']
+  //     this.orderAdd.products[i].quantity[i]=this.productsList[i]['quantity']
+  //   }
+    console.log("USERCART",this.userCart)
+    console.log(this.orderAdd)
+    console.log("List with Quntity")
+    // for(let i=0;i<this.orderAdd.products.length;i++)
+    // this.orderAdd.products["quantity"].push(this.productsList[i]["quantity"]);
+    console.log(this.orderAdd)
+    // this.subscriberToAddOrder = this.orderService.addOrder(this.orderAdd)
+    // .subscribe((order)=>{
+    // },
+    // (err)=>{
+    //   console.log(err)
+    // })
+  }
+}
+class Order {
+  user: string;
+   date:Date = new Date();
+   price: number;
+   products:[
+    {
+      product:string;
+      quantity: number;
+    }
+    ]
+   
+   status:string;
+  constructor() {
+      this.date.getDate();
+      this.status="pending";
+  }
+  
 }
