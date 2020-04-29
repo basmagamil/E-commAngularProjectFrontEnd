@@ -3,6 +3,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/services/products.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ActivatedRoute } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-view-item',
@@ -43,7 +44,7 @@ export class ViewItemComponent implements OnInit {
   id;
   product;
   subscriber;
-  qtyInput;
+  qtyInput =1 ;
   ngOnInit(): void {
     this.id = this.activeRouterLink.snapshot.params.id;
     console.log(this.id)
@@ -77,6 +78,9 @@ export class ViewItemComponent implements OnInit {
     console.log(this.product)
   }
   addToCartHandler(product, qtyInput) {
+    $("#addToCart").on("click", function() {
+      $(this).prop("disabled", true);
+  });
     console.log("prod ID", product._id, "qty", qtyInput);
     this.cartService.addProductToCart(product, this.qtyInput).subscribe((prod) => {
       //console.log(prod)

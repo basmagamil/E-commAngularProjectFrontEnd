@@ -42,7 +42,7 @@
                     </p>
 
                     <div class="d-flex justify-content-end">
-                      <a routerLink="/cart/2" class="btn btn-danger ">Delete</a>
+                      <a class="btn btn-danger" (click)="deleteFromCart(item.product._id)">Delete</a>
                     </div>
                   </div>
                 </div>

@@ -44,7 +44,8 @@
                       <input type="number" min="1" max="100" required class="w-75" [(ngModel)]="qtyInput"/>
                     </div>
                     <div class="col col-lg-6">
-                      <button type="button" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)">
+                      <!-- routerLink="../../../cart/{{id}}" -->
+                      <button type="button" id="addToCart" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)" >
                         Add To Cart
                       </button>
                     </div>

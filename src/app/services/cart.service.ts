@@ -22,22 +22,25 @@ export class CartService {
    
    
    addProductToCart(prod, qtyInput){
-    //  this.qtyInput = qtyInput;
      let temp = {
       userId: this.userId,
       productsList: [{
             productId: prod._id,
             quantity:qtyInput
-           
         }]
     }
-     //console.log(temp);
-     //console.log("service Done")
      return this.myClient.post(`${this.baseURL}/user/${this.userId}`, temp, {
        headers: new HttpHeaders({
          'Content-Type': 'application/json'
        }),
        observe: 'body'
      });
+   }
+
+   deleteProductFromCart(prod){
+     console.log(prod)
+     console.log(prod._id)
+     let productId = prod._id
+     return this.myClient.delete(`${this.baseURL}/user/${this.userId}/product/${prod}`);
    }
 }

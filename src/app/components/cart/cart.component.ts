@@ -19,8 +19,17 @@ export class CartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
   
   }
- 
-  ngOnInit() {
+  deleteFromCart(prodId){
+    console.log("deleted prod id",prodId) //2d5
+    this.myService.deleteProductFromCart(prodId).subscribe((prod)=>{
+      console.log("delete", prod)
+    location.reload();
+    }, (err)=>{
+      console.log(err);
+    })
+  }
+
+  showData(){
     this.myService.getUserCart(this.id)
     .subscribe((userCart) => {
 
@@ -45,7 +54,7 @@ export class CartComponent implements OnInit, OnChanges {
           this.totalPrice+= prod[0].price;
          
           //console.log(this.productsList);
-  
+          
         }
         , (err)=>{console.log(err);})
       }
@@ -54,13 +63,18 @@ export class CartComponent implements OnInit, OnChanges {
         console.log(err);
       });
     
+  }
+ 
+  ngOnInit() {
+    
+    this.showData();
        
       }
 
   id: string = "5ea457ee4387c02984646e91";
   userCart; //from service
   productsList= []; //from service
-  count;
+  count = 0;
   totalPrice = 0;
   objectKeys = Object.keys;
   orderProduct; //azhar
