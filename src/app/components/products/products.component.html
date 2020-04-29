@@ -17,11 +17,11 @@
                 <!--  -->
 
 
-                <button type="button" class="btn btn-outline-primary mt-3 col-12 w-100"
-                    routerLink="../products/add">Add new product</button>
+                <button type="button" class="btn btn-outline-primary mt-3 col-12 w-100" routerLink="../products/add">Add
+                    new product</button>
 
                 <!--  -->
-                <div class="row" *ngFor="let product of products | filter:search" >
+                <div class="row" *ngFor="let product of products | filter:search">
                     <div class="card mb-3 mt-2 col-12">
                         <div class="row no-gutters">
                             <div class="col-md-3">
@@ -42,14 +42,19 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="mt-4 text-center">
-                                    <h5>{{product.price}} EGP</h5>
-                                    <h6 style="text-decoration: line-through;" class="text-danger"
-                                        *ngIf="product.ratioOfPromotion">
-                                        {{product.price-product.price*product.ratioOfPromotion}} EGP</h6>
+                                    <h5 *ngIf="product.ratioOfPromotion">
+                                        {{product.price - product.price * product.ratioOfPromotion}} EGP
+                                    </h5>
+                                    <h5 [ngStyle]="{'text-decoration': (product.ratioOfPromotion) ? 'line-through' : 'none'}"
+                                        [ngClass]="{'text-danger': product.ratioOfPromotion}">
+                                        {{ product.price }} EGP
+                                    </h5>
+
+
                                     <button type="button" class="btn btn-outline-primary mt-5 w-100"
                                         routerLink="../products/Details/{{product._id}}">View Full Details</button>
                                     <br>
-                                    <div class="btn-group mt-5 w-100" role="group" aria-label="Basic example">
+                                    <div class="btn-group mt-3 mb-3 w-100" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                                             data-target="#DeleteModal" (click)="DeleteModal(product)">Delete</button>
                                         <button type="button" class="btn btn-outline-primary"

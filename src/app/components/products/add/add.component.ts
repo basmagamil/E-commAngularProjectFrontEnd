@@ -28,6 +28,7 @@ export class AddComponent implements OnInit {
     }),
     quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
     ratioOfPromotion:new FormControl('',[Validators.pattern("^[0-9]*$")])
+      //(0(\.[0-9]{1,4})?|1$
   })
 
   get title() { return this.AddProductForm.get('title'); }
@@ -65,10 +66,17 @@ FileChange(event)
   }
   onClickAddProductSubmit(){
     console.log(this.AddProductForm.value)
+    console.log(this.AddProductForm)
     if(this.AddProductForm.valid){
       let addProduct = this.AddProductForm.value;
-      this.AddProduct(addProduct);
-      this.location.back();
+      if(this.promotion.value){
+        addProduct.isPromoted=true;
+      }
+      else{
+        addProduct.isPromoted=false;
+      }
+      // this.AddProduct(addProduct);
+      // this.location.back();
     }
   }
   subscriber;
