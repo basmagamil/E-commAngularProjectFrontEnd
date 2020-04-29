@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -18,22 +18,29 @@ export class CartService {
     console.log( this.myClient.get(`${this.baseURL}/user/${id}`) )//{observe: 'body'} default // or {observe: 'response'}
     return this.myClient.get(`${this.baseURL}/user/${id}`);
    }
+  //  qtyInput;
+   
+   
    addProductToCart(prod, qtyInput){
      let temp = {
       userId: this.userId,
       productsList: [{
             productId: prod._id,
             quantity:qtyInput
-           
         }]
     }
-     console.log(temp);
-     console.log("service Done")
      return this.myClient.post(`${this.baseURL}/user/${this.userId}`, temp, {
        headers: new HttpHeaders({
          'Content-Type': 'application/json'
        }),
        observe: 'body'
      });
+   }
+
+   deleteProductFromCart(prod){
+     console.log(prod)
+     console.log(prod._id)
+     let productId = prod._id
+     return this.myClient.delete(`${this.baseURL}/user/${this.userId}/product/${prod}`);
    }
 }

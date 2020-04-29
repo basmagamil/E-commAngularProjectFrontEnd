@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/services/products.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ActivatedRoute } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-view-item',
@@ -11,13 +12,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewItemComponent implements OnInit {
   // images = [1, 2, 3, 4].map((n) => `assets/images/${n}.jpg`);
-  constructor(config: NgbCarouselConfig, private productsService:ProductsService,private cartService:CartService, public activeRouterLink:ActivatedRoute) { 
+  constructor(config: NgbCarouselConfig, private productsService: ProductsService, private cartService: CartService, public activeRouterLink: ActivatedRoute) {
     config.interval = 4000;
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = false;
 
-    this.id=this.activeRouterLink.snapshot.params.id;
+    this.id = this.activeRouterLink.snapshot.params.id;
     console.log(this.id)
 
 
@@ -43,9 +44,9 @@ export class ViewItemComponent implements OnInit {
   id;
   product;
   subscriber;
-  qtyInput;
+  qtyInput =1 ;
   ngOnInit(): void {
-    this.id=this.activeRouterLink.snapshot.params.id;
+    this.id = this.activeRouterLink.snapshot.params.id;
     console.log(this.id)
 
     this.getProduct(this.id);
@@ -56,7 +57,7 @@ export class ViewItemComponent implements OnInit {
     this.subscriber.unsubscribe();
   }
 
-  GetKeys(obj){
+  GetKeys(obj) {
     return Object.keys(obj);
   }
 
@@ -76,8 +77,17 @@ export class ViewItemComponent implements OnInit {
 
     console.log(this.product)
   }
-  addToCartHandler(product, qtyInput){
-    console.log("prod ID", product._id,"qty" ,qtyInput);
-    this.cartService.addProductToCart(product, this.qtyInput)
+  addToCartHandler(product, qtyInput) {
+    $("#addToCart").on("click", function() {
+      $(this).prop("disabled", true);
+  });
+    console.log("prod ID", product._id, "qty", qtyInput);
+    this.cartService.addProductToCart(product, this.qtyInput).subscribe((prod) => {
+      //console.log(prod)
+    },
+      (err) => {
+        console.log(err)
+      });
+
   }
 }

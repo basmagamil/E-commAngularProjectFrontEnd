@@ -19,29 +19,30 @@
           </li>
         </ul>
 
-        <div class="container mt-5">
-          <div class="row justify-content-md-center">
-            <div class="col col-lg-4">
-              <h5 style="font-size: 26px;" *ngIf="product.ratioOfPromotion">
-                {{product.price - product.price * product.ratioOfPromotion}} EGP
-              </h5>
-              <h5 style="font-size: 26px;" [ngStyle]="{'text-decoration': (product.ratioOfPromotion) ? 'line-through' : 'none'}"
-                [ngClass]="{'text-danger': product.ratioOfPromotion}">
-                {{ product.price }} EGP
-              </h5>
-
-            </div>
-            <div class="col col-lg-8">
-              <div class="container">
-                <div class="row">
-                  <div class="col col-lg-6 ">
-                    <label class="m-2 text-dark">No:</label>
-                    <input type="number" min="1" max="100" required class="w-75" [(ngModel)]="qtyInput" />
-                  </div>
-                  <div class="col col-lg-6">
-                    <button type="button" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)">
-                      Add To Cart
-                    </button>
+          <div class="container mt-5">
+            <div class="row justify-content-md-center">
+              <div class="col col-lg-4">
+                <h5 style="font-size: 26px;" *ngIf="product.ratioOfPromotion">
+                  {{product.price - product.price * product.ratioOfPromotion}} EGP
+                </h5>
+                <h5 style="font-size: 26px;" [ngStyle]="{'text-decoration': (product.ratioOfPromotion) ? 'line-through' : 'none'}"
+                  [ngClass]="{'text-danger': product.ratioOfPromotion}">
+                  {{ product.price }} EGP
+                </h5>
+              </div>
+              <div class="col col-lg-8">
+                <div class="container">
+                  <div class="row">
+                    <div class="col col-lg-6 ">
+                      <label class="m-2 text-dark">No:</label>
+                      <input type="number" min="1" max="100" required class="w-75" [(ngModel)]="qtyInput"/>
+                    </div>
+                    <div class="col col-lg-6">
+                      <!-- routerLink="../../../cart/{{id}}" -->
+                      <button type="button" id="addToCart" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)" >
+                        Add To Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -55,4 +56,3 @@
     <button type="button" class="btn btn-secondary  col-2" routerLink="/products">Back</button>
   
   </div> -->
-</div>
