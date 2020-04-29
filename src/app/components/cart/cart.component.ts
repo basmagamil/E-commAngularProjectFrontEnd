@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,9 @@ export class CartComponent implements OnInit, OnChanges {
 
 
 
-  constructor(activeRouterLink: ActivatedRoute, public router: Router, private myService: CartService, private productsService :ProductsService) {
+  constructor(activeRouterLink: ActivatedRoute, public router: Router, 
+    private myService: CartService, private productsService :ProductsService,
+    private orderService:OrdersService) {
     this.id = activeRouterLink.snapshot.params.id;
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -77,6 +80,44 @@ export class CartComponent implements OnInit, OnChanges {
   count = 0;
   totalPrice = 0;
   objectKeys = Object.keys;
+  subscriberToAddOrder
   orderProduct; //azhar
+
+
+  CheckOut()
+  {
+    console.log("CheckOut")
+    console.log("List with Out Quntity")
+    
+  console.log(this.orderProduct)
+  let temp = {
+    user : this.id,
+     date: new Date(),
+     price: this.totalPrice,
+     products:[
+      ],
+     
+     status:"pending",
+  }
+    for(let i=0;i<this.orderProduct.length;i++)
+    {
+      temp.products.push({
+        product: this.orderProduct[i].productId,
+        quantity: this.orderProduct[i].productQty
+      });
+    }
+  
+    this.subscriberToAddOrder = this.orderService.addOrder(temp)
+    .subscribe((order)=>{
+      console.log("subscribe");
+      if(order)
+      console.log(order);
+    },
+    (err)=>{
+      console.log(err)
+    })
+  }
+
+  
 
 }
