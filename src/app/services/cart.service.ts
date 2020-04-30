@@ -39,8 +39,10 @@ export class CartService {
 
    deleteProductFromCart(prod){
      console.log(prod)
-     console.log(prod._id)
-     let productId = prod._id
      return this.myClient.delete(`${this.baseURL}/user/${this.userId}/product/${prod}`);
+   }
+
+   checkoutFromCart(){
+      return this.myClient.get(`${this.baseURL}/user/${this.userId}/checkout`);
    }
 }

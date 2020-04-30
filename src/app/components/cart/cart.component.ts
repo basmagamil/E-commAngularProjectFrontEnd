@@ -56,7 +56,7 @@ export class CartComponent implements OnInit, OnChanges {
           // console.log("prooood",prod[0]); 
           this.totalPrice+= prod[0].price;
          
-          //console.log(this.productsList);
+          console.log(this.productsList);
           
         }
         , (err)=>{console.log(err);})
@@ -87,9 +87,16 @@ export class CartComponent implements OnInit, OnChanges {
   CheckOut()
   {
     console.log("CheckOut")
+    this.myService.checkoutFromCart().subscribe((cart)=>{
+      console.log(cart)
+    },
+    (err)=>{
+      console.log(err)
+    })
     console.log("List with Out Quntity")
     
   console.log(this.orderProduct)
+  console.log("henaaaa",this.userCart[0].productsList);
   let temp = {
     user : this.id,
      date: new Date(),
@@ -106,7 +113,8 @@ export class CartComponent implements OnInit, OnChanges {
         quantity: this.orderProduct[i].productQty
       });
     }
-  
+    
+
     this.subscriberToAddOrder = this.orderService.addOrder(temp)
     .subscribe((order)=>{
       console.log("subscribe");

@@ -33,13 +33,11 @@
                         </label>
                       </div>
                     </div>
-
-                    <p
-                      class="card-text"
-                      *ngFor="let key of objectKeys(item.product.details)"
-                    >
-                      {{ key + ": " + item.product.details[key] }}
-                    </p>
+                    <ul class="card-text">
+                      <li *ngFor="let key of objectKeys(item.product.details)">
+                        <b>{{ key }}:</b> {{ item.product.details[key] }}
+                      </li>
+                    </ul>
 
                     <div class="d-flex justify-content-end">
                       <a class="btn btn-danger" (click)="deleteFromCart(item.product._id)">Delete</a>
@@ -66,9 +64,10 @@
                   The order arrives in 3-5 working days
                 </li>
               </ul>
+              
               <div class="card-body ">
                 <a routerLink="/profile/{{this.id}}" (click)="CheckOut()"
-                class="btn btn-success btn-block">Checkout</a>
+                class="btn btn-success btn-block" *ngIf="productsList.length!=0">Checkout</a>
               </div>
             </div>
           </div>
