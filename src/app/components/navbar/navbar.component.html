@@ -32,46 +32,45 @@
     </form>
 
     <div class="navbar-nav ml-auto">
-
       <!-- 1 TODO: only show if logged in -->
-      <a class="d-md-none" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
-        class="nav-item nav-link">
-        <fa-icon class="d-md-none" [icon]="faShoppingBag"></fa-icon>
-        <span class="d-md-none"> All Laptops</span>
-      </a>
+        <a *ngIf="usersService.isLoggedIn()" class="d-md-none" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="../products"
+          class="nav-item nav-link">
+          <fa-icon class="d-md-none" [icon]="faShoppingBag"></fa-icon>
+          <span class="d-md-none"> All Laptops</span>
+        </a>
 
-      <!-- 1.a TODO: only show if user -->
-      <a href="#" class="nav-item nav-link disabled d-none d-md-inline-block">Hello, {{user.userName}}!</a>
-      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="profile/{{this.id}}"
-        class="nav-item nav-link">
-        <fa-icon [icon]="faUser"></fa-icon>
-        <span class="d-md-none">  {{user.userName}}</span>
-      </a>
-      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="cart/{{this.id}}"
-        class="nav-item nav-link">
-        <fa-icon [icon]="faShoppingCart"></fa-icon>
-        <span class="d-md-none">  Cart</span>
-      </a>
-      <!-- 1.a end -->
+        <a *ngIf="usersService.isLoggedIn()" href="#" class="nav-item nav-link disabled d-none d-md-inline-block">Hello, {{usersService.currentUser.userName}}!</a>
+        <!-- 1.a TODO: only show if user -->
+        <a *ngIf="usersService.isLoggedIn() && !usersService.currentUser.isAdmin" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="profile/{{usersService.currentUser.id}}"
+          class="nav-item nav-link">
+          <fa-icon [icon]="faUser"></fa-icon>
+          <span class="d-md-none">  {{usersService.currentUser.userName}}</span>
+        </a>
+        <a *ngIf="usersService.isLoggedIn() && !usersService.currentUser.isAdmin" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="cart/{{usersService.currentUser.id}}"
+          class="nav-item nav-link">
+          <fa-icon [icon]="faShoppingCart"></fa-icon>
+          <span class="d-md-none">  Cart</span>
+        </a>
+        <!-- 1.a end -->
 
-      <!-- 1.b TODO: only show if admin -->
-      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="orders"
-        class="nav-item nav-link">
-        <fa-icon [icon]="faClipboardList"></fa-icon>
-        <span class="d-md-none">  Orders</span>
-      </a>
-      <!-- 1.b end -->
+        <!-- 1.b TODO: only show if admin -->
+        <a *ngIf="usersService.isLoggedIn() && usersService.currentUser.isAdmin" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="orders"
+          class="nav-item nav-link">
+          <fa-icon [icon]="faClipboardList"></fa-icon>
+          <span class="d-md-none">  Orders</span>
+        </a>
+        <!-- 1.b end -->
 
-      <a href="#" class="nav-item nav-link">
-        <fa-icon [icon]="faSignOutAlt"></fa-icon>
-        <span class="d-md-none">  Log Out</span>
-      </a>
+        <a *ngIf="usersService.isLoggedIn()" (click)="onClickLogout()" class="nav-item nav-link">
+          <fa-icon [icon]="faSignOutAlt"></fa-icon>
+          <span class="d-md-none">  Log Out</span>
+        </a>
       <!-- 1. end -->
 
       <!-- 2 TODO: only show if not logged in -->
-      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="login"
+      <a *ngIf="!usersService.isLoggedIn()" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="login"
         class="nav-item nav-link">Login</a>
-      <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="register"
+      <a *ngIf="!usersService.isLoggedIn()" [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="register"
         class="nav-item nav-link">Register</a>
       <!-- 2 end -->
 

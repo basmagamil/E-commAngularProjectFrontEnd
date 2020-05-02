@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { OrdersService } from 'src/app/services/orders.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +17,7 @@ export class CartComponent implements OnInit, OnChanges {
 
   constructor(activeRouterLink: ActivatedRoute, public router: Router, 
     private myService: CartService, private productsService :ProductsService,
-    private orderService:OrdersService) {
+    private orderService:OrdersService, public usersService:UsersService) {
     this.id = activeRouterLink.snapshot.params.id;
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -74,7 +75,7 @@ export class CartComponent implements OnInit, OnChanges {
        
       }
 
-  id: string = "5ea457ee4387c02984646e91";
+  id: string;// = "5ea457ee4387c02984646e91";
   userCart; //from service
   productsList= []; //from service
   count = 0;
@@ -84,47 +85,59 @@ export class CartComponent implements OnInit, OnChanges {
   orderProduct; //azhar
 
 
-  CheckOut()
-  {
-    console.log("CheckOut")
-    this.myService.checkoutFromCart().subscribe((cart)=>{
-      console.log(cart)
-    },
-    (err)=>{
-      console.log(err)
-    })
-    console.log("List with Out Quntity")
-    
-  console.log(this.orderProduct)
-  console.log("henaaaa",this.userCart[0].productsList);
-  let temp = {
-    user : this.id,
-     date: new Date(),
-     price: this.totalPrice,
-     products:[
-      ],
-     
-     status:"pending",
-  }
-    for(let i=0;i<this.orderProduct.length;i++)
-    {
-      temp.products.push({
-        product: this.orderProduct[i].productId,
-        quantity: this.orderProduct[i].productQty
-      });
-    }
-    
-
-    this.subscriberToAddOrder = this.orderService.addOrder(temp)
+  CheckOut(){
+    this.orderService.addOrder(this.id)
     .subscribe((order)=>{
-      console.log("subscribe");
-      if(order)
-      console.log(order);
-    },
-    (err)=>{
-      console.log(err)
-    })
+          console.log("subscribe");
+          if(order)
+            console.log(order);
+        },
+        (err)=>{
+          console.log(err)
+        })
   }
+
+  // CheckOut()
+  // {
+  //   console.log("CheckOut")
+  //   this.myService.checkoutFromCart().subscribe((cart)=>{
+  //     console.log(cart)
+  //   },
+  //   (err)=>{
+  //     console.log(err)
+  //   })
+  //   console.log("List with Out Quntity")
+    
+  // console.log(this.orderProduct)
+  // console.log("henaaaa",this.userCart[0].productsList);
+  // let temp = {
+  //   user : this.id,
+  //    date: new Date(),
+  //    price: this.totalPrice,
+  //    products:[
+  //     ],
+     
+  //    status:"pending",
+  // }
+  //   for(let i=0;i<this.orderProduct.length;i++)
+  //   {
+  //     temp.products.push({
+  //       product: this.orderProduct[i].productId,
+  //       quantity: this.orderProduct[i].productQty
+  //     });
+  //   }
+    
+  //   console.log("order to be posted",temp);
+  //   this.subscriberToAddOrder = this.orderService.addOrder(temp)
+  //   .subscribe((order)=>{
+  //     console.log("subscribe");
+  //     if(order)
+  //     console.log(order);
+  //   },
+  //   (err)=>{
+  //     console.log(err)
+  //   })
+  // }
 
   
 

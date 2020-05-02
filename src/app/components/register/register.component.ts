@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
@@ -8,7 +8,7 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy{
 
   @Output() registerEvent = new EventEmitter();
 
@@ -61,7 +61,15 @@ export class RegisterComponent implements OnInit {
   registerUser(user) {
     this.subscriber = this.usersService.registerUser(user).subscribe(
       res => {
-        console.log(res);
+        if (res){
+          console.log(res['token']);
+          localStorage.setItem('token', res['token']);  
+          this.router.navigate(['/']);
+        }
+        else{
+          // this.invalidLogin = true;
+        }    
+        console.log("res",res);
       },
       err => {
         console.log(err);
@@ -70,7 +78,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // this.subscriber.unsubscribe(); TODO: when to unsubscribe?
+    // this.subscriber.unsubscribe();
   }
 
 }

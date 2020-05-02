@@ -75,8 +75,8 @@ FileChange(event)
       else{
         addProduct.isPromoted=false;
       }
-      // this.AddProduct(addProduct);
-      // this.location.back();
+      this.AddProduct(addProduct);
+      this.location.back();
     }
   }
   subscriber;

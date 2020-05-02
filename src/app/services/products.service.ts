@@ -1,5 +1,5 @@
 import { Injectable,EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { EmailValidator } from '@angular/forms';
 @Injectable({
@@ -40,13 +40,47 @@ export class ProductsService {
     return this.client.get(`${this.baseURL}/${id}`);
   }
   addProduct(product){
-    return this.client.post(`${this.baseURL}`, product);
+    const payload = new HttpParams()
+    .set('title', product.title)
+    .set('price', product.price)
+    .set('details[Brand]', product.details.Brand)
+    .set('details[Processor]', product.details.Processor)
+    .set('details[RAM]', product.details.RAM)
+    .set('details[HardDisk]', product.details.HardDisk)
+    .set('details[GPU]', product.details.GPU)
+    .set('details[Color]', product.details.Color)
+    .set('ratioOfPromotion', product.ratioOfPromotion)
+    .set('isPromoted', product.isPromoted)
+    .set('quantity', product.quantity);
+    var i = 0;
+    product.images.forEach(img => {
+      payload.set(`images[${i}]`, img);
+      i++;
+    });
+    return this.client.post(`${this.baseURL}`, payload);
   }
   deleteProduct(id){
     return this.client.delete(`${this.baseURL}/${id}`);
   }
   updateProduct(id, product){
-    return this.client.patch(`${this.baseURL}/${id}`, product);
+    const payload = new HttpParams()
+    .set('title', product.title)
+    .set('price', product.price)
+    .set('details[Brand]', product.details.Brand)
+    .set('details[Processor]', product.details.Processor)
+    .set('details[RAM]', product.details.RAM)
+    .set('details[HardDisk]', product.details.HardDisk)
+    .set('details[GPU]', product.details.GPU)
+    .set('details[Color]', product.details.Color)
+    .set('ratioOfPromotion', product.ratioOfPromotion)
+    .set('isPromoted', product.isPromoted)
+    .set('quantity', product.quantity);
+    var i = 0;
+    product.images.forEach(img => {
+      payload.set(`images[${i}]`, img);
+      i++;
+    });
+    return this.client.patch(`${this.baseURL}/${id}`, payload);
   }
   //firstway
   private _MessageSearch=new Subject<string>();

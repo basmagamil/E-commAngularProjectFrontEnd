@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +31,10 @@ import { OrdersService } from './services/orders.service';
 import { EdituserComponent } from './components/profile/edituser/edituser.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
+import { NoAccessComponent } from './components/no-access/no-access.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     AddComponent,
     ViewItemComponent,
     FooterComponent,
-    EdituserComponent
+    EdituserComponent,
+    NoAccessComponent
   ],
   imports: [
     NgbModule,
@@ -63,7 +68,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     Ng2SearchPipeModule
   ],
  
-  providers: [ProductsService, UsersService, CartService, OrdersService],
+  providers: [ProductsService, UsersService, CartService, OrdersService, AuthGuardService, AdminAuthGuardService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent],
   entryComponents: [EdituserComponent]
 })
