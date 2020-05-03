@@ -22,27 +22,29 @@
                     <h5 class="card-title">{{ item.product.title }}</h5>
                     <div class="d-flex">
                       <div class="p-2">
-                        <h6 class="card-subtitle text-primary font-weight-bold">
-                          {{ item.product.price }}EGP
+                        <h6  *ngIf="item.product.ratioOfPromotion" class="card-subtitle text-primary font-weight-bold">
+                          {{item.product.price - item.product.price * item.product.ratioOfPromotion}} EGP
+                        </h6>
+                        <h6 class="card-subtitle text-primary font-weight-bold" [ngStyle]="{'text-decoration': (item.product.ratioOfPromotion) ? 'line-through' : 'none'}"
+                          [ngClass]="{'text-danger': item.product.ratioOfPromotion}">
+                          {{ item.product.price }} EGP
                         </h6>
                       </div>
 
                       <div class="ml-auto">
                         <label class="card-text">
-                          QTY: {{item.productQty}}
+                          <b>No.:</b> {{item.productQty}}
                         </label>
                       </div>
                     </div>
-
-                    <p
-                      class="card-text"
-                      *ngFor="let key of objectKeys(item.product.details)"
-                    >
-                      {{ key + ": " + item.product.details[key] }}
-                    </p>
+                    <ul class="card-text">
+                      <li *ngFor="let key of objectKeys(item.product.details)">
+                        <b>{{ key }}:</b> {{ item.product.details[key] }}
+                      </li>
+                    </ul>
 
                     <div class="d-flex justify-content-end">
-                      <a routerLink="/cart/2" class="btn btn-danger ">Delete</a>
+                      <a class="btn btn-danger" (click)="deleteFromCart(item.product._id)">Delete</a>
                     </div>
                   </div>
                 </div>
@@ -66,9 +68,10 @@
                   The order arrives in 3-5 working days
                 </li>
               </ul>
+              
               <div class="card-body ">
-                <a routerLink="/profile/{{this.id}}" (click)="CheckOut()"
-                class="btn btn-success btn-block">Checkout</a>
+                <a routerLink="/profile/{{usersService.currentUser.id}}" (click)="CheckOut()"
+                class="btn btn-success btn-block" *ngIf="productsList.length!=0">Checkout</a>
               </div>
             </div>
           </div>

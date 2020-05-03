@@ -12,74 +12,40 @@ export class UpdateComponent implements OnInit {
   UpdateProductForm:FormGroup;
 
   constructor(fb: FormBuilder, private router: Router, private productsService: ProductsService, private activeRouterLink:ActivatedRoute) {
-    console.log("ctor")
     this.id=this.activeRouterLink.snapshot.params.id;
-    console.log("id",this.id);
-    this.UpdateProductForm = fb.group({
-      title: fb.control('', [Validators.required]),
-      image: fb.control(''),
-      price: fb.control('', [Validators.required, Validators.pattern("^[0-9]*$")]),
-      brand: fb.control(''),
-      processor: fb.control(''),
-      ram: fb.control(''),
-      hardDisk: fb.control(''),
-      graphicsCard: fb.control(''),
-      color: fb.control(''),
-      quantity: fb.control('', [Validators.required, Validators.pattern("^[0-9]*$")]),
-      promotion: fb.control('0.5', [Validators.pattern("^[0-9]*$")])
-      //(0(\.[0-9]{1,4})?|1$
-    })
-
-  }
-
-
-
-  ngOnInit(): void {
-    console.log("ngoninit")
-    this.GetProduct(this.id);
-    console.log("product",this.product)
-    this.UpdateProductForm.reset({
-      title: this.product.title,
-      image:this.product.image,
-      price: this.product.price,
-      brand: this.product.details.Brand,
-      processor: this.product.details.Processor,
-      ram: this.product.details.RAM,
-      hardDisk: this.product.details.HardDisk,
-      graphicsCard: this.product.details.GPU,
-      color: this.product.details.Color,
-      quantity: this.product.details.quantity,
-      promotion: this.product.ratioOfPromotion
-    })
-    console.log("formgroup in oninit",this.UpdateProductForm);
   }
 
   get title() { return this.UpdateProductForm.get('title'); }
   get price() { return this.UpdateProductForm.get('price'); }
   get quantity() { return this.UpdateProductForm.get('quantity'); }
-  get promotion() { return this.UpdateProductForm.get('promotion'); }
+  get promotion() { return this.UpdateProductForm.get('ratioOfPromotion'); }
 
-  //   product={
-  //     title: new String(),
-  //     ImagesList:new Array(),
-  //     price: new Number(),
-  //     details:
-  //     {
-  //       Brand: new String(),
-  //       Processor: new String(),
-  //       RAM: new String(),
-  //       HardDisk: new String(),
-  //       GPU:new String(),
-  //       Color: new String()
-  //     },
-  //     quantity:new Number() ,
-  //     promotion:new Number() 
-  // }
-  
+
+
+  ngOnInit(): void {
+    this.GetProduct(this.id);
+    this.UpdateProductForm = new FormGroup({
+      title:new FormControl('',[Validators.required]),
+      images:new FormControl([]),
+      price:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
+      details:new FormGroup({
+        Brand:new FormControl(''),
+        Processor:new FormControl(''),
+        RAM:new FormControl(''),
+        HardDisk:new FormControl(''),
+        GPU:new FormControl(''),
+        Color:new FormControl(''),
+      }),
+      quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
+      ratioOfPromotion:new FormControl('',[Validators.pattern("^[0-9]*$")])
+        //(0(\.[0-9]{1,4})?|1$
+    })
+  }
+
   id;
   updatedProduct;
   subscriber;
-  SuccesOrNoToUpdate;
+  subscriber2;
   product;
   FileChange(event) {
     for (let i = 0; i < event.target.files.length; i++) {
@@ -94,7 +60,7 @@ export class UpdateComponent implements OnInit {
     }
   }
   UpdateProduct(id, updatedProduct) {
-    this.subscriber = this.productsService.updateProduct(id, updatedProduct).subscribe(
+    this.subscriber2 = this.productsService.updateProduct(id, updatedProduct).subscribe(
       res => {
         this.updatedProduct = res;
       },
@@ -104,13 +70,25 @@ export class UpdateComponent implements OnInit {
     )
   }
   GetProduct(id) {
-    console.log("getting product")
     this.subscriber = this.productsService.getProduct(id).subscribe(
       res => {
-        console.log("success")
         this.product = res[0];
         // this.user._id=this.id;
         console.log(this.product);
+        this.UpdateProductForm.patchValue({title: this.product.title})
+        // this.UpdateProductForm.patchValue({images: this.product.images})
+        this.UpdateProductForm.patchValue({price: this.product.price})
+        this.UpdateProductForm.patchValue({details: {
+                                                    Brand: this.product.details.Brand,
+                                                    Processor: this.product.details.Processor,
+                                                    RAM: this.product.details.RAM,
+                                                    HardDisk: this.product.details.HardDisk,
+                                                    GPU: this.product.details.GPU,
+                                                    Color: this.product.details.Color
+                                                  }
+                                          })
+        this.UpdateProductForm.patchValue({ratioOfPromotion: this.product.ratioOfPromotion})
+        this.UpdateProductForm.patchValue({quantity: this.product.quantity})
       },
       err => {
         console.log("fail")

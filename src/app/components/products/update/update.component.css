@@ -1,9 +1,10 @@
 input{
-    border:1px solid cornflowerblue;
+    /* border:1px solid cornflowerblue; */
 }
 label{
-    color: black;
+    /* color: black; */
+    font-size: smaller;
 }
 h2{
-    color: cornflowerblue;
+    /* color: cornflowerblue; */
 }

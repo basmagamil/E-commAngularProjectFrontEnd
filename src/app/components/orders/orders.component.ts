@@ -15,13 +15,18 @@ export class OrdersComponent implements OnInit , OnDestroy{
               private productService:ProductsService) { }
 
   ngOnInit(): void {
+    console.log("this.orders", this.orders);
     this.getAllOrders();
+    //console.log("this.order", this.);
+
   }
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
   }
 
   openModal(orderId): void{
+    console.log("this.productsarr", this.productsArr);
+
     this.tempOrderId= orderId;
     this.productsArr = this.orders.find(o=> o._id == orderId).products;
     console.log(this.productsArr)
@@ -53,6 +58,8 @@ export class OrdersComponent implements OnInit , OnDestroy{
   userName=[];
   productTitle=[];
   getAllOrders(){
+    console.log("this.productsarr", this.productsArr);
+
     this.subscriber = this.ordersService.getOrders().subscribe(
       (orders)=>{
         if(orders)

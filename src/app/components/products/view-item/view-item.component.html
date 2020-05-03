@@ -1,52 +1,50 @@
 <div class="container mt-3">
   <div class="row">
-      <div class="col-sm-4 vertical-center">
-        <ngb-carousel *ngIf="product.images" id="carouselExampleIndicators">
-          <ng-template ngbSlide *ngFor="let img of product.images">
-            <div class="picsum-img-wrapper">
-              <img [src]="img" style="max-width: 100%;" />
-            </div>
-          </ng-template>
-        </ngb-carousel>
-      </div>
+    <div class="col-sm-4 vertical-center">
+      <ngb-carousel *ngIf="product.images" id="carouselExampleIndicators">
+        <ng-template ngbSlide *ngFor="let img of product.images">
+          <div class="picsum-img-wrapper">
+            <img [src]="img" style="max-width: 100%;" />
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
 
-      <div class="card col-sm-8">
-        <h2 class="card-title card-header bg-white">{{ product.title }}</h2>
-        <div class="card-body m-1">
-          <ul class="card-text">
-            <li *ngFor="let key of GetKeys(product.details)">
-              <b>{{ key }}:</b> {{ product.details[key] }}
-            </li>
-          </ul>
+    <div class="card col-sm-8">
+      <h2 class="card-title card-header bg-white">{{ product.title }}</h2>
+      <div class="card-body m-1">
+        <ul class="card-text">
+          <li *ngFor="let key of GetKeys(product.details)">
+            <b>{{ key }}:</b> {{ product.details[key] }}
+          </li>
+        </ul>
 
           <div class="container mt-5">
             <div class="row justify-content-md-center">
               <div class="col col-lg-4">
-                <h5 style="font-size: 28px;" class="font-weight-bold">
+                <h5 style="font-size: 26px;" *ngIf="product.ratioOfPromotion">
+                  {{product.price - product.price * product.ratioOfPromotion}} EGP
+                </h5>
+                <h5 style="font-size: 26px;" [ngStyle]="{'text-decoration': (product.ratioOfPromotion) ? 'line-through' : 'none'}"
+                  [ngClass]="{'text-danger': product.ratioOfPromotion}">
                   {{ product.price }} EGP
                 </h5>
-                <h6
-                  style="text-decoration: line-through;font-size: 22px;"
-                  class="text-danger"
-                  *ngIf="product.ratioOfPromotion"
-                >
-                  {{
-                    product.price - product.price * product.ratioOfPromotion
-                  }}
-                  EGP
-                </h6>
               </div>
               <div class="col col-lg-8">
                 <div class="container">
                   <div class="row">
                     <div class="col col-lg-6 ">
-                      <label class="m-2 text-dark">No:</label>
-                      <input type="number" min="1" max="100" required class="w-75" [(ngModel)]="qtyInput"/>
+                      <label class="m-2 text-dark" *ngIf="product.quantity!=0"><b>No.:</b></label>
+                      <input type="number" min="1" max="100" required class="w-75" [(ngModel)]="qtyInput" *ngIf="product.quantity!=0"/>
+                      <label class="m-2 text-dark"><b>Available Quantity:</b> {{product.quantity}}</label>
+
                     </div>
                     <div class="col col-lg-6">
-                      <button type="button" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)">
+                      <!-- routerLink="../../../cart/{{id}}" -->
+                      <button type="button" id="addToCart" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)" *ngIf="product.quantity!=0" data-toggle="modal" data-target="#exampleModalCenter">
                         Add To Cart
                       </button>
+                      
                     </div>
                   </div>
                 </div>
@@ -55,9 +53,28 @@
           </div>
         </div>
       </div>
+    </div>
   </div>
   <!-- <div class="row justify-content-center mt-2">
     <button type="button" class="btn btn-secondary  col-2" routerLink="/products">Back</button>
   
   </div> -->
-</div>
+
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add To Cart</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Product <b>{{product.title}}</b> with quantity <b>{{qtyInput}}</b> is added to cart successfully!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
