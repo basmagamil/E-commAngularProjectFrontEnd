@@ -22,14 +22,18 @@
                     <h5 class="card-title">{{ item.product.title }}</h5>
                     <div class="d-flex">
                       <div class="p-2">
-                        <h6 class="card-subtitle text-primary font-weight-bold">
-                          {{ item.product.price }}EGP
+                        <h6  *ngIf="item.product.ratioOfPromotion" class="card-subtitle text-primary font-weight-bold">
+                          {{item.product.price - item.product.price * item.product.ratioOfPromotion}} EGP
+                        </h6>
+                        <h6 class="card-subtitle text-primary font-weight-bold" [ngStyle]="{'text-decoration': (item.product.ratioOfPromotion) ? 'line-through' : 'none'}"
+                          [ngClass]="{'text-danger': item.product.ratioOfPromotion}">
+                          {{ item.product.price }} EGP
                         </h6>
                       </div>
 
                       <div class="ml-auto">
                         <label class="card-text">
-                          QTY: {{item.productQty}}
+                          <b>No.:</b> {{item.productQty}}
                         </label>
                       </div>
                     </div>

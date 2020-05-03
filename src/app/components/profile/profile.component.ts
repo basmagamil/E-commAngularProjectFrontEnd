@@ -87,9 +87,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   productTitle=[];
   getOrder()
   {
+    console.log("this.getorder in profile")
+    console.log("this.productsArr", this.productsArr);
     this.subscriberOrder = this.ordersService.getOrder(this.id).subscribe(
       orders=>{
-        console.log(orders)
+        console.log("orders", orders)
         this.orders = orders;
       },
       err=>{

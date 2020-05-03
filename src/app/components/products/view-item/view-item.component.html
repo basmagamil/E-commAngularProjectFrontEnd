@@ -34,12 +34,14 @@
                 <div class="container">
                   <div class="row">
                     <div class="col col-lg-6 ">
-                      <label class="m-2 text-dark">No:</label>
-                      <input type="number" min="1" max="100" required class="w-75" [(ngModel)]="qtyInput"/>
+                      <label class="m-2 text-dark" *ngIf="product.quantity!=0"><b>No.:</b></label>
+                      <input type="number" min="1" max="100" required class="w-75" [(ngModel)]="qtyInput" *ngIf="product.quantity!=0"/>
+                      <label class="m-2 text-dark"><b>Available Quantity:</b> {{product.quantity}}</label>
+
                     </div>
                     <div class="col col-lg-6">
                       <!-- routerLink="../../../cart/{{id}}" -->
-                      <button type="button" id="addToCart" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)" data-toggle="modal" data-target="#exampleModalCenter">
+                      <button type="button" id="addToCart" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)" *ngIf="product.quantity!=0" data-toggle="modal" data-target="#exampleModalCenter">
                         Add To Cart
                       </button>
                       

@@ -36,7 +36,7 @@ export class CartComponent implements OnInit, OnChanges {
   showData(){
     this.myService.getUserCart(this.id)
     .subscribe((userCart) => {
-
+      
       this.userCart = userCart[0].productsList; //contains prod id and qty
       this.count = this.userCart.length;
 
@@ -52,10 +52,17 @@ export class CartComponent implements OnInit, OnChanges {
       
       for(let i=0; i<products.length; i++){
         this.productsService.getProduct(products[i].productId).subscribe((prod)=>{
-
+// product.price - product.price * product.ratioOfPromotion
+          console.log("prooood",prod[0].ratioOfPromotion); 
           this.productsList.push({product:prod[0], productQty: products[i].productQty}); //details of each product
-          // console.log("prooood",prod[0]); 
-          this.totalPrice+= prod[0].price;
+      console.log("3yza ashof elratio", this.productsList[0].product.ratioOfPromotion);
+
+          if(prod[0].isPromoted){
+            this.totalPrice+= (products[i].productQty) * (prod[0].price - ((prod[0].price)*(prod[0].ratioOfPromotion)));
+          }
+          else{
+            this.totalPrice+= (prod[0].price)*(products[i].productQty);
+          }
          
           console.log(this.productsList);
           
@@ -70,7 +77,6 @@ export class CartComponent implements OnInit, OnChanges {
   }
  
   ngOnInit() {
-    
     this.showData();
        
       }
@@ -90,7 +96,7 @@ export class CartComponent implements OnInit, OnChanges {
     .subscribe((order)=>{
           console.log("subscribe");
           if(order)
-            console.log(order);
+            console.log("ORDER",order); //price is ok
         },
         (err)=>{
           console.log(err)

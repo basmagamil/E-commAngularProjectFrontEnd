@@ -15,6 +15,7 @@ export class OrdersComponent implements OnInit , OnDestroy{
               private productService:ProductsService) { }
 
   ngOnInit(): void {
+    console.log("this.orders", this.orders);
     this.getAllOrders();
     //console.log("this.order", this.);
 
