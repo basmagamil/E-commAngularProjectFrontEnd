@@ -53,6 +53,7 @@ export class NavbarComponent implements OnInit {
   }
   SearchOnHPLaptop()
   {
+    console.log("search on HP")
     this.productService.sendMessageSearch('HP');
   }
   SearchOnLenovoLaptop()
