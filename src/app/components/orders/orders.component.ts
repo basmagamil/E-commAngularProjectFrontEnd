@@ -30,6 +30,7 @@ export class OrdersComponent implements OnInit , OnDestroy{
     this.tempOrderId= orderId;
     this.productsArr = this.orders.find(o=> o._id == orderId).products;
     console.log(this.productsArr)
+    this.productTitle=[];
     for(var i=0;i<this.productsArr.length;i++)
           {
             this.subscriberToGetProductTitle=this.productService.getProduct(this.productsArr[i].product).subscribe(

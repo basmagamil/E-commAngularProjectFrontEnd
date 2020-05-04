@@ -94,7 +94,9 @@ export class CartComponent implements OnInit, OnChanges {
   CheckOut(){
     this.orderService.addOrder(this.id)
     .subscribe((order)=>{
+          console.log("CheckOut")
           console.log("subscribe");
+          console.log(order)
           if(order)
             console.log("ORDER",order); //price is ok
         },

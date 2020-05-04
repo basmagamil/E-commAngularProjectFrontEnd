@@ -61,7 +61,8 @@
         </a>
         <!-- 1.b end -->
 
-        <a *ngIf="usersService.isLoggedIn()" (click)="onClickLogout()" class="nav-item nav-link">
+        <a *ngIf="usersService.isLoggedIn()" (click)="onClickLogout()" class="nav-item nav-link"
+            routerLink="home">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
           <span class="d-md-none">  Log Out</span>
         </a>
