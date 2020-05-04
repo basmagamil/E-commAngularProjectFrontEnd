@@ -15,75 +15,75 @@ export class CartComponent implements OnInit, OnChanges {
 
 
 
-  constructor(activeRouterLink: ActivatedRoute, public router: Router, 
-    private myService: CartService, private productsService :ProductsService,
-    private orderService:OrdersService, public usersService:UsersService) {
+  constructor(activeRouterLink: ActivatedRoute, public router: Router,
+    private myService: CartService, private productsService: ProductsService,
+    private orderService: OrdersService, public usersService: UsersService) {
     this.id = activeRouterLink.snapshot.params.id;
   }
   ngOnChanges(changes: SimpleChanges): void {
-  
+
   }
-  deleteFromCart(prodId){
-    console.log("deleted prod id",prodId) //2d5
-    this.myService.deleteProductFromCart(prodId).subscribe((prod)=>{
+  deleteFromCart(prodId) {
+    console.log("deleted prod id", prodId) //2d5
+    this.myService.deleteProductFromCart(prodId).subscribe((prod) => {
       console.log("delete", prod)
-    location.reload();
-    }, (err)=>{
+      location.reload();
+    }, (err) => {
       console.log(err);
     })
   }
 
-  showData(){
+  showData() {
     this.myService.getUserCart(this.id)
-    .subscribe((userCart) => {
-      
-      this.userCart = userCart[0].productsList; //contains prod id and qty
-      this.count = this.userCart.length;
+      .subscribe((userCart) => {
 
-      const products = [];
-      for (let i = 0; i < this.userCart.length; i++) {
-        products.push({productId: this.userCart[i].productId, productQty: this.userCart[i].quantity})
-      }
-      console.log("PROD",products)
-      this.orderProduct = products;
+        this.userCart = userCart[0].productsList; //contains prod id and qty
+        this.count = this.userCart.length;
 
-      console.log("azhar",this.orderProduct) //azhar
-
-      
-      for(let i=0; i<products.length; i++){
-        this.productsService.getProduct(products[i].productId).subscribe((prod)=>{
-// product.price - product.price * product.ratioOfPromotion
-          console.log("prooood",prod[0].ratioOfPromotion); 
-          this.productsList.push({product:prod[0], productQty: products[i].productQty}); //details of each product
-      console.log("3yza ashof elratio", this.productsList[0].product.ratioOfPromotion);
-
-          if(prod[0].isPromoted){
-            this.totalPrice+= (products[i].productQty) * (prod[0].price - ((prod[0].price)*(prod[0].ratioOfPromotion)));
-          }
-          else{
-            this.totalPrice+= (prod[0].price)*(products[i].productQty);
-          }
-         
-          console.log(this.productsList);
-          
+        const products = [];
+        for (let i = 0; i < this.userCart.length; i++) {
+          products.push({ productId: this.userCart[i].productId, productQty: this.userCart[i].quantity })
         }
-        , (err)=>{console.log(err);})
-      }
-    },
-      (err) => {
-        console.log(err);
-      });
-    
+        console.log("PROD", products)
+        this.orderProduct = products;
+
+        console.log("azhar", this.orderProduct) //azhar
+
+
+        for (let i = 0; i < products.length; i++) {
+          this.productsService.getProduct(products[i].productId).subscribe((prod) => {
+            // product.price - product.price * product.ratioOfPromotion
+            console.log("prooood", prod[0].ratioOfPromotion);
+            this.productsList.push({ product: prod[0], productQty: products[i].productQty }); //details of each product
+            console.log("3yza ashof elratio", this.productsList[0].product.ratioOfPromotion);
+
+            if (prod[0].isPromoted) {
+              this.totalPrice += (products[i].productQty) * (prod[0].price - ((prod[0].price) * (prod[0].ratioOfPromotion)));
+            }
+            else {
+              this.totalPrice += (prod[0].price) * (products[i].productQty);
+            }
+
+            console.log(this.productsList);
+
+          }
+            , (err) => { console.log(err); })
+        }
+      },
+        (err) => {
+          console.log(err);
+        });
+
   }
- 
+
   ngOnInit() {
     this.showData();
-       
-      }
+
+  }
 
   id: string;// = "5ea457ee4387c02984646e91";
   userCart; //from service
-  productsList= []; //from service
+  productsList = []; //from service
   count = 0;
   totalPrice = 0;
   objectKeys = Object.keys;
@@ -91,7 +91,7 @@ export class CartComponent implements OnInit, OnChanges {
   orderProduct; //azhar
 
 
-  CheckOut(){
+  CheckOut() {
     this.orderService.addOrder(this.id)
     .subscribe((order)=>{
           console.log("CheckOut")
@@ -115,7 +115,7 @@ export class CartComponent implements OnInit, OnChanges {
   //     console.log(err)
   //   })
   //   console.log("List with Out Quntity")
-    
+
   // console.log(this.orderProduct)
   // console.log("henaaaa",this.userCart[0].productsList);
   // let temp = {
@@ -124,7 +124,7 @@ export class CartComponent implements OnInit, OnChanges {
   //    price: this.totalPrice,
   //    products:[
   //     ],
-     
+
   //    status:"pending",
   // }
   //   for(let i=0;i<this.orderProduct.length;i++)
@@ -134,7 +134,7 @@ export class CartComponent implements OnInit, OnChanges {
   //       quantity: this.orderProduct[i].productQty
   //     });
   //   }
-    
+
   //   console.log("order to be posted",temp);
   //   this.subscriberToAddOrder = this.orderService.addOrder(temp)
   //   .subscribe((order)=>{
@@ -147,6 +147,6 @@ export class CartComponent implements OnInit, OnChanges {
   //   })
   // }
 
-  
+
 
 }
