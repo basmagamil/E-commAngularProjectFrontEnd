@@ -5,6 +5,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import { UsersService } from 'src/app/services/users.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-view-item',
@@ -13,7 +14,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ViewItemComponent implements OnInit {
   // images = [1, 2, 3, 4].map((n) => `assets/images/${n}.jpg`);
-  constructor(config: NgbCarouselConfig, private productsService: ProductsService, private cartService: CartService, private usersService:UsersService, public activeRouterLink: ActivatedRoute) {
+  constructor(config: NgbCarouselConfig, private productsService: ProductsService, private cartService: CartService, private usersService:UsersService, public activeRouterLink: ActivatedRoute, public navService:NavbarService) {
     config.interval = 4000;
     config.wrap = true;
     config.keyboard = false;
@@ -47,6 +48,7 @@ export class ViewItemComponent implements OnInit {
   subscriber;
   qtyInput =1 ;
   ngOnInit(): void {
+    this.navService.show();
     this.id = this.activeRouterLink.snapshot.params.id;
     console.log(this.id)
 

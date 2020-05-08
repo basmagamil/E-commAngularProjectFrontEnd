@@ -3,6 +3,7 @@ import { faSearch ,faPercent} from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery'  
 import { ProductsService } from 'src/app/services/products.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-products',
@@ -11,7 +12,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private productsService: ProductsService) {
+  constructor(private router: Router, private productsService: ProductsService, public navService:NavbarService) {
     this.GetProductByBrandName();
   }
 
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.navService.show();
    this.getAllProducts();
     this.GetProductByBrandName();
     this.products;

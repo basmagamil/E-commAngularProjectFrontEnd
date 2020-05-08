@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/services/products.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-home',
@@ -54,7 +55,7 @@ export class HomeComponent implements OnInit {
     return Object.keys(obj);
   }
 
-  constructor(private productsService:ProductsService) {
+  constructor(private productsService:ProductsService, public navService:NavbarService) {
 
   }
 
@@ -62,6 +63,7 @@ export class HomeComponent implements OnInit {
   promotedLaptops;
 
   ngOnInit(): void {
+    this.navService.show();
     this.getPromotedProducts();
   }
 

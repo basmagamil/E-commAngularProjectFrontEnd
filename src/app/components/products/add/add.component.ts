@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators,ValidatorFn, AbstractControl} from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
 import { Location } from '@angular/common'
+import { NavbarService } from 'src/app/services/navbar.service';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -11,7 +12,7 @@ import { Location } from '@angular/common'
 })
 export class AddComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private productsService:ProductsService, private location:Location) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private productsService:ProductsService, private location:Location, public navService:NavbarService) {
     
   }
   AddProductForm = new FormGroup({
@@ -27,7 +28,7 @@ export class AddComponent implements OnInit {
       Color:new FormControl(''),
     }),
     quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
-    ratioOfPromotion:new FormControl('',[Validators.pattern("^[0-9]*$")])
+    ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\.\d+)?|1(\.0*)?)$")])
       //(0(\.[0-9]{1,4})?|1$
   })
 
@@ -38,6 +39,7 @@ export class AddComponent implements OnInit {
 
   // productId
   ngOnInit(): void {
+    this.navService.show();
     // this.productId=this.activatedRoute.snapshot.paramMap.get('id');
   }
 //   product={

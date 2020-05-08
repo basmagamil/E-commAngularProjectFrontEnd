@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-orders',
@@ -12,9 +13,10 @@ export class OrdersComponent implements OnInit , OnDestroy{
 
   constructor(private ordersService:OrdersService,
               private userService:UsersService,
-              private productService:ProductsService) { }
+              private productService:ProductsService, public navService:NavbarService) { }
 
   ngOnInit(): void {
+    this.navService.show();
     this.getAllOrders();
 
   }

@@ -11,6 +11,10 @@ export class UsersService {
   baseURL = "http://localhost:3000/users";
 
   constructor(private client:HttpClient) { }
+
+  getAllUsers(){
+    return this.client.get(`${this.baseURL}`);
+  }
   
   getUser(id){
     // let headers = new HttpHeaders();

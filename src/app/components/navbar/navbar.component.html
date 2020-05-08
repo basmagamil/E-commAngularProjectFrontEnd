@@ -1,4 +1,4 @@
-<nav class="navbar-top navbar navbar-expand navbar-dark bg-dark">
+<nav *ngIf="navService.visible" class="navbar-top navbar navbar-expand navbar-dark bg-dark">
   <div class="navbar-nav ml-auto">
     <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="about"
       class="nav-item nav-link">About</a>
@@ -8,7 +8,7 @@
   </div>
 </nav>
 
-<nav class="navbar-middle navbar navbar-expand-md navbar-light bg-light sticky-top navbar-toggleable-md">
+<nav *ngIf="navService.visible" class="navbar-middle navbar navbar-expand-md navbar-light bg-light sticky-top navbar-toggleable-md">
   <a [routerLinkActiveOptions]='{exact:true}' routerLinkActive='active' routerLink="home" class="navbar-brand">
     <img src="assets/images/logo/logo.svg" height="28" alt="CompYou">
   </a>
@@ -79,7 +79,7 @@
 </nav>
 
 <!-- 3 TODO: only show if logged in -->
-<nav class="navbar-bottom navbar navbar-expand-md d-md-block d-none navbar-dark bg-primary justify-content-center">
+<nav *ngIf="navService.visible" class="navbar-bottom navbar navbar-expand-md d-md-block d-none navbar-dark bg-primary justify-content-center">
   <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
     <ul class="navbar-nav mx-auto text-center">
       <a class="nav-link parent-nav-link" routerLink="../products" (click)="SearchOnAllLaptop()">All Laptops</a>

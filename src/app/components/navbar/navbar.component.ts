@@ -13,6 +13,7 @@ import {
 import { UsersService } from 'src/app/services/users.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { Router } from '@angular/router';
+import { NavbarService } from 'src/app/services/navbar.service'
 
 @Component({
   selector: 'app-navbar',
@@ -39,7 +40,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public usersService: UsersService,
     private productService: ProductsService,
-    private router: Router
+    private router: Router,
+    public navService: NavbarService
   ) {
     this.isCollapsed = true;
     // this.id = usersService.currentUser.id;

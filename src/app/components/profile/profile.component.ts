@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EdituserComponent } from './edituser/edituser.component';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,13 +29,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(activeRouterLink:ActivatedRoute, 
     public router:Router, public usersService:UsersService, 
     private modalService: NgbModal,private ordersService:OrdersService,
-    private productService:ProductsService) {
+    private productService:ProductsService, public navService:NavbarService) {
       this.id=activeRouterLink.snapshot.params.id;
       // this.id=this.usersService.currentUser.id;
       // this.getUser();
   }
 
   ngOnInit(): void {
+    this.navService.show();
     console.log("ngoninit");
     this.getUser();
     console.log("after get user", this.user);

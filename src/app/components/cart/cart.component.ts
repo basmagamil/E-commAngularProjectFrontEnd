@@ -5,6 +5,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UsersService } from 'src/app/services/users.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,8 @@ export class CartComponent implements OnInit, OnChanges {
 
   constructor(activeRouterLink: ActivatedRoute, public router: Router,
     private myService: CartService, private productsService: ProductsService,
-    private orderService: OrdersService, public usersService: UsersService) {
+    private orderService: OrdersService, public usersService: UsersService,
+    public navService:NavbarService) {
     this.id = activeRouterLink.snapshot.params.id;
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -77,6 +79,7 @@ export class CartComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.navService.show();
     this.showData();
 
   }

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/cor
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +13,10 @@ export class RegisterComponent implements OnInit, OnDestroy{
 
   @Output() registerEvent = new EventEmitter();
 
-  constructor(public router: Router, private usersService: UsersService) { }
+  constructor(public router: Router, private usersService: UsersService, public navService:NavbarService) { }
 
   ngOnInit(): void {
+    this.navService.show();
   }
 
   registerForm = new FormGroup({

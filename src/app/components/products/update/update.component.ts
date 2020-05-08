@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -11,7 +12,7 @@ export class UpdateComponent implements OnInit {
 
   UpdateProductForm:FormGroup;
 
-  constructor(fb: FormBuilder, private router: Router, private productsService: ProductsService, private activeRouterLink:ActivatedRoute) {
+  constructor(fb: FormBuilder, private router: Router, private productsService: ProductsService, private activeRouterLink:ActivatedRoute, public navService:NavbarService) {
     this.id=this.activeRouterLink.snapshot.params.id;
   }
 
@@ -23,6 +24,7 @@ export class UpdateComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.navService.show();
     this.GetProduct(this.id);
     this.UpdateProductForm = new FormGroup({
       title:new FormControl('',[Validators.required]),
@@ -37,7 +39,7 @@ export class UpdateComponent implements OnInit {
         Color:new FormControl(''),
       }),
       quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
-      ratioOfPromotion:new FormControl('',[Validators.pattern("^[0-9]*$")])
+      ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\.\d+)?|1(\.0*)?)$")])
         //(0(\.[0-9]{1,4})?|1$
     })
   }
@@ -55,8 +57,18 @@ export class UpdateComponent implements OnInit {
   onClickUpdateProductSubmit() {
     if (this.UpdateProductForm.valid) {
       let updatedProduct = this.UpdateProductForm.value;
+      if(this.promotion.value){
+        updatedProduct.isPromoted=true;
+      }
+      else{
+        updatedProduct.isPromoted=false;
+      }
+      console.log(updatedProduct)
       this.UpdateProduct(this.product._id, updatedProduct)
       this.router.navigate(['../']);
+    }
+    else{
+      console.log(this.UpdateProductForm)
     }
   }
   UpdateProduct(id, updatedProduct) {

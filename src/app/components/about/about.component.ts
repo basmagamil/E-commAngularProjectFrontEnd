@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-about',
@@ -6,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-
   team = [
     {
       "Name": "Ashimaa",
@@ -38,9 +38,11 @@ export class AboutComponent implements OnInit {
     },
   ];
 
-  constructor() { }
-
+  
+  constructor(public navService:NavbarService) { }
+  
   ngOnInit(): void {
+    this.navService.show();
   }
 
 }
