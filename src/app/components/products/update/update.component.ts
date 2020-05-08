@@ -39,7 +39,7 @@ export class UpdateComponent implements OnInit {
         Color:new FormControl(''),
       }),
       quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
-      ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\.\d+)?|1(\.0*)?)$")])
+      ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\\.\\d+)?|1(\\.0*)?)$")])
         //(0(\.[0-9]{1,4})?|1$
     })
   }
@@ -57,12 +57,12 @@ export class UpdateComponent implements OnInit {
   onClickUpdateProductSubmit() {
     if (this.UpdateProductForm.valid) {
       let updatedProduct = this.UpdateProductForm.value;
-      if(this.promotion.value){
-        updatedProduct.isPromoted=true;
-      }
-      else{
-        updatedProduct.isPromoted=false;
-      }
+      // if(this.promotion.value){
+      //   updatedProduct.isPromoted=true;
+      // }
+      // else{
+      //   updatedProduct.isPromoted=false;
+      // }
       console.log(updatedProduct)
       this.UpdateProduct(this.product._id, updatedProduct)
       this.router.navigate(['../']);

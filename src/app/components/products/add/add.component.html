@@ -44,7 +44,7 @@
                             formControlName="ratioOfPromotion">
                         <div *ngIf="(promotion.invalid && promotion.touched) || promotion.dirty">
                             <small *ngIf="promotion.errors?.pattern" class="text-danger">Please provide a valid
-                                promotion rate between 0 and 1</small>
+                                promotion percentage between 0 and 1</small>
                         </div>
                     </div>
                 </div>

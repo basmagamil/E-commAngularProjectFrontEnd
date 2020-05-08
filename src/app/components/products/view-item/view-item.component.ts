@@ -14,7 +14,7 @@ import { NavbarService } from 'src/app/services/navbar.service';
 })
 export class ViewItemComponent implements OnInit {
   // images = [1, 2, 3, 4].map((n) => `assets/images/${n}.jpg`);
-  constructor(config: NgbCarouselConfig, private productsService: ProductsService, private cartService: CartService, private usersService:UsersService, public activeRouterLink: ActivatedRoute, public navService:NavbarService) {
+  constructor(config: NgbCarouselConfig, private productsService: ProductsService, private cartService: CartService, public usersService:UsersService, public activeRouterLink: ActivatedRoute, public navService:NavbarService) {
     config.interval = 4000;
     config.wrap = true;
     config.keyboard = false;

@@ -50,7 +50,7 @@ export class ProductsService {
     .set('details[GPU]', product.details.GPU)
     .set('details[Color]', product.details.Color)
     .set('ratioOfPromotion', product.ratioOfPromotion)
-    .set('isPromoted', product.isPromoted)
+    // .set('isPromoted', product.isPromoted)
     .set('quantity', product.quantity);
     var i = 0;
     product.images.forEach(img => {
@@ -73,7 +73,7 @@ export class ProductsService {
     .set('details[GPU]', product.details.GPU)
     .set('details[Color]', product.details.Color)
     .set('ratioOfPromotion', product.ratioOfPromotion)
-    .set('isPromoted', product.isPromoted)
+    // .set('isPromoted', product.isPromoted)
     .set('quantity', product.quantity);
     var i = 0;
     product.images.forEach(img => {

@@ -28,7 +28,7 @@ export class AddComponent implements OnInit {
       Color:new FormControl(''),
     }),
     quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
-    ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\.\d+)?|1(\.0*)?)$")])
+    ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\\.\\d+)?|1(\\.0*)?)$")])
       //(0(\.[0-9]{1,4})?|1$
   })
 
@@ -71,12 +71,12 @@ FileChange(event)
     console.log(this.AddProductForm)
     if(this.AddProductForm.valid){
       let addProduct = this.AddProductForm.value;
-      if(this.promotion.value){
-        addProduct.isPromoted=true;
-      }
-      else{
-        addProduct.isPromoted=false;
-      }
+      // if(this.promotion.value){
+      //   addProduct.isPromoted=true;
+      // }
+      // else{
+      //   addProduct.isPromoted=false;
+      // }
       this.AddProduct(addProduct);
       this.location.back();
     }

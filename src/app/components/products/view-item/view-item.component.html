@@ -41,7 +41,7 @@
                     </div>
                     <div class="col col-lg-6">
                       <!-- routerLink="../../../cart/{{id}}" -->
-                      <button type="button" id="addToCart" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)" *ngIf="product.quantity!=0" data-toggle="modal" data-target="#exampleModalCenter">
+                      <button type="button" id="addToCart" class="btn btn-dark btn-lg" (click)="addToCartHandler(product, qtyInput)" *ngIf="product.quantity!=0 && usersService.isLoggedIn() && !usersService.currentUser.isAdmin" data-toggle="modal" data-target="#exampleModalCenter">
                         Add To Cart
                       </button>
                       

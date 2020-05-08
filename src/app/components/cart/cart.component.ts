@@ -59,7 +59,7 @@ export class CartComponent implements OnInit, OnChanges {
             this.productsList.push({ product: prod[0], productQty: products[i].productQty }); //details of each product
             console.log("3yza ashof elratio", this.productsList[0].product.ratioOfPromotion);
 
-            if (prod[0].isPromoted) {
+            if (prod[0].ratioOfPromotion>0) {
               this.totalPrice += (products[i].productQty) * (prod[0].price - ((prod[0].price) * (prod[0].ratioOfPromotion)));
             }
             else {
