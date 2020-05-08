@@ -5,8 +5,9 @@
                 
 
 
-                <button type="button" class="btn btn-outline-primary mt-3 col-12 w-100" routerLink="../products/add">Add
-                    new product</button>
+                <button type="button" class="btn btn-outline-primary mt-3 col-12 w-100" 
+                routerLink="../products/add" 
+                [style.visibility]="isvisable ? 'visible' : 'hidden'">Add new product</button>
 
                 <!--  -->
                 <div class="row" *ngFor="let product of products | filter:search">
@@ -44,9 +45,11 @@
                                     <br>
                                     <div class="btn-group mt-3 mb-3 w-100" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                            data-target="#DeleteModal" (click)="DeleteModal(product)">Delete</button>
+                                            data-target="#DeleteModal" (click)="DeleteModal(product)"
+                                            [style.visibility]="isvisable ? 'visible' : 'hidden'">Delete</button>
                                         <button type="button" class="btn btn-outline-primary"
-                                            (click)="Update(product)">Update</button>
+                                            (click)="Update(product)"
+                                            [style.visibility]="isvisable ? 'visible' : 'hidden'">Update</button>
                                     </div>
                                 </div>
                             </div>

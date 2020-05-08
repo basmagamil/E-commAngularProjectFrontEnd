@@ -35,6 +35,8 @@ export class OrdersService {
     // console.log("payload to be posted",payload);
     let payload = new HttpParams()
     .set('user',userId);
+    console.log("service add order");
+    console.log(payload)
     return this.client.post(`${this.baseURL}`, payload);
   }
   deleteOrder(id){

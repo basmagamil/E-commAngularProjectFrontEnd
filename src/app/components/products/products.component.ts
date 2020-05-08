@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery'  
 import { ProductsService } from 'src/app/services/products.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { AdminAuthGuardService } from 'src/app/services/admin-auth-guard.service';
 
 @Component({
   selector: 'app-products',
@@ -12,27 +13,40 @@ import { NavbarService } from 'src/app/services/navbar.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private productsService: ProductsService, public navService:NavbarService) {
+  constructor(private router: Router, private productsService: ProductsService,
+    private isadmain:AdminAuthGuardService, public navService:NavbarService) {
+    console.log("in constractor before ");
+    console.log(this.products);
     this.GetProductByBrandName();
+    console.log("in constractor after ");
+    console.log(this.products);
   }
 
   
   products;
   subscriber;
   // subscriber2;
-
+isvisable
 
   ngOnInit(): void {
     this.navService.show();
    this.getAllProducts();
     this.GetProductByBrandName();
+   //this.getAllProducts();
+   console.log("in ngOnInit before ");
+   console.log(this.products);
+   this.GetProductByBrandName();
+   console.log("in ngOnInit after ");
+   console.log(this.products);
     this.products;
+    this.isvisable=this.isadmain.CheckAdminOrNot();
+    console.log("admin or not "+this.isvisable);
   }
 
   ngOnDestroy(): void {
     // this.subscriber.unsubscribe();
    // this.subscriberSearchBrand.unsubscribe();
-    // this.subscriberProductBrandHp.unsubscribe();
+    //this.subscriberProductBrandHp.unsubscribe();
   }
 
   GetKeys(obj) {
@@ -86,6 +100,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   subscriberProductBrandHp
   GetProductByBrandName()
   {
+    console.log('I am in search ')
     this.subscriberSearchBrand = this.productsService._MessageSearch$.subscribe(
       (message)=>{
         if(message==="HP")
@@ -208,6 +223,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
             }
           )
         }
+        console.log('message '+message);
       },
       err=>{
         console.log(err);

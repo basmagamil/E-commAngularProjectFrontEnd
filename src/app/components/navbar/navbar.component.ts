@@ -93,13 +93,10 @@ export class NavbarComponent implements OnInit {
   search: string;
   GeneralSearch() {
     console.log(`search ${this.search}`);
-    let x = `searchBar: azhar kamel search`;
-    let u = x.split('searchBar: ');
-    console.log(u[1]);
+    
     this.productService.sendMessageSearch(`searchBar: ${this.search}`);
   }
   GoToAllProduct() {
-    console.log(`I am Onclick`);
     this.router.navigate(['../products']);
   }
   ngOnDestroy(): void {
@@ -107,6 +104,6 @@ export class NavbarComponent implements OnInit {
   }
   onClickLogout(){
     this.usersService.logout();
-    location.reload();
+    //location.reload();
   }
 }

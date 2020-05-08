@@ -119,12 +119,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
     console.log(this.orders.find(o=> o._id == orderId))
     this.productsArr = this.orders.find(o=> o._id == orderId).products;
     console.log(this.productsArr);
+    this.productTitle=[];
     for(var i=0;i<this.productsArr.length;i++)
           {
+            console.log("product id is wrong")
             console.log(this.productsArr[i].product)
             this.subscriberToGetProductTitle=this.productService.getProduct(this.productsArr[i].product).subscribe(
               (products)=>{
                 console.log(products)
+                console.log(products[0].title)
                 if(products)
                 {
                   this.productTitle.push(products[0].title);
