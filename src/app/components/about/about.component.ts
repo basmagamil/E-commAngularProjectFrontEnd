@@ -13,28 +13,28 @@ export class AboutComponent implements OnInit {
       "Track": "System Development",
       "SubTrack": "Mobile Applications Cross Platform",
       "Organization": "ITI Smart Village",
-      "Image": "assets/images/profilepics/defaultfemale.jpeg"
+      "Image": "http://localhost:3000/defaultfemale.jpeg"
     },
     {
       "Name": "Azhar",
       "Track": "System Development",
       "SubTrack": "Mobile Applications Cross Platform",
       "Organization": "ITI Smart Village",
-      "Image": "assets/images/profilepics/defaultfemale.jpeg"
+      "Image": "http://localhost:3000/defaultfemale.jpeg"
     },
     {
       "Name": "Basma",
       "Track": "System Development",
       "SubTrack": "Mobile Applications Cross Platform",
       "Organization": "ITI Smart Village",
-      "Image": "assets/images/profilepics/defaultfemale.jpeg"
+      "Image": "http://localhost:3000/defaultfemale.jpeg"
     },
     {
       "Name": "Rawan",
       "Track": "System Development",
       "SubTrack": "Mobile Applications Cross Platform",
       "Organization": "ITI Smart Village",
-      "Image": "assets/images/profilepics/defaultfemale.jpeg"
+      "Image": "http://localhost:3000/defaultfemale.jpeg"
     },
   ];
 

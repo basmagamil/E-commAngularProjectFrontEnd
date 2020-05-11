@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators'; 
+import { map, combineAll } from 'rxjs/operators'; 
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,15 @@ export class UsersService {
     .set('image', user.image);
     return this.client.post(`${this.baseURL}/signup`, payload);
     // return this.client.post(`${this.baseURL}`, user);
+  }
+  uploadPhoto(id, profileImage : File){
+    console.log("service uploadPhoto profileImage",profileImage);
+    const formData: FormData = new FormData();
+    formData.append('image', profileImage, profileImage.name);
+
+    // new Response(formData).text().then(console.log);
+
+    return this.client.post(`${this.baseURL}/upload/profile/${id}`, formData);
   }
   loginUser(user){
     const payload = new HttpParams()

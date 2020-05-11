@@ -7,6 +7,7 @@ import { EdituserComponent } from './edituser/edituser.component';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { EdituserphotoComponent } from './edituserphoto/edituserphoto.component';
 
 @Component({
   selector: 'app-profile',
@@ -54,7 +55,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     //   }
     //   });
   }
-
+  onClickEditPhotoModal(){
+    // console.log(this.user)
+    const modalRef = this.modalService.open(EdituserphotoComponent);
+    modalRef.componentInstance.user = this.user;
+    // modalRef.componentInstance.test = "heyy";
+    // modalRef.result.then((result) => {
+    //   if (result) {
+    //    this.user=result;
+    //   }
+    //   });
+  }
   getUser(){
     this.subscriber = this.usersService.getUser(this.id).subscribe(
       user=>{

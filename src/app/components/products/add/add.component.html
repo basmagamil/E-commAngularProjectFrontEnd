@@ -52,12 +52,13 @@
 
                 <div class="mb-3">
                     <label for="inputImage">Images</label>
-                    <div class="custom-file">
+                    <!-- <div class="custom-file">
                         <input type="file" id="inputImage" class="custom-file-input" id="validatedCustomFile"
                             lang="es" (change)="FileChange($event)" formControlName="images" multiple>
 
                         <label class="custom-file-label" for="validatedCustomFile"></label>
-                    </div>
+                    </div> -->
+                    <input type="file" id="inputImage" accept="image/*" name="images" (change)="uploadFiles($event.target.files)" multiple>
                 </div>
                 <hr class="mb-4">
                 <div formGroupName="details">

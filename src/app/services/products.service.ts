@@ -39,48 +39,82 @@ export class ProductsService {
   getProduct(id){
     return this.client.get(`${this.baseURL}/${id}`);
   }
-  addProduct(product){
-    const payload = new HttpParams()
-    .set('title', product.title)
-    .set('price', product.price)
-    .set('details[Brand]', product.details.Brand)
-    .set('details[Processor]', product.details.Processor)
-    .set('details[RAM]', product.details.RAM)
-    .set('details[HardDisk]', product.details.HardDisk)
-    .set('details[GPU]', product.details.GPU)
-    .set('details[Color]', product.details.Color)
-    .set('ratioOfPromotion', product.ratioOfPromotion)
-    // .set('isPromoted', product.isPromoted)
-    .set('quantity', product.quantity);
-    var i = 0;
-    product.images.forEach(img => {
-      payload.set(`images[${i}]`, img);
-      i++;
-    });
-    return this.client.post(`${this.baseURL}`, payload);
+  addProduct(product, productImages){
+
+    const formData: FormData = new FormData();
+    for(var i =0; i<productImages.length; i++){
+      formData.append(`images`, productImages[i]);
+    }
+    formData.append('title', product.title);
+    formData.append('price', product.price);
+    formData.append('details[Brand]', product.details.Brand);
+    formData.append('details[Processor]', product.details.Processor);
+    formData.append('details[RAM]', product.details.RAM);
+    formData.append('details[HardDisk]', product.details.HardDisk);
+    formData.append('details[GPU]', product.details.GPU);
+    formData.append('details[Color]', product.details.Color);
+    formData.append('ratioOfPromotion', product.ratioOfPromotion);
+    formData.append('quantity', product.quantity);
+
+    // const payload = new HttpParams()
+    // .set('title', product.title)
+    // .set('price', product.price)
+    // .set('details[Brand]', product.details.Brand)
+    // .set('details[Processor]', product.details.Processor)
+    // .set('details[RAM]', product.details.RAM)
+    // .set('details[HardDisk]', product.details.HardDisk)
+    // .set('details[GPU]', product.details.GPU)
+    // .set('details[Color]', product.details.Color)
+    // .set('ratioOfPromotion', product.ratioOfPromotion)
+    // // .set('isPromoted', product.isPromoted)
+    // .set('quantity', product.quantity);
+    // var i = 0;
+    // product.images.forEach(img => {
+    //   payload.set(`images[${i}]`, img);
+    //   i++;
+    // });
+    // return this.client.post(`${this.baseURL}`, payload);
+    return this.client.post(`${this.baseURL}`, formData);
   }
   deleteProduct(id){
     return this.client.delete(`${this.baseURL}/${id}`);
   }
-  updateProduct(id, product){
-    const payload = new HttpParams()
-    .set('title', product.title)
-    .set('price', product.price)
-    .set('details[Brand]', product.details.Brand)
-    .set('details[Processor]', product.details.Processor)
-    .set('details[RAM]', product.details.RAM)
-    .set('details[HardDisk]', product.details.HardDisk)
-    .set('details[GPU]', product.details.GPU)
-    .set('details[Color]', product.details.Color)
-    .set('ratioOfPromotion', product.ratioOfPromotion)
-    // .set('isPromoted', product.isPromoted)
-    .set('quantity', product.quantity);
-    var i = 0;
-    product.images.forEach(img => {
-      payload.set(`images[${i}]`, img);
-      i++;
-    });
-    return this.client.patch(`${this.baseURL}/${id}`, payload);
+  updateProduct(id, product, productImages){
+
+    const formData: FormData = new FormData();
+    for(var i =0; i<productImages.length; i++){
+      formData.append(`images`, productImages[i]);
+    }
+    formData.append('title', product.title);
+    formData.append('price', product.price);
+    formData.append('details[Brand]', product.details.Brand);
+    formData.append('details[Processor]', product.details.Processor);
+    formData.append('details[RAM]', product.details.RAM);
+    formData.append('details[HardDisk]', product.details.HardDisk);
+    formData.append('details[GPU]', product.details.GPU);
+    formData.append('details[Color]', product.details.Color);
+    formData.append('ratioOfPromotion', product.ratioOfPromotion);
+    formData.append('quantity', product.quantity);
+
+    // const payload = new HttpParams()
+    // .set('title', product.title)
+    // .set('price', product.price)
+    // .set('details[Brand]', product.details.Brand)
+    // .set('details[Processor]', product.details.Processor)
+    // .set('details[RAM]', product.details.RAM)
+    // .set('details[HardDisk]', product.details.HardDisk)
+    // .set('details[GPU]', product.details.GPU)
+    // .set('details[Color]', product.details.Color)
+    // .set('ratioOfPromotion', product.ratioOfPromotion)
+    // // .set('isPromoted', product.isPromoted)
+    // .set('quantity', product.quantity);
+    // var i = 0;
+    // product.images.forEach(img => {
+    //   payload.set(`images[${i}]`, img);
+    //   i++;
+    // });
+    // return this.client.patch(`${this.baseURL}/${id}`, payload);
+    return this.client.patch(`${this.baseURL}/${id}`, formData);
   }
   //firstway
   private _MessageSearch=new Subject<string>();

@@ -49,10 +49,10 @@ export class RegisterComponent implements OnInit, OnDestroy{
     if (this.registerForm.valid) {
       let user = this.registerForm.value;
       if(user.gender == "female"){
-        user.image = "/assets/images/profilepics/defaultfemale.jpeg";
+        user.image = "http://localhost:3000/defaultfemale.jpeg";
       }
       else{
-        user.image = "/assets/images/profilepics/defaultmale.jpg";
+        user.image = "http://localhost:3000/defaultmale.jpg";
       }
       this.registerEvent.emit(user);
       this.registerUser(user);

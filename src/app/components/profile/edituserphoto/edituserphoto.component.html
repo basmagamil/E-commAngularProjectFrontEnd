@@ -1,0 +1,23 @@
+<!-- {{user.userName}} -->
+<form [formGroup]="updateUserPhotoForm" (ngSubmit)="onClickUpdateUserPhotoSubmit()">
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Photo</h4>
+        <button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- <div class="form-group">
+            <div class="preview" *ngIf="preview && preview !== null">
+              <img style="width: 130px;" [src]="preview" [alt]="updateUserPhotoForm.value.name">
+            </div>
+          </div> -->
+        <div class="form-group">
+            <input type="file" accept="image/*" name="image" (change)="uploadFile($event.target.files)">
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+</form>

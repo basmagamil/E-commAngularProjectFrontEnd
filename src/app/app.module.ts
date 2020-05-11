@@ -35,6 +35,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { NoAccessComponent } from './components/no-access/no-access.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { EdituserphotoComponent } from './components/profile/edituserphoto/edituserphoto.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     ViewItemComponent,
     FooterComponent,
     EdituserComponent,
-    NoAccessComponent
+    NoAccessComponent,
+    EdituserphotoComponent
   ],
   imports: [
     NgbModule,

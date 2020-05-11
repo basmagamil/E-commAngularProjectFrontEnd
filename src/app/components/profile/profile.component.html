@@ -4,7 +4,8 @@
         <div class="card mb-4 box-shadow">
             <img class="card-img-top">
             <div class="card-body">
-                <img class="card-img-top mb-3" [src]="user.image">
+              <!-- [src]="user.image" -->
+                <img class="card-img-top mb-3" [src]="user.image" >
                 <div class="card-text">
                     <p><b>Name: </b>{{user.userName}}</p>
                     <p><b>Email: </b>{{user.email}}</p>
@@ -13,6 +14,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <button type="button" class="btn btn-link" (click)="onClickEditInfoModal()">Edit Details</button>
+                        <button type="button" class="btn btn-link" (click)="onClickEditPhotoModal()">Edit Photo</button>
                     </div>
                 </div>
             </div>

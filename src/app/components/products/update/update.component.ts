@@ -10,6 +10,8 @@ import { NavbarService } from 'src/app/services/navbar.service';
 })
 export class UpdateComponent implements OnInit {
 
+  filesToUpload = [];
+
   UpdateProductForm:FormGroup;
 
   constructor(fb: FormBuilder, private router: Router, private productsService: ProductsService, private activeRouterLink:ActivatedRoute, public navService:NavbarService) {
@@ -20,8 +22,6 @@ export class UpdateComponent implements OnInit {
   get price() { return this.UpdateProductForm.get('price'); }
   get quantity() { return this.UpdateProductForm.get('quantity'); }
   get promotion() { return this.UpdateProductForm.get('ratioOfPromotion'); }
-
-
 
   ngOnInit(): void {
     this.navService.show();
@@ -40,20 +40,23 @@ export class UpdateComponent implements OnInit {
       }),
       quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
       ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\\.\\d+)?|1(\\.0*)?)$")])
-        //(0(\.[0-9]{1,4})?|1$
     })
   }
+    uploadFiles(files: FileList) {
+    for(var i =0; i<files.length; i++){
+      this.filesToUpload.push(files.item(i));
+    }}
 
   id;
   updatedProduct;
   subscriber;
   subscriber2;
   product;
-  FileChange(event) {
-    for (let i = 0; i < event.target.files.length; i++) {
-      this.updatedProduct.ImagesList.push(event.target.files[i].name);
-    }
-  }
+  // FileChange(event) {
+  //   for (let i = 0; i < event.target.files.length; i++) {
+  //     this.updatedProduct.ImagesList.push(event.target.files[i].name);
+  //   }
+  // }
   onClickUpdateProductSubmit() {
     if (this.UpdateProductForm.valid) {
       let updatedProduct = this.UpdateProductForm.value;
@@ -63,16 +66,17 @@ export class UpdateComponent implements OnInit {
       // else{
       //   updatedProduct.isPromoted=false;
       // }
-      console.log(updatedProduct)
-      this.UpdateProduct(this.product._id, updatedProduct)
+      console.log(updatedProduct);
+      this.UpdateProduct(this.product._id, updatedProduct, this.filesToUpload);
       this.router.navigate(['../']);
+      // location.reload();
     }
     else{
       console.log(this.UpdateProductForm)
     }
   }
-  UpdateProduct(id, updatedProduct) {
-    this.subscriber2 = this.productsService.updateProduct(id, updatedProduct).subscribe(
+  UpdateProduct(id, updatedProduct, files) {
+    this.subscriber2 = this.productsService.updateProduct(id, updatedProduct, files).subscribe(
       res => {
         this.updatedProduct = res;
       },
@@ -85,6 +89,7 @@ export class UpdateComponent implements OnInit {
     this.subscriber = this.productsService.getProduct(id).subscribe(
       res => {
         this.product = res[0];
+        this.filesToUpload = this.product.images;
         // this.user._id=this.id;
         console.log(this.product);
         this.UpdateProductForm.patchValue({title: this.product.title})

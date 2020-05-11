@@ -15,6 +15,8 @@ export class AddComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private productsService:ProductsService, private location:Location, public navService:NavbarService) {
     
   }
+  filesToUpload = [];
+  
   AddProductForm = new FormGroup({
     title:new FormControl('',[Validators.required]),
     images:new FormControl([]),
@@ -29,7 +31,6 @@ export class AddComponent implements OnInit {
     }),
     quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
     ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\\.\\d+)?|1(\\.0*)?)$")])
-      //(0(\.[0-9]{1,4})?|1$
   })
 
   get title() { return this.AddProductForm.get('title'); }
@@ -37,33 +38,12 @@ export class AddComponent implements OnInit {
   get quantity() { return this.AddProductForm.get('quantity'); }
   get promotion() { return this.AddProductForm.get('ratioOfPromotion'); }
 
-  // productId
   ngOnInit(): void {
     this.navService.show();
-    // this.productId=this.activatedRoute.snapshot.paramMap.get('id');
   }
-//   product={
-//     id:new String(),
-//     title: new String(),
-//     ImagesList:new Array(),
-//     price: new Number(),
-//     details:
-//     {
-//       brand: new String(),
-//       processor: new String(),
-//       ram: new String(),
-//       hardDisk: new String(),
-//       graphicsCard:new String(),
-//       color: new String()
-//     },
-//     quantity:new Number() ,
-//     promotion:new Number() 
-// }
-SuccesOrNoToUpdate;
-FileChange(event)
-  {
-    for (let i=0;i<event.target.files.length;i++) {
-      // this.product.ImagesList.push(event.target.files[i].name);
+  uploadFiles(files: FileList) {
+    for(var i =0; i<files.length; i++){
+      this.filesToUpload.push(files.item(i));
     }
   }
   onClickAddProductSubmit(){
@@ -71,19 +51,13 @@ FileChange(event)
     console.log(this.AddProductForm)
     if(this.AddProductForm.valid){
       let addProduct = this.AddProductForm.value;
-      // if(this.promotion.value){
-      //   addProduct.isPromoted=true;
-      // }
-      // else{
-      //   addProduct.isPromoted=false;
-      // }
-      this.AddProduct(addProduct);
+      this.AddProduct(addProduct, this.filesToUpload);
       this.location.back();
     }
   }
   subscriber;
-  AddProduct(addProduct) {
-    this.subscriber = this.productsService.addProduct(addProduct).subscribe(
+  AddProduct(addProduct, files) {
+    this.subscriber = this.productsService.addProduct(addProduct, files).subscribe(
       res => {
         console.log(res);
       },
