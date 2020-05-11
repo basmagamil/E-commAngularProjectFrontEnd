@@ -12,9 +12,26 @@
               <img style="width: 130px;" [src]="preview" [alt]="updateUserPhotoForm.value.name">
             </div>
           </div> -->
-        <div class="form-group">
+          
+        <!-- <div class="form-group">
             <input type="file" accept="image/*" name="image" (change)="uploadFile($event.target.files)">
-          </div>
+          </div> -->
+
+          <div class="mb-3">
+            <label for="inputImage">Images</label>
+
+            <div class="custom-file">
+                <input type="file" id="inputImage" accept="image/*" class="custom-file-input" id="validatedCustomFile" name="images"
+                    lang="es" (change)="uploadFile($event.target.files)">
+
+                <label class="custom-file-label" for="validatedCustomFile">{{fileName}}</label>
+            </div>
+
+
+            <!-- <input type="file" id="inputImage" accept="image/*" name="images" (change)="uploadFiles($event.target.files)" multiple> -->
+            
+
+        </div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Submit</button>

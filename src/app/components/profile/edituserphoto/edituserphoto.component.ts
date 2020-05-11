@@ -12,14 +12,17 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 })
 export class EdituserphotoComponent implements OnInit {
 
-  constructor(public activeModal: NgbActiveModal, private usersService: UsersService, public router:Router, public fb: FormBuilder) { }
+  constructor(public activeModal: NgbActiveModal, private usersService: UsersService, public router:Router, public fb: FormBuilder) { 
+    this.fileName = "Choose file";
+  }
   
   @Input() public user;
   id;
   updateUserPhotoForm:FormGroup;
   subscriber;
   fileToUpload: File = null;
-  
+  fileName;
+
   ngOnInit(): void {
     console.log("photo modal init")
     this.updateUserPhotoForm = this.fb.group({
@@ -29,7 +32,9 @@ export class EdituserphotoComponent implements OnInit {
   }
 
   uploadFile(files: FileList) {
+    this.fileName = "";
     this.fileToUpload = files.item(0);
+    this.fileName = `${files.item(0).name}`;
   }
 
   onClickUpdateUserPhotoSubmit(){
