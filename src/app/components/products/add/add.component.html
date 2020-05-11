@@ -40,9 +40,10 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="inputRatioOfPromotion">Promotion</label>
-                        <input type="number" class="form-control" id="inputRatioOfPromotion"
-                            formControlName="ratioOfPromotion">
+                        <input [class.is-invalid]="promotion.invalid && promotion.touched" type="number" class="form-control" id="inputRatioOfPromotion"
+                            formControlName="ratioOfPromotion" required>
                         <div *ngIf="(promotion.invalid && promotion.touched) || promotion.dirty">
+                            <small *ngIf="promotion.errors?.required" class="text-danger">Promotion is required</small>
                             <small *ngIf="promotion.errors?.pattern" class="text-danger">Please provide a valid
                                 promotion percentage between 0 and 1</small>
                         </div>
@@ -52,13 +53,18 @@
 
                 <div class="mb-3">
                     <label for="inputImage">Images</label>
-                    <!-- <div class="custom-file">
-                        <input type="file" id="inputImage" class="custom-file-input" id="validatedCustomFile"
-                            lang="es" (change)="FileChange($event)" formControlName="images" multiple>
 
-                        <label class="custom-file-label" for="validatedCustomFile"></label>
-                    </div> -->
-                    <input type="file" id="inputImage" accept="image/*" name="images" (change)="uploadFiles($event.target.files)" multiple>
+                    <div class="custom-file">
+                        <input type="file" id="inputImage" accept="image/*" class="custom-file-input" id="validatedCustomFile" name="images"
+                            lang="es" (change)="uploadFiles($event.target.files)" multiple>
+
+                        <label class="custom-file-label" for="validatedCustomFile">{{fileName}}</label>
+                    </div>
+
+
+                    <!-- <input type="file" id="inputImage" accept="image/*" name="images" (change)="uploadFiles($event.target.files)" multiple> -->
+                    
+
                 </div>
                 <hr class="mb-4">
                 <div formGroupName="details">
@@ -102,7 +108,7 @@
                 <hr class="mb-4">
 
                 <div class="btn-group w-100" role="group">
-                    <button type="button" class="btn btn-secondary" routerLink="/products">Back</button>
+                    <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </div>
             </form>

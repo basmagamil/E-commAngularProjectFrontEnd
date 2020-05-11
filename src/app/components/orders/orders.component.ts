@@ -70,9 +70,10 @@ export class OrdersComponent implements OnInit , OnDestroy{
           {
             this.subscriberToGetUserName=this.userService.getUser(orders[i].user).subscribe(
               (user)=>{
+                console.log(user);
                 if(user)
                 {
-                  this.userName.push(user["userName"]);
+                  this.userName.push(user[0].userName);
                 }
               },(err)=>{
                 console.log(err);

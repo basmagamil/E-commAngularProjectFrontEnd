@@ -58,6 +58,9 @@ export class RegisterComponent implements OnInit, OnDestroy{
       this.registerUser(user);
       this.router.navigateByUrl('');
     }
+    else{
+      this.registerForm.markAllAsTouched();
+    }
   }
 
   registerUser(user) {

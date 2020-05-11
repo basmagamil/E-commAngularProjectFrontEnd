@@ -16,23 +16,21 @@
     <div *ngFor="let laptop of promotedLaptops; index as i">
         <div *ngIf="i<=1; then featurette"></div>
         <ng-template #featurette>
-            <div class="row featurette">
+            <a routerLink="../products/Details/{{laptop._id}}" class="row featurette">
                 <div class="col-md-7" [ngClass]="{'order-md-2' : i==0}">
-                    <h2 class="featurette-heading">{{laptop.title}}</h2>
-                    <h3 class="text-muted old-price d-inline">{{laptop.price}} EGP</h3>
+                    <h2 class="featurette-heading font-weight-bold pl-3">{{laptop.title}}</h2>
+                    <h3 class="text-muted old-price d-inline pl-3">{{laptop.price}} EGP</h3>
                     <h3 class="new-price text-danger d-inline"> {{laptop.price-laptop.price*laptop.ratioOfPromotion}} EGP</h3>
-                    <ul class="lead">
-                        <li *ngFor="let key of GetKeys(laptop.details)">{{key}}: {{laptop.details[key]}}</li>
-                        <!-- <li>Processor: Core i7</li>
-                        <li>Graphics Card: 4 GB</li> -->
+                    <ul class="lead pt-2">
+                        <li *ngFor="let key of GetKeys(laptop.details)"><b>{{key}}:</b> {{laptop.details[key]}}</li>
                     </ul>
-                    <button type="button" class="btn btn-sm btn-primary" routerLink="../products/Details/{{laptop._id}}">View Details</button>
+                    <!-- <button type="button" class="btn btn-sm btn-primary" routerLink="../products/Details/{{laptop._id}}">View Details</button> -->
                 </div>
                 <div class="col-md-5 vertical-center">
                     <img class="featurette-image img-fluid mx-auto vertical-center"
                     [src]="laptop.images[0]">
                 </div>
-            </div>
+            </a>
             <hr class="featurette-divider">
         </ng-template>
     </div>
@@ -40,25 +38,24 @@
         <div *ngFor="let laptop of promotedLaptops; index as i">
             <div *ngIf="i>=2; then cardcolumn"></div>
             <ng-template #cardcolumn>
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" [src]="laptop.images[0]">
+                <a routerLink="../products/Details/{{laptop._id}}" class="card mb-4 box-shadow">
+                    <img class="card-img-top p-3" [src]="laptop.images[0]">
                     <div class="card-body">
-                        <h5 class="card-title">{{laptop.title}}</h5>
+                        <h5 class="card-title font-weight-bold">{{laptop.title}}</h5>
                         <ul class="card-text">
-                            <li *ngFor="let key of GetKeys(laptop.details)">{{key}}: {{laptop.details[key]}}</li>
+                            <li *ngFor="let key of GetKeys(laptop.details)"><b>{{key}}:</b> {{laptop.details[key]}}</li>
                         </ul>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <!-- <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-primary" routerLink="../products/Details/{{laptop._id}}">View Details</button>
-                            </div>
+                            </div> -->
                             <div>
-        
                                 <p class="card-text new-price text-danger">{{laptop.price-laptop.price*laptop.ratioOfPromotion}} EGP</p>
                                 <small class="text-muted old-price">{{laptop.price}} EGP</small>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </ng-template>
         </div>
     </div>

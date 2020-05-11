@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/services/products.service';
 import { CartService } from 'src/app/services/cart.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery';
 import { UsersService } from 'src/app/services/users.service';
 import { NavbarService } from 'src/app/services/navbar.service';
@@ -14,34 +14,17 @@ import { NavbarService } from 'src/app/services/navbar.service';
 })
 export class ViewItemComponent implements OnInit {
   // images = [1, 2, 3, 4].map((n) => `assets/images/${n}.jpg`);
-  constructor(config: NgbCarouselConfig, private productsService: ProductsService, private cartService: CartService, public usersService:UsersService, public activeRouterLink: ActivatedRoute, public navService:NavbarService) {
+  constructor(config: NgbCarouselConfig, private productsService: ProductsService, private cartService: CartService, public usersService:UsersService, public activeRouterLink: ActivatedRoute, public navService:NavbarService, private router: Router) {
     config.interval = 4000;
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = false;
-
+    config.showNavigationArrows = false;
     this.id = this.activeRouterLink.snapshot.params.id;
     console.log(this.id)
 
 
   }
-  // product={
-  //   id:2,
-  //     title: "Dell Inspiron 3593 (Intel® Core™ Ci7-1065G7- 16GB -2TB - Nvidia MX230 4GB -15.6 FHD) Silver",
-  //     images: ["assets/images/2.jpg"],
-  //     price: 12319,
-  //     details:
-  //     {
-  //       brand: "Dell",
-  //       processor: "10th Generation Intel® Core™ Ci7-1065G7 8M Cache, up to 3.90 GHz",
-  //       ram: "16GB, 4Gx2, DDR4, 2400MHz",
-  //       hardDisk: "2TB ",
-  //       graphicsCard: "Nvidia MX230 4GB",
-  //       color: "Silver"
-  //     },
-  //     quantity: 5,
-  //     ratioOfPromotion:3
-  // }
 
   id;
   product;
@@ -93,4 +76,22 @@ export class ViewItemComponent implements OnInit {
       });
 
   }
+
+  Update(product) {
+    this.router.navigate(['../products/update/', product._id]);
+  }
+
+  Delete(productID) {
+    this.subscriber = this.productsService.deleteProduct(productID).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      })
+    console.log("yes i delete item no " + productID);
+    location.reload();
+
+  }
+
 }

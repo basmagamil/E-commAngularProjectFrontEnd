@@ -13,10 +13,10 @@ import { NavbarService } from 'src/app/services/navbar.service';
 export class AddComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private productsService:ProductsService, private location:Location, public navService:NavbarService) {
-    
+    this.fileName="Choose file";
   }
   filesToUpload = [];
-  
+  fileName;
   AddProductForm = new FormGroup({
     title:new FormControl('',[Validators.required]),
     images:new FormControl([]),
@@ -30,7 +30,7 @@ export class AddComponent implements OnInit {
       Color:new FormControl(''),
     }),
     quantity:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$")]),
-    ratioOfPromotion:new FormControl('',[Validators.pattern("^(?:0*(?:\\.\\d+)?|1(\\.0*)?)$")])
+    ratioOfPromotion:new FormControl('',[Validators.required,Validators.pattern("^(?:0*(?:\\.\\d+)?|1(\\.0*)?)$")])
   })
 
   get title() { return this.AddProductForm.get('title'); }
@@ -42,8 +42,11 @@ export class AddComponent implements OnInit {
     this.navService.show();
   }
   uploadFiles(files: FileList) {
+    this.fileName = "";
     for(var i =0; i<files.length; i++){
       this.filesToUpload.push(files.item(i));
+      this.fileName = `${this.fileName} ${files.item(i).name}`;
+      // this.fileName += "hey";
     }
   }
   onClickAddProductSubmit(){
@@ -53,6 +56,9 @@ export class AddComponent implements OnInit {
       let addProduct = this.AddProductForm.value;
       this.AddProduct(addProduct, this.filesToUpload);
       this.location.back();
+    }
+    else{
+      this.AddProductForm.markAllAsTouched();
     }
   }
   subscriber;
@@ -66,7 +72,10 @@ export class AddComponent implements OnInit {
       }
     )
   }
+  goBack(){
+    this.location.back();
 
+  }
 
 
 }

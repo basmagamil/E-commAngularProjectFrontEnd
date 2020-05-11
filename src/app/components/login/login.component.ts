@@ -46,6 +46,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       // this.router.navigateByUrl('');
       console.log("loginformvalid")
     }
+    else{
+      this.loginForm.markAllAsTouched();
+    }
   }
 
   loginUser(user){

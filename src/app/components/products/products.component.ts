@@ -5,6 +5,7 @@ import * as $ from 'jquery'
 import { ProductsService } from 'src/app/services/products.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { AdminAuthGuardService } from 'src/app/services/admin-auth-guard.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +15,7 @@ import { AdminAuthGuardService } from 'src/app/services/admin-auth-guard.service
 export class ProductsComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private productsService: ProductsService,
-    private isadmain:AdminAuthGuardService, public navService:NavbarService) {
+    private isadmain:AdminAuthGuardService, public navService:NavbarService, public usersService:UsersService) {
     console.log("in constractor before ");
     console.log(this.products);
     this.GetProductByBrandName();
@@ -26,7 +27,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products;
   subscriber;
   // subscriber2;
-isvisable
 
   ngOnInit(): void {
     this.navService.show();
@@ -39,8 +39,6 @@ isvisable
    console.log("in ngOnInit after ");
    console.log(this.products);
     this.products;
-    this.isvisable=this.isadmain.CheckAdminOrNot();
-    console.log("admin or not "+this.isvisable);
   }
 
   ngOnDestroy(): void {

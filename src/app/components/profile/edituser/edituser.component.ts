@@ -144,6 +144,9 @@ export class EdituserComponent implements OnInit {
       location.reload();
       // this.activeModal.close(this.user);
     }
+    else{
+      this.updateInfoForm.markAllAsTouched();
+    }
   }
 
   updateUser(id, updatedUser) {

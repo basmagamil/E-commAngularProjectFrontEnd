@@ -73,7 +73,7 @@ ul.card-text{
 
 @media (min-width: 40em) {
   .featurette-heading {
-    font-size: 50px;
+    /* font-size: 50px; */
   }
 }
 
@@ -82,3 +82,28 @@ ul.card-text{
     margin-top: 7rem;
   }
 } */
+
+a{
+  text-decoration: inherit;
+  color:inherit;
+}
+a:hover{
+  color:inherit;
+}
+
+ul {
+  list-style-type: square;
+}
+
+.card img{
+  /* max-height: 200px; */
+  object-fit: contain;
+}
+
+.featurette img{
+  max-height: 270px;
+  object-fit: contain;
+}
+.featurette ul li{
+  font-size: smaller;
+}
