@@ -155,6 +155,8 @@ export class EdituserComponent implements OnInit {
         this.user = res;
         this.user._id=this.id;
         // console.log("res");
+        console.log(res['token']);
+        localStorage.setItem('token', res['token']);
       },
       err => {
         console.log(err);
