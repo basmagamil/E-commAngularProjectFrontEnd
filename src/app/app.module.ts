@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -36,6 +36,7 @@ import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { NoAccessComponent } from './components/no-access/no-access.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { EdituserphotoComponent } from './components/profile/edituserphoto/edituserphoto.component';
+import { SameUserGuardService } from './services/same-user-guard.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { EdituserphotoComponent } from './components/profile/edituserphoto/editu
     FooterComponent,
     EdituserComponent,
     NoAccessComponent,
-    EdituserphotoComponent
+    EdituserphotoComponent,
   ],
   imports: [
     NgbModule,
@@ -67,11 +68,24 @@ import { EdituserphotoComponent } from './components/profile/edituserphoto/editu
     HttpClientModule,
     FontAwesomeModule,
     CommonModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
- 
-  providers: [ProductsService, UsersService, CartService, OrdersService, AuthGuardService, AdminAuthGuardService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+
+  providers: [
+    ProductsService,
+    UsersService,
+    CartService,
+    OrdersService,
+    AuthGuardService,
+    AdminAuthGuardService,
+    SameUserGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [EdituserComponent]
+  entryComponents: [EdituserComponent],
 })
-export class AppModule { }
+export class AppModule {}

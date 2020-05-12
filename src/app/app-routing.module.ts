@@ -16,6 +16,7 @@ import { ViewItemComponent } from './components/products/view-item/view-item.com
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { NoAccessComponent } from './components/no-access/no-access.component';
+import { SameUserGuardService } from './services/same-user-guard.service';
 
 
 const routes: Routes = [
@@ -26,8 +27,8 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'products', component:ProductsComponent},
   {path:'orders', component:OrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
-  {path:'cart/:id', component:CartComponent, canActivate: [AuthGuardService]}, //:id
-  {path:'profile/:id', component:ProfileComponent, canActivate: [AuthGuardService]},
+  {path:'cart/:id', component:CartComponent, canActivate: [AuthGuardService, SameUserGuardService]}, //:id
+  {path:'profile/:id', component:ProfileComponent, canActivate: [AuthGuardService, SameUserGuardService]},
   {path:'products/update/:id',component:UpdateComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
   {path:'products/add',component:AddComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
   {path:'products/Details/:id',component:ViewItemComponent, canActivate: [AuthGuardService]},
