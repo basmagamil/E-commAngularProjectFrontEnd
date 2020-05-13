@@ -45,18 +45,25 @@
           placeholder="What are you looking for?"
           [(ngModel)]="search"
           name="search"
-          (click)="GoToAllProduct()"
-          (keyup.enter)="GeneralSearch()"
+          (keyup.enter)="searchByTitle(search)"
+          
         />
+        <!-- (keyup.enter)="GeneralSearch()"
+        (click)="GoToAllProduct()" -->
+
+
         <div class="input-group-append">
           <button
             type="button"
             class="btn btn-secondary"
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLinkActive="active"
-            routerLink="../products"
-            (click)="GeneralSearch()"
+            (click)="searchByTitle(search)"
+            
+            
           >
+          <!--(click)="GeneralSearch()"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+          routerLink="../products" -->
             <fa-icon [icon]="faSearch"></fa-icon>
           </button>
         </div>
@@ -165,9 +172,9 @@
       <a
         class="nav-link parent-nav-link"
         routerLink="../products"
-        (click)="SearchOnAllLaptop()"
         >All Laptops</a
-      >
+        >
+        <!-- (click)="SearchOnAllLaptop()" -->
 
       <div class="dropdown d-inline-block">
         <a class="nav-link dropbtn parent-nav-link"
@@ -178,27 +185,30 @@
             <a
               [routerLinkActiveOptions]="{ exact: true }"
               routerLinkActive="active"
-              routerLink="../products"
               class="nav-link"
-              (click)="SearchOnHPLaptop()"
+              (click)="searchByBrand('HP')"
               >HP</a
-            >
+              >
+              <!-- routerLink="../products"
+              (click)="SearchOnHPLaptop()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
               routerLinkActive="active"
-              routerLink="../products"
               class="nav-link"
-              (click)="SearchOnLenovoLaptop()"
+              (click)="searchByBrand('Lenovo')"
               >Lenovo</a
-            >
+              >
+              <!-- routerLink="../products"
+              (click)="SearchOnLenovoLaptop()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
               routerLinkActive="active"
-              routerLink="../products"
               class="nav-link"
-              (click)="SearchOnDellLaptop()"
+              (click)="searchByBrand('Dell')"
               >Dell</a
-            >
+              >
+              <!-- routerLink="../products"
+              (click)="SearchOnDellLaptop()" -->
           </div>
         </div>
       </div>
@@ -212,35 +222,39 @@
             <a
               [routerLinkActiveOptions]="{ exact: true }"
               routerLinkActive="active"
-              routerLink="../products"
               class="nav-link"
-              (click)="SearchOnLaptopCore_i3()"
+              (click)="searchByProcessor('Core i3')"
               >Core i3</a
-            >
+              >
+              <!-- routerLink="../products"
+              (click)="SearchOnLaptopCore_i3()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
               routerLinkActive="active"
-              routerLink="../products"
               class="nav-link"
-              (click)="SearchOnLaptopCore_i5()"
+              (click)="searchByProcessor('Core i5')"
               >Core i5</a
-            >
+              >
+              <!-- routerLink="../products"
+              (click)="SearchOnLaptopCore_i5()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
               routerLinkActive="active"
-              routerLink="../products"
               class="nav-link"
-              (click)="SearchOnLaptopCore_i7()"
+              (click)="searchByProcessor('Core i7')"
               >Core i7</a
-            >
+              >
+              <!-- routerLink="../products"
+              (click)="SearchOnLaptopCore_i7()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
               routerLinkActive="active"
-              routerLink="../products"
               class="nav-link"
-              (click)="SearchOnLaptopCore_i9()"
+              (click)="searchByProcessor('Core i9')"
               >Core i9</a
-            >
+              >
+              <!-- routerLink="../products"
+              (click)="SearchOnLaptopCore_i9()" -->
           </div>
         </div>
       </div>

@@ -11,6 +11,8 @@ export class ProductsService {
   
   constructor(private client:HttpClient) { }
 
+  // searchQuery;
+
   getAllProducts(){
     return this.client.get(this.baseURL); //, {observe:'body'}
   }
@@ -21,7 +23,7 @@ export class ProductsService {
     // this._MessageSearch.next(objSearchBrand);
     // return objSearchBrand;
     //
-    return this.client.get(`${this.baseURL}//search/Brand?Brand=${BrandName}`);
+    return this.client.get(`${this.baseURL}/search/Brand?Brand=${BrandName}`);
     //
     // const ProductBrand =this.client.get(`${this.baseURL}//search/Brand?Brand=${BrandName}`);
     // console.log(BrandName)
@@ -31,7 +33,7 @@ export class ProductsService {
     // console.log("IS enter Here");
   }
   getSearchByProcessor(ProcessorName){
-    return this.client.get(`${this.baseURL}//search/Processor?Processor=${ProcessorName}`);
+    return this.client.get(`${this.baseURL}/search/Processor?Processor=${ProcessorName}`);
   }
   getPromotedProducts(){
     return this.client.get(`${this.baseURL}/promoted`);
@@ -116,15 +118,43 @@ export class ProductsService {
     // return this.client.patch(`${this.baseURL}/${id}`, payload);
     return this.client.patch(`${this.baseURL}/${id}`, formData);
   }
-  //firstway
-  private _MessageSearch=new Subject<string>();
-  _MessageSearch$=this._MessageSearch.asObservable();
-  sendMessageSearch(searchMessage:string)
-  {
-    this._MessageSearch.next(searchMessage);
+  searchByTitle(searchText){
+    // this.searchQuery = searchText;
+    console.log("search text in service",searchText);
+    // const formData: FormData = new FormData();
+    // formData.append('title', searchText);
+    // console.log("formdata",formData);
+    const payload = new HttpParams()
+    .set('title', searchText)
+    return this.client.post(`${this.baseURL}/search`,payload);
   }
+  searchByBrand(searchText){
+    console.log("search text in service",searchText);
+    // const formData: FormData = new FormData();
+    // formData.append('title', searchText);
+    // console.log("formdata",formData);
+    const payload = new HttpParams()
+    .set('Brand', searchText)
+    return this.client.post(`${this.baseURL}/search`,payload);
+  }
+  searchByProcessor(searchText){
+    console.log("search text in service",searchText);
+    // const formData: FormData = new FormData();
+    // formData.append('title', searchText);
+    // console.log("formdata",formData);
+    const payload = new HttpParams()
+    .set('Processor', searchText)
+    return this.client.post(`${this.baseURL}/search`,payload);
+  }
+  // //firstway
+  // private _MessageSearch=new Subject<string>();
+  // _MessageSearch$=this._MessageSearch.asObservable();
+  // sendMessageSearch(searchMessage:string)
+  // {
+  //   this._MessageSearch.next(searchMessage);
+  // }
 
-  //secondway
-  $SearchBrand=new EventEmitter();
-  SeaechBrandList:any[];
+  // //secondway
+  // $SearchBrand=new EventEmitter();
+  // SeaechBrandList:any[];
 }

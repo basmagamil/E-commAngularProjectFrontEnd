@@ -65,37 +65,37 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
-  SearchOnHPLaptop() {
-    this.productService.sendMessageSearch('HP');
-  }
-  SearchOnLenovoLaptop() {
-    this.productService.sendMessageSearch('Lenovo');
-  }
-  SearchOnDellLaptop() {
-    this.productService.sendMessageSearch('Dell');
-  }
-  SearchOnLaptopCore_i3() {
-    this.productService.sendMessageSearch('Core i3');
-  }
-  SearchOnLaptopCore_i5() {
-    this.productService.sendMessageSearch('Core i5');
-  }
-  SearchOnLaptopCore_i7() {
-    this.productService.sendMessageSearch('Core i7');
-  }
-  SearchOnLaptopCore_i9() {
-    this.productService.sendMessageSearch('Core i9');
-  }
-  SearchOnAllLaptop() {
-    this.router.navigate(['../products']);
-    this.productService.sendMessageSearch('All Laptop');
-  }
+  // SearchOnHPLaptop() {
+  //   this.productService.sendMessageSearch('HP');
+  // }
+  // SearchOnLenovoLaptop() {
+  //   this.productService.sendMessageSearch('Lenovo');
+  // }
+  // SearchOnDellLaptop() {
+  //   this.productService.sendMessageSearch('Dell');
+  // }
+  // SearchOnLaptopCore_i3() {
+  //   this.productService.sendMessageSearch('Core i3');
+  // }
+  // SearchOnLaptopCore_i5() {
+  //   this.productService.sendMessageSearch('Core i5');
+  // }
+  // SearchOnLaptopCore_i7() {
+  //   this.productService.sendMessageSearch('Core i7');
+  // }
+  // SearchOnLaptopCore_i9() {
+  //   this.productService.sendMessageSearch('Core i9');
+  // }
+  // SearchOnAllLaptop() {
+  //   this.router.navigate(['../products']);
+  //   this.productService.sendMessageSearch('All Laptop');
+  // }
   search: string;
-  GeneralSearch() {
-    console.log(`search ${this.search}`);
+  // GeneralSearch() {
+  //   console.log(`search ${this.search}`);
     
-    this.productService.sendMessageSearch(`searchBar: ${this.search}`);
-  }
+  //   this.productService.sendMessageSearch(`searchBar: ${this.search}`);
+  // }
   GoToAllProduct() {
     this.router.navigate(['../products']);
   }
@@ -105,5 +105,41 @@ export class NavbarComponent implements OnInit {
   onClickLogout(){
     this.usersService.logout();
     //location.reload();
+  }
+
+  searchByTitle(title){
+    // this.productService.searchByTitle(title);
+    this.search="";
+    if(title){
+      this.router.navigate(['/products'], { queryParams: { search: title } });
+    }
+    else{
+      this.router.navigate(['/products']);
+    }
+    // location.reload();
+  }
+
+  searchByBrand(brand){
+    // this.productService.searchByTitle(title);
+    this.search="";
+    if(brand){
+      this.router.navigate(['/products'], { queryParams: { brand: brand } });
+    }
+    else{
+      this.router.navigate(['/products']);
+    }
+    // location.reload();
+  }
+
+  searchByProcessor(processor){
+    // this.productService.searchByTitle(title);
+    this.search="";
+    if(processor){
+      this.router.navigate(['/products'], { queryParams: { processor: processor } });
+    }
+    else{
+      this.router.navigate(['/products']);
+    }
+    // location.reload();
   }
 }
