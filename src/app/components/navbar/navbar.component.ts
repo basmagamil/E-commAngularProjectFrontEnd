@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
   id;
   user;
   subscriber;
-
+  search: string;
   isCollapsed: boolean;
 
   constructor(
@@ -44,10 +44,6 @@ export class NavbarComponent implements OnInit {
     public navService: NavbarService
   ) {
     this.isCollapsed = true;
-    // this.id = usersService.currentUser.id;
-    // this.id = '5ea33e292b361551e0d428fb'; //basma
-    // this.id = "5ea457ee4387c02984646e91"; //rawan
-    // this.id = "5ea464c3b4ec50572cccc954"; //azhar
   }
 
   ngOnInit(): void {
@@ -65,37 +61,9 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
-  // SearchOnHPLaptop() {
-  //   this.productService.sendMessageSearch('HP');
-  // }
-  // SearchOnLenovoLaptop() {
-  //   this.productService.sendMessageSearch('Lenovo');
-  // }
-  // SearchOnDellLaptop() {
-  //   this.productService.sendMessageSearch('Dell');
-  // }
-  // SearchOnLaptopCore_i3() {
-  //   this.productService.sendMessageSearch('Core i3');
-  // }
-  // SearchOnLaptopCore_i5() {
-  //   this.productService.sendMessageSearch('Core i5');
-  // }
-  // SearchOnLaptopCore_i7() {
-  //   this.productService.sendMessageSearch('Core i7');
-  // }
-  // SearchOnLaptopCore_i9() {
-  //   this.productService.sendMessageSearch('Core i9');
-  // }
-  // SearchOnAllLaptop() {
-  //   this.router.navigate(['../products']);
-  //   this.productService.sendMessageSearch('All Laptop');
-  // }
-  search: string;
-  // GeneralSearch() {
-  //   console.log(`search ${this.search}`);
-    
-  //   this.productService.sendMessageSearch(`searchBar: ${this.search}`);
-  // }
+
+  
+
   GoToAllProduct() {
     this.router.navigate(['../products']);
   }
@@ -110,13 +78,54 @@ export class NavbarComponent implements OnInit {
   searchByTitle(title){
     // this.productService.searchByTitle(title);
     this.search="";
+    // this.productService.searchQuery=title;
     if(title){
-      this.router.navigate(['/products'], { queryParams: { search: title } });
+      this.getSearchTitleProducts(title);
     }
     else{
-      this.router.navigate(['/products']);
+      this.getAllProducts();
     }
+    // if(title){
+    //   this.router.navigate(['/products'], { queryParams: { search: title } });
+    // }
+    // else{
+    //   this.router.navigate(['/products']);
+    // }
     // location.reload();
+    this.router.navigate(['/products']);
+  }
+
+  getAllProducts(){
+    this.subscriber = this.productService.getAllProducts().subscribe(
+      (products) => {
+        if (products) {
+          // this.products = products;
+          this.productService.productsList = products;
+          console.log("this.productService.productsList")
+          console.log(this.productService.productsList);
+        }
+      },
+      (err) => {
+        console.log(err);
+      })
+  }
+
+  getSearchTitleProducts(title) {
+    // this.searchQu=this.productService.searchQuery;
+    // console.log("this.productService.searchQuery",this.productService.searchQuery);
+    this.subscriber = this.productService.searchByTitle(title).subscribe(
+      (products) => {
+        if (products) {
+          // this.products = products;
+          this.productService.productsList = products;
+          console.log("this.productService.productsList")
+          console.log(this.productService.productsList);
+        }
+      },
+      (err) => {
+        console.log(err);
+      })
+    // console.log(this.products)
   }
 
   searchByBrand(brand){

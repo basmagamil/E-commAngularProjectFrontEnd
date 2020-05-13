@@ -6,7 +6,7 @@
                 <button type="button" class="btn btn-outline-dark mt-3 col-12 w-100 box-shadow" 
                 routerLink="../products/add" *ngIf="usersService.isLoggedIn() && usersService.currentUser.isAdmin">Add new product</button>
             </div>
-                <div class="row" *ngFor="let product of products | filter:search">
+                <div class="row" *ngFor="let product of productsService.productsList | filter:search">
                     <div class="card box-shadow mt-2 col-12">
                         <div class="row no-gutters">
                             <div class="col-md-3">

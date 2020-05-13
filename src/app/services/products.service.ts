@@ -12,6 +12,8 @@ export class ProductsService {
   constructor(private client:HttpClient) { }
 
   // searchQuery;
+  productsList;
+
 
   getAllProducts(){
     return this.client.get(this.baseURL); //, {observe:'body'}
@@ -121,9 +123,6 @@ export class ProductsService {
   searchByTitle(searchText){
     // this.searchQuery = searchText;
     console.log("search text in service",searchText);
-    // const formData: FormData = new FormData();
-    // formData.append('title', searchText);
-    // console.log("formdata",formData);
     const payload = new HttpParams()
     .set('title', searchText)
     return this.client.post(`${this.baseURL}/search`,payload);
@@ -146,15 +145,4 @@ export class ProductsService {
     .set('Processor', searchText)
     return this.client.post(`${this.baseURL}/search`,payload);
   }
-  // //firstway
-  // private _MessageSearch=new Subject<string>();
-  // _MessageSearch$=this._MessageSearch.asObservable();
-  // sendMessageSearch(searchMessage:string)
-  // {
-  //   this._MessageSearch.next(searchMessage);
-  // }
-
-  // //secondway
-  // $SearchBrand=new EventEmitter();
-  // SeaechBrandList:any[];
 }
