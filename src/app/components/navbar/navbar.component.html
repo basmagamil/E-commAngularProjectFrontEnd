@@ -75,11 +75,12 @@
       <a
         *ngIf="usersService.isLoggedIn()"
         class="d-md-none"
+        class="nav-item nav-link"
+        (click)="getAllProducts()"
         [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
         routerLink="../products"
-        class="nav-item nav-link"
-      >
+        >
         <fa-icon class="d-md-none" [icon]="faShoppingBag"></fa-icon>
         <span class="d-md-none"> All Laptops</span>
       </a>
@@ -172,6 +173,7 @@
       <a
         class="nav-link parent-nav-link"
         routerLink="../products"
+        (click)="getAllProducts()"
         >All Laptops</a
         >
         <!-- (click)="SearchOnAllLaptop()" -->

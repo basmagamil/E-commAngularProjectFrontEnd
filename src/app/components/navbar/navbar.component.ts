@@ -49,6 +49,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     // this.getUser();
     console.log(this.usersService.currentUser);
+    this.getAllProducts();
   }
 
   getUser() {
@@ -80,7 +81,7 @@ export class NavbarComponent implements OnInit {
     this.search="";
     // this.productService.searchQuery=title;
     if(title){
-      this.getSearchTitleProducts(title);
+      this.getProductsFilteredByTitle(title);
     }
     else{
       this.getAllProducts();
@@ -96,6 +97,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getAllProducts(){
+    console.log("getall")
     this.subscriber = this.productService.getAllProducts().subscribe(
       (products) => {
         if (products) {
@@ -110,7 +112,7 @@ export class NavbarComponent implements OnInit {
       })
   }
 
-  getSearchTitleProducts(title) {
+  getProductsFilteredByTitle(title) {
     // this.searchQu=this.productService.searchQuery;
     // console.log("this.productService.searchQuery",this.productService.searchQuery);
     this.subscriber = this.productService.searchByTitle(title).subscribe(
@@ -120,6 +122,9 @@ export class NavbarComponent implements OnInit {
           this.productService.productsList = products;
           console.log("this.productService.productsList")
           console.log(this.productService.productsList);
+        }
+        else{
+          this.productService.productsList = [];
         }
       },
       (err) => {
@@ -131,24 +136,71 @@ export class NavbarComponent implements OnInit {
   searchByBrand(brand){
     // this.productService.searchByTitle(title);
     this.search="";
+    // if(brand){
+    //   this.router.navigate(['/products'], { queryParams: { brand: brand } });
+    // }
+    // else{
+    //   this.router.navigate(['/products']);
+    // }
+    // // location.reload();
     if(brand){
-      this.router.navigate(['/products'], { queryParams: { brand: brand } });
+      this.getProductsFilteredByBrand(brand);
     }
     else{
-      this.router.navigate(['/products']);
+      this.getAllProducts();
     }
-    // location.reload();
+    this.router.navigate(['/products']);
+  }
+
+  getProductsFilteredByBrand(brand) {
+    // this.searchQu=this.productService.searchQuery;
+    // console.log("this.productService.searchQuery",this.productService.searchQuery);
+    this.subscriber = this.productService.searchByBrand(brand).subscribe(
+      (products) => {
+        if (products) {
+          this.productService.productsList = products;
+        }
+        else{
+          this.productService.productsList = [];
+        }
+      },
+      (err) => {
+        console.log(err);
+      })
+    // console.log(this.products)
   }
 
   searchByProcessor(processor){
     // this.productService.searchByTitle(title);
     this.search="";
+    // if(processor){
+    //   this.router.navigate(['/products'], { queryParams: { processor: processor } });
+    // }
+    // else{
+    //   this.router.navigate(['/products']);
+    // }
+    // // location.reload();
     if(processor){
-      this.router.navigate(['/products'], { queryParams: { processor: processor } });
+      this.getProductsFilteredByProcessor(processor);
     }
     else{
-      this.router.navigate(['/products']);
+      this.getAllProducts();
     }
-    // location.reload();
+    this.router.navigate(['/products']);
+  }
+
+  getProductsFilteredByProcessor(processor){
+    this.subscriber = this.productService.searchByProcessor(processor).subscribe(
+      (products) => {
+        if (products) {
+          this.productService.productsList = products;
+        }
+        else{
+          this.productService.productsList = [];
+        }
+      },
+      (err) => {
+        console.log(err);
+      })
   }
 }

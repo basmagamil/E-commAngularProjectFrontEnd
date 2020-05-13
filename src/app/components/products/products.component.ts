@@ -67,18 +67,18 @@ export class ProductsComponent implements OnInit {
     return Object.keys(obj);
   }
 
-  getAllProducts() {
-    this.subscriber = this.productsService.getAllProducts().subscribe(
-      (products) => {
-        if (products) {
-          this.products = products;
-        }
-      },
-      (err) => {
-        console.log(err);
-      })
-    console.log(this.products)
-  }
+  // getAllProducts() {
+  //   this.subscriber = this.productsService.getAllProducts().subscribe(
+  //     (products) => {
+  //       if (products) {
+  //         this.products = products;
+  //       }
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     })
+  //   console.log(this.products)
+  // }
 
   // getSearchTitleProducts(title) {
   //   this.searchQueryFromService=this.productsService.searchQuery;
@@ -98,31 +98,31 @@ export class ProductsComponent implements OnInit {
   //   console.log(this.products)
   // }
 
-  getSearchBrandProducts(brand) {
-    this.subscriber = this.productsService.searchByBrand(brand).subscribe(
-      (products) => {
-        if (products) {
-          this.products = products;
-        }
-      },
-      (err) => {
-        console.log(err);
-      })
-    console.log(this.products)
-  }
+  // getSearchBrandProducts(brand) {
+  //   this.subscriber = this.productsService.searchByBrand(brand).subscribe(
+  //     (products) => {
+  //       if (products) {
+  //         this.products = products;
+  //       }
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     })
+  //   console.log(this.products)
+  // }
 
-  getSearchProcessorProducts(processor) {
-    this.subscriber = this.productsService.searchByProcessor(processor).subscribe(
-      (products) => {
-        if (products) {
-          this.products = products;
-        }
-      },
-      (err) => {
-        console.log(err);
-      })
-    console.log(this.products)
-  }
+  // getSearchProcessorProducts(processor) {
+  //   this.subscriber = this.productsService.searchByProcessor(processor).subscribe(
+  //     (products) => {
+  //       if (products) {
+  //         this.products = products;
+  //       }
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     })
+  //   console.log(this.products)
+  // }
 
 
   DeleteModal(product) {
