@@ -67,14 +67,12 @@ export class RegisterComponent implements OnInit, OnDestroy{
     this.subscriber = this.usersService.registerUser(user).subscribe(
       res => {
         if (res){
-          console.log(res['token']);
           localStorage.setItem('token', res['token']);  
           this.router.navigate(['/']);
         }
         else{
           // this.invalidLogin = true;
         }    
-        console.log("res",res);
       },
       err => {
         console.log(err);
@@ -83,7 +81,6 @@ export class RegisterComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    // this.subscriber.unsubscribe();
   }
 
 }

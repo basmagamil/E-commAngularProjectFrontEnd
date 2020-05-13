@@ -26,9 +26,7 @@ export class CartComponent implements OnInit, OnChanges {
 
   }
   deleteFromCart(prodId) {
-    console.log("deleted prod id", prodId) //2d5
     this.myService.deleteProductFromCart(prodId).subscribe((prod) => {
-      console.log("delete", prod)
       location.reload();
     }, (err) => {
       console.log(err);
@@ -46,18 +44,11 @@ export class CartComponent implements OnInit, OnChanges {
         for (let i = 0; i < this.userCart.length; i++) {
           products.push({ productId: this.userCart[i].productId, productQty: this.userCart[i].quantity })
         }
-        console.log("PROD", products)
         this.orderProduct = products;
-
-        console.log("azhar", this.orderProduct) //azhar
-
 
         for (let i = 0; i < products.length; i++) {
           this.productsService.getProduct(products[i].productId).subscribe((prod) => {
-            // product.price - product.price * product.ratioOfPromotion
-            console.log("prooood", prod[0].ratioOfPromotion);
             this.productsList.push({ product: prod[0], productQty: products[i].productQty }); //details of each product
-            console.log("3yza ashof elratio", this.productsList[0].product.ratioOfPromotion);
 
             if (prod[0].ratioOfPromotion>0) {
               this.totalPrice += (products[i].productQty) * (prod[0].price - ((prod[0].price) * (prod[0].ratioOfPromotion)));
@@ -66,7 +57,6 @@ export class CartComponent implements OnInit, OnChanges {
               this.totalPrice += (prod[0].price) * (products[i].productQty);
             }
 
-            console.log(this.productsList);
 
           }
             , (err) => { console.log(err); })
@@ -97,9 +87,6 @@ export class CartComponent implements OnInit, OnChanges {
   CheckOut() {
     this.orderService.addOrder(this.id)
     .subscribe((order)=>{
-          console.log("CheckOut")
-          console.log("subscribe");
-          console.log(order)
           if(order)
             console.log("ORDER",order); //price is ok
         },
@@ -107,49 +94,5 @@ export class CartComponent implements OnInit, OnChanges {
           console.log(err)
         })
   }
-
-  // CheckOut()
-  // {
-  //   console.log("CheckOut")
-  //   this.myService.checkoutFromCart().subscribe((cart)=>{
-  //     console.log(cart)
-  //   },
-  //   (err)=>{
-  //     console.log(err)
-  //   })
-  //   console.log("List with Out Quntity")
-
-  // console.log(this.orderProduct)
-  // console.log("henaaaa",this.userCart[0].productsList);
-  // let temp = {
-  //   user : this.id,
-  //    date: new Date(),
-  //    price: this.totalPrice,
-  //    products:[
-  //     ],
-
-  //    status:"pending",
-  // }
-  //   for(let i=0;i<this.orderProduct.length;i++)
-  //   {
-  //     temp.products.push({
-  //       product: this.orderProduct[i].productId,
-  //       quantity: this.orderProduct[i].productQty
-  //     });
-  //   }
-
-  //   console.log("order to be posted",temp);
-  //   this.subscriberToAddOrder = this.orderService.addOrder(temp)
-  //   .subscribe((order)=>{
-  //     console.log("subscribe");
-  //     if(order)
-  //     console.log(order);
-  //   },
-  //   (err)=>{
-  //     console.log(err)
-  //   })
-  // }
-
-
 
 }

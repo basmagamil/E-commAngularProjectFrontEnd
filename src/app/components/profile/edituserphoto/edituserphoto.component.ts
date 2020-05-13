@@ -24,7 +24,6 @@ export class EdituserphotoComponent implements OnInit {
   fileName;
 
   ngOnInit(): void {
-    console.log("photo modal init")
     this.updateUserPhotoForm = this.fb.group({
       image: ['']
     });
@@ -38,19 +37,15 @@ export class EdituserphotoComponent implements OnInit {
   }
 
   onClickUpdateUserPhotoSubmit(){
-    console.log(this.fileToUpload);
     this.updateUserPhoto(this.user._id, this.fileToUpload);
     this.activeModal.close();
     location.reload();
   }
 
   updateUserPhoto(id, updatedUserPhoto : File) {
-    console.log("updateUserPhoto updatedUserPhoto", updatedUserPhoto)
     this.subscriber = this.usersService.uploadPhoto(id, updatedUserPhoto).subscribe(() =>
       res => {
         this.user = res;
-        console.log(res);
-        // this.user._id=this.id;
       },
       err => {
         console.log(err);
@@ -59,6 +54,5 @@ export class EdituserphotoComponent implements OnInit {
   }
 
   ngOnDestroy():void{
-    // this.subscriber.unsubscribe();
   }
 }

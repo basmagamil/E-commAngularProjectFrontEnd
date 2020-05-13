@@ -12,15 +12,12 @@ export class CartService {
     private myClient: HttpClient,
     private usersService: UsersService
   ) {
-    console.log(this.userId);
   }
   userId = this.usersService.currentUser.id;
   getUserCart(id) {
     this.userId = id;
-    console.log(this.myClient.get(`${this.baseURL}/user/${id}`)); //{observe: 'body'} default // or {observe: 'response'}
     return this.myClient.get(`${this.baseURL}/user/${id}`);
   }
-  //  qtyInput;
 
   addProductToCart(prod, qtyInput) {
     let temp = {
@@ -37,16 +34,9 @@ export class CartService {
     .set('productsList[0][productId]', temp.productsList[0].productId)
     .set('productsList[0][quantity]', temp.productsList[0].quantity);
     return this.myClient.post(`${this.baseURL}/user/${this.userId}`, payload);
-    // return this.myClient.post(`${this.baseURL}/user/${this.userId}`, temp, {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //   }),
-    //   observe: 'body',
-    // });
   }
 
   deleteProductFromCart(prod) {
-    console.log(prod);
     return this.myClient.delete(
       `${this.baseURL}/user/${this.userId}/product/${prod}`
     );

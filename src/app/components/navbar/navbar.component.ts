@@ -47,8 +47,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getUser();
-    console.log(this.usersService.currentUser);
     this.getAllProducts();
   }
 
@@ -97,14 +95,11 @@ export class NavbarComponent implements OnInit {
   }
 
   getAllProducts(){
-    console.log("getall")
     this.subscriber = this.productService.getAllProducts().subscribe(
       (products) => {
         if (products) {
           // this.products = products;
           this.productService.productsList = products;
-          console.log("this.productService.productsList")
-          console.log(this.productService.productsList);
         }
       },
       (err) => {
@@ -113,15 +108,10 @@ export class NavbarComponent implements OnInit {
   }
 
   getProductsFilteredByTitle(title) {
-    // this.searchQu=this.productService.searchQuery;
-    // console.log("this.productService.searchQuery",this.productService.searchQuery);
     this.subscriber = this.productService.searchByTitle(title).subscribe(
       (products) => {
         if (products) {
-          // this.products = products;
           this.productService.productsList = products;
-          console.log("this.productService.productsList")
-          console.log(this.productService.productsList);
         }
         else{
           this.productService.productsList = [];
@@ -130,7 +120,6 @@ export class NavbarComponent implements OnInit {
       (err) => {
         console.log(err);
       })
-    // console.log(this.products)
   }
 
   searchByBrand(brand){
@@ -153,8 +142,6 @@ export class NavbarComponent implements OnInit {
   }
 
   getProductsFilteredByBrand(brand) {
-    // this.searchQu=this.productService.searchQuery;
-    // console.log("this.productService.searchQuery",this.productService.searchQuery);
     this.subscriber = this.productService.searchByBrand(brand).subscribe(
       (products) => {
         if (products) {
@@ -167,7 +154,6 @@ export class NavbarComponent implements OnInit {
       (err) => {
         console.log(err);
       })
-    // console.log(this.products)
   }
 
   searchByProcessor(processor){

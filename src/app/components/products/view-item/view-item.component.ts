@@ -13,7 +13,6 @@ import { NavbarService } from 'src/app/services/navbar.service';
   styleUrls: ['./view-item.component.css']
 })
 export class ViewItemComponent implements OnInit {
-  // images = [1, 2, 3, 4].map((n) => `assets/images/${n}.jpg`);
   constructor(config: NgbCarouselConfig, private productsService: ProductsService, private cartService: CartService, public usersService:UsersService, public activeRouterLink: ActivatedRoute, public navService:NavbarService, private router: Router) {
     config.interval = 4000;
     config.wrap = true;
@@ -21,9 +20,6 @@ export class ViewItemComponent implements OnInit {
     config.pauseOnHover = false;
     config.showNavigationArrows = false;
     this.id = this.activeRouterLink.snapshot.params.id;
-    console.log(this.id)
-
-
   }
 
   id;
@@ -33,10 +29,7 @@ export class ViewItemComponent implements OnInit {
   ngOnInit(): void {
     this.navService.show();
     this.id = this.activeRouterLink.snapshot.params.id;
-    console.log(this.id)
-
     this.getProduct(this.id);
-    console.log(this.product)
   }
 
   ngOnDestroy(): void {
@@ -52,24 +45,17 @@ export class ViewItemComponent implements OnInit {
       (product) => {
         if (product) {
           this.product = product[0];
-          console.log(this.product)
-          console.log(product)
-          console.log(this.id)
         }
       },
       (err) => {
         console.log(err);
       })
-
-    console.log(this.product)
   }
   addToCartHandler(product, qtyInput) {
     $("#addToCart").on("click", function() {
       $(this).prop("disabled", true);
   });
-    console.log("prod ID", product._id, "qty", qtyInput);
     this.cartService.addProductToCart(product, this.qtyInput).subscribe((prod) => {
-      //console.log(prod)
     },
       (err) => {
         console.log(err)
@@ -89,7 +75,6 @@ export class ViewItemComponent implements OnInit {
       (err) => {
         console.log(err);
       })
-    console.log("yes i delete item no " + productID);
     location.reload();
 
   }

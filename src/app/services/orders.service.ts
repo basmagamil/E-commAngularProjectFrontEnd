@@ -15,28 +15,11 @@ export class OrdersService {
   }
 
   getOrder(id){
-    // let headers = new HttpHeaders();
-    // let token = localStorage.getItem('token');  
-    // headers = headers.set('Authorization', 'Bearer ' + token);
     return this.client.get(`${this.baseURL}/user/${id}`);
   }
   addOrder(userId){
-    // let payload = new HttpParams()
-    // .set('user', order.user)
-    // .set('date', order.date)
-    // .set('price', order.price)
-    // .set('status', order.status);
-    // var i=0;
-    // order.products.forEach(prodObj => {
-    //   payload = payload.set(`products[${i}][product]`,prodObj.product);
-    //   payload = payload.set(`products[${i}][quantity]`,prodObj.quantity);
-    //   i++;
-    // });
-    // console.log("payload to be posted",payload);
     let payload = new HttpParams()
     .set('user',userId);
-    console.log("service add order");
-    console.log(payload)
     return this.client.post(`${this.baseURL}`, payload);
   }
   deleteOrder(id){

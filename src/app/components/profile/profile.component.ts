@@ -19,57 +19,30 @@ export class ProfileComponent implements OnInit, OnDestroy {
   subscriber;
   user;
 
-  // orders=[{
-  //   date: 11-3-2020,
-  //   price: 5000,
-  //   products: [],
-  //   status: "pending"
-  // }]
-
-
   constructor(activeRouterLink:ActivatedRoute, 
     public router:Router, public usersService:UsersService, 
     private modalService: NgbModal,private ordersService:OrdersService,
     private productService:ProductsService, public navService:NavbarService) {
       this.id=activeRouterLink.snapshot.params.id;
-      // this.id=this.usersService.currentUser.id;
-      // this.getUser();
   }
 
   ngOnInit(): void {
     this.navService.show();
-    console.log("ngoninit");
     this.getUser();
-    console.log("after get user", this.user);
     this.getOrder();
   }
 
   onClickEditInfoModal(){
-    // console.log(this.user)
     const modalRef = this.modalService.open(EdituserComponent);
     modalRef.componentInstance.user = this.user;
-    // modalRef.componentInstance.test = "heyy";
-    // modalRef.result.then((result) => {
-    //   if (result) {
-    //    this.user=result;
-    //   }
-    //   });
   }
   onClickEditPhotoModal(){
-    // console.log(this.user)
     const modalRef = this.modalService.open(EdituserphotoComponent);
     modalRef.componentInstance.user = this.user;
-    // modalRef.componentInstance.test = "heyy";
-    // modalRef.result.then((result) => {
-    //   if (result) {
-    //    this.user=result;
-    //   }
-    //   });
   }
   getUser(){
     this.subscriber = this.usersService.getUser(this.id).subscribe(
       user=>{
-        console.log(user)
         this.user = user[0];
       },
       err=>{
@@ -100,11 +73,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   productTitle=[];
   getOrder()
   {
-    console.log("this.getorder in profile")
-    console.log("this.productsArr", this.productsArr);
     this.subscriberOrder = this.ordersService.getOrder(this.id).subscribe(
       orders=>{
-        console.log("orders", orders)
         this.orders = orders;
       },
       err=>{
@@ -125,20 +95,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   openModal(orderId): void{
-    console.log(orderId);
     this.tempOrderId= orderId;
-    console.log(this.orders.find(o=> o._id == orderId))
     this.productsArr = this.orders.find(o=> o._id == orderId).products;
-    console.log(this.productsArr);
     this.productTitle=[];
     for(var i=0;i<this.productsArr.length;i++)
           {
-            console.log("product id is wrong")
-            console.log(this.productsArr[i].product)
             this.subscriberToGetProductTitle=this.productService.getProduct(this.productsArr[i].product).subscribe(
               (products)=>{
-                console.log(products)
-                console.log(products[0].title)
                 if(products)
                 {
                   this.productTitle.push(products[0].title);
@@ -151,7 +114,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
  
   ngOnDestroy():void{
-    // this.subscriber.unsubscribe();
     this.subscriberOrder.unsubscribe();
   }
 }

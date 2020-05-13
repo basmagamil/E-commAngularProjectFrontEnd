@@ -46,12 +46,9 @@ export class AddComponent implements OnInit {
     for(var i =0; i<files.length; i++){
       this.filesToUpload.push(files.item(i));
       this.fileName = `${this.fileName} ${files.item(i).name}`;
-      // this.fileName += "hey";
     }
   }
   onClickAddProductSubmit(){
-    console.log(this.AddProductForm.value)
-    console.log(this.AddProductForm)
     if(this.AddProductForm.valid){
       let addProduct = this.AddProductForm.value;
       this.AddProduct(addProduct, this.filesToUpload);

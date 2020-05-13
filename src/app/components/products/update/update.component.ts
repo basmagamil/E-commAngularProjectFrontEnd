@@ -58,28 +58,13 @@ export class UpdateComponent implements OnInit {
   subscriber2;
   product;
   fileName;
-  // FileChange(event) {
-  //   for (let i = 0; i < event.target.files.length; i++) {
-  //     this.updatedProduct.ImagesList.push(event.target.files[i].name);
-  //   }
-  // }
   onClickUpdateProductSubmit() {
     if (this.UpdateProductForm.valid) {
       let updatedProduct = this.UpdateProductForm.value;
-      // if(this.promotion.value){
-      //   updatedProduct.isPromoted=true;
-      // }
-      // else{
-      //   updatedProduct.isPromoted=false;
-      // }
-      console.log(updatedProduct);
       this.UpdateProduct(this.product._id, updatedProduct, this.filesToUpload);
-      // this.router.navigate(['../']);
       this._location.back();
-      // location.reload();
     }
     else{
-      console.log(this.UpdateProductForm)
       this.UpdateProductForm.markAllAsTouched();
     }
   }
@@ -103,7 +88,6 @@ export class UpdateComponent implements OnInit {
         this.filesToUpload = this.product.images;
         if(this.product.images && this.product.images.length){
           this.fileName ="";
-          console.log(this.product.images)
           for(var j=0; j<this.product.images.length; j++){
             let fullname = this.product.images[j];
             let name = fullname.split("//")[1].split("/")[1];
@@ -113,10 +97,7 @@ export class UpdateComponent implements OnInit {
         else{
           this.fileName = "Choose file";
         }
-        // this.user._id=this.id;
-        console.log(this.product);
         this.UpdateProductForm.patchValue({title: this.product.title})
-        // this.UpdateProductForm.patchValue({images: this.product.images})
         this.UpdateProductForm.patchValue({price: this.product.price})
         this.UpdateProductForm.patchValue({details: {
                                                     Brand: this.product.details.Brand,
@@ -131,8 +112,6 @@ export class UpdateComponent implements OnInit {
         this.UpdateProductForm.patchValue({quantity: this.product.quantity})
       },
       err => {
-        console.log("fail")
-
         console.log(err);
       }
     )

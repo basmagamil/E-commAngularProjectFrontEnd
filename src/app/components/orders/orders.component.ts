@@ -25,11 +25,8 @@ export class OrdersComponent implements OnInit , OnDestroy{
   }
 
   openModal(orderId): void{
-    console.log("this.productsarr", this.productsArr);
-
     this.tempOrderId= orderId;
     this.productsArr = this.orders.find(o=> o._id == orderId).products;
-    console.log(this.productsArr)
     this.productTitle=[];
     for(var i=0;i<this.productsArr.length;i++)
           {
@@ -48,9 +45,7 @@ export class OrdersComponent implements OnInit , OnDestroy{
   tempOrderId;
   tempOrder;
   productsArr = [];
-  
 
-  //Azhar updates
   subscriber;
   subscriberToGetUserName;
   subscriberToGetProductTitle;
@@ -59,8 +54,6 @@ export class OrdersComponent implements OnInit , OnDestroy{
   userName=[];
   productTitle=[];
   getAllOrders(){
-    console.log("this.productsarr", this.productsArr);
-
     this.subscriber = this.ordersService.getOrders().subscribe(
       (orders)=>{
         if(orders)
@@ -70,7 +63,6 @@ export class OrdersComponent implements OnInit , OnDestroy{
           {
             this.subscriberToGetUserName=this.userService.getUser(orders[i].user).subscribe(
               (user)=>{
-                console.log(user);
                 if(user)
                 {
                   this.userName.push(user[0].userName);
@@ -86,8 +78,6 @@ export class OrdersComponent implements OnInit , OnDestroy{
       (err)=>{
         console.log(err);
       })
-
-      console.log(this.orders)
   }
 
 
@@ -98,12 +88,8 @@ export class OrdersComponent implements OnInit , OnDestroy{
 
 
   onChange(deviceValue,order){
-    console.log(deviceValue);
-    console.log(order)
     this.subscriberToUpdateOrder = this.ordersService.updateOrder(order._id,order)
     .subscribe((order)=>{
-      console.log("No error")
-      console.log(order)
     },
     (err)=>{
       console.log(err)

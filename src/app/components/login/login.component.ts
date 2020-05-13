@@ -37,14 +37,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onClickLoginSubmit(){
-    console.log("onclickloginsubmit")
     if(this.loginForm.valid){
       let user = this.loginForm.value;
       this.loginUser(user);
-      // console.log(this.loginForm.value);
-      // this.loginEvent.emit(this.loginForm.value);
-      // this.router.navigateByUrl('');
-      console.log("loginformvalid")
     }
     else{
       this.loginForm.markAllAsTouched();
@@ -52,11 +47,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loginUser(user){
-    console.log("loginUser")
     this.subscriber = this.usersService.loginUser(user).subscribe(
       res => {
         if (res){
-          console.log(res['token']);
           localStorage.setItem('token', res['token']);
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           this.router.navigate([returnUrl || '/']);
@@ -64,7 +57,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         else{
           this.invalidLogin = true;
         }    
-        console.log("res",res);
       },
       err => {
         this.invalidLogin = true;
@@ -74,7 +66,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.subscriber.unsubscribe();
   }
 
 

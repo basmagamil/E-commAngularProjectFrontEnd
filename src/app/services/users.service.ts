@@ -18,9 +18,6 @@ export class UsersService {
   }
   
   getUser(id){
-    // let headers = new HttpHeaders();
-    // let token = localStorage.getItem('token');  
-    // headers = headers.set('Authorization', 'Bearer ' + token);
     return this.client.get(`${this.baseURL}/${id}`);
   }
   updateUser(id, user){
@@ -43,14 +40,10 @@ export class UsersService {
     .set('gender', user.gender)
     .set('image', user.image);
     return this.client.post(`${this.baseURL}/signup`, payload);
-    // return this.client.post(`${this.baseURL}`, user);
   }
   uploadPhoto(id, profileImage : File){
-    console.log("service uploadPhoto profileImage",profileImage);
     const formData: FormData = new FormData();
     formData.append('image', profileImage, profileImage.name);
-
-    // new Response(formData).text().then(console.log);
 
     return this.client.post(`${this.baseURL}/upload/profile/${id}`, formData);
   }
