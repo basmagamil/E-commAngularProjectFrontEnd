@@ -38,9 +38,9 @@ export class EdituserComponent implements OnInit {
         Validators.required,
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
       ]),
-      password: new FormControl(this.user.password, Validators.required),
+      password: new FormControl(),
       gender: new FormControl(this.user.gender, Validators.required),
-      image: new FormControl(this.user.image, Validators.required),
+      // image: new FormControl(this.user.image, Validators.required),
     })
     // console.log(this.user._id)
     this.id = this.user._id;
@@ -123,9 +123,9 @@ export class EdituserComponent implements OnInit {
   get gender() {
     return this.updateInfoForm.get('gender');
   }
-  get image(){
-    return this.updateInfoForm.get('image');
-  }
+  // get image(){
+  //   return this.updateInfoForm.get('image');
+  // }
 
   
 
