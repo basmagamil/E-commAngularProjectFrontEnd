@@ -11,7 +11,7 @@
                         <div class="row no-gutters">
                             <div class="col-md-3">
                                 <h6 style="background-color: red; color: white;font-size:25px;" class="w-50 p-2"
-                                    *ngIf="product.ratioOfPromotion">{{product.ratioOfPromotion*100}}<fa-icon
+                                    *ngIf="product.ratioOfPromotion">{{Math.round(product.ratioOfPromotion*100)}}<fa-icon
                                         style="color:white;font-size:25px;" [icon]="faPercent"></fa-icon>
                                 </h6>
                                 <img [src]="product.images[0]" class="card-img m-3">
@@ -20,8 +20,12 @@
                                 <div class="card-body m-1">
                                     <a class="card-title h5" routerLink="../products/Details/{{product._id}}">{{product.title}}</a>
                                     <ul class="card-text mt-3">
-                                        <li *ngFor="let key of GetKeys(product.details)"><b>{{key}}:</b>
-                                            {{product.details[key]}}</li>
+                                        <div *ngFor="let key of GetKeys(product.details)">
+                                            <li *ngIf="product.details[key]">
+                                                <b>{{key}}:</b>
+                                                {{product.details[key]}}
+                                            </li>
+                                        </div>
                                     </ul>
                                 </div>
                             </div>

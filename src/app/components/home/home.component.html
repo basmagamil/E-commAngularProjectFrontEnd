@@ -3,7 +3,8 @@
         <div class="carousel-caption col-md-5 p-lg-5 mx-auto my-5 d-md-inline-block d-none">
             <h1 class="display-4 font-weight-normal d-lg-inline-block d-none">{{sliderTitles[i]}}</h1>
             <p class="lead font-weight-normal">{{sliderCaptions[i]}}</p>
-            <a class="btn btn-primary" routerLink="../products">Shop Now</a>
+            <a class="btn btn-primary" routerLink="../products"
+            (click)="getAllProducts()">Shop Now</a>
         </div>
         <div class="picsum-img-wrapper">
             <img [src]="img" class="w-100">

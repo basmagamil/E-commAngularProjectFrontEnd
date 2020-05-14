@@ -52,7 +52,10 @@ export class AddComponent implements OnInit {
     if(this.AddProductForm.valid){
       let addProduct = this.AddProductForm.value;
       this.AddProduct(addProduct, this.filesToUpload);
-      this.location.back();
+      console.log("add");
+      this.getAllProducts();
+      console.log(this.productsService.productsList)
+      this.router.navigate(['../products']);
     }
     else{
       this.AddProductForm.markAllAsTouched();
@@ -70,9 +73,21 @@ export class AddComponent implements OnInit {
     )
   }
   goBack(){
-    this.location.back();
+    this.getAllProducts();
+    this.router.navigate(['../products']);
 
   }
-
+  getAllProducts(){
+    this.subscriber = this.productsService.getAllProducts().subscribe(
+      (products) => {
+        if (products) {
+          // this.products = products;
+          this.productsService.productsList = products;
+        }
+      },
+      (err) => {
+        console.log(err);
+      })
+  }
 
 }

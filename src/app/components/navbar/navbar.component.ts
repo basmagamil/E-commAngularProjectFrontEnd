@@ -64,6 +64,7 @@ export class NavbarComponent implements OnInit {
   
 
   GoToAllProduct() {
+    this.getAllProducts();
     this.router.navigate(['../products']);
   }
   ngOnDestroy(): void {

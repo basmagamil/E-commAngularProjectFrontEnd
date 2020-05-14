@@ -62,14 +62,28 @@ export class UpdateComponent implements OnInit {
     if (this.UpdateProductForm.valid) {
       let updatedProduct = this.UpdateProductForm.value;
       this.UpdateProduct(this.product._id, updatedProduct, this.filesToUpload);
-      this._location.back();
+      this.getAllProducts();
+      this.router.navigate(['../products']);
     }
     else{
       this.UpdateProductForm.markAllAsTouched();
     }
   }
   goBack(){
-    this._location.back();
+    this.getAllProducts();
+    this.router.navigate(['../products']);
+  }
+  getAllProducts(){
+    this.subscriber = this.productsService.getAllProducts().subscribe(
+      (products) => {
+        if (products) {
+          // this.products = products;
+          this.productsService.productsList = products;
+        }
+      },
+      (err) => {
+        console.log(err);
+      })
   }
   UpdateProduct(id, updatedProduct, files) {
     this.subscriber2 = this.productsService.updateProduct(id, updatedProduct, files).subscribe(

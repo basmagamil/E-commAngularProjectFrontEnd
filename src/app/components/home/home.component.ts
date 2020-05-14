@@ -6,6 +6,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/services/products.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -64,7 +65,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    public navService: NavbarService
+    public navService: NavbarService,
+    private router: Router
   ) {}
 
   subscriber;
@@ -88,5 +90,23 @@ export class HomeComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
+  }
+  // shopNow(){
+  //   console.log("home");
+  //   this.getAllProducts();
+  //   console.log(this.productsService.productsList);
+  //   this.router.navigate(['../products']);
+  // }
+  getAllProducts(){
+    this.subscriber = this.productsService.getAllProducts().subscribe(
+      (products) => {
+        if (products) {
+          // this.products = products;
+          this.productsService.productsList = products;
+        }
+      },
+      (err) => {
+        console.log(err);
+      })
   }
 }

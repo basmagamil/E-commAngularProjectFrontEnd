@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit {
     private isadmain:AdminAuthGuardService, public navService:NavbarService, public usersService:UsersService,  private route: ActivatedRoute) {
   }
 
+  Math = Math;
   faSearch = faSearch;
   faPercent = faPercent;
   DeleteProductItemID;
@@ -34,6 +35,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.navService.show();
+    // this.getAllProducts();
+    // console.log(this.products);
   }
 
   GetKeys(obj) {
@@ -57,4 +60,19 @@ export class ProductsComponent implements OnInit {
     this.UpdateProductItem = product;
     this.router.navigate(['../products/update/', product._id]);
   }
+
+  getAllProducts(){
+    this.subscriber = this.productsService.getAllProducts().subscribe(
+      (products) => {
+        if (products) {
+          // this.products = products;
+          this.productsService.productsList = products;
+        }
+      },
+      (err) => {
+        console.log(err);
+      })
+  }
 }
+
+
