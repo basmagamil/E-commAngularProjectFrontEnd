@@ -1,39 +1,38 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { EmailValidator } from '@angular/forms';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductsService {
-  
-  baseURL = "http://localhost:3000/products";
-  
-  constructor(private client:HttpClient) { }
+  baseURL = 'https://lab-shop.herokuapp.com/products';
+
+  constructor(private client: HttpClient) {}
 
   // searchQuery;
   productsList;
 
-
-  getAllProducts(){
+  getAllProducts() {
     return this.client.get(this.baseURL); //, {observe:'body'}
   }
-  getSearchByBrand(BrandName){
+  getSearchByBrand(BrandName) {
     return this.client.get(`${this.baseURL}/search/Brand?Brand=${BrandName}`);
   }
-  getSearchByProcessor(ProcessorName){
-    return this.client.get(`${this.baseURL}/search/Processor?Processor=${ProcessorName}`);
+  getSearchByProcessor(ProcessorName) {
+    return this.client.get(
+      `${this.baseURL}/search/Processor?Processor=${ProcessorName}`
+    );
   }
-  getPromotedProducts(){
+  getPromotedProducts() {
     return this.client.get(`${this.baseURL}/promoted`);
   }
-  getProduct(id){
+  getProduct(id) {
     return this.client.get(`${this.baseURL}/${id}`);
   }
-  addProduct(product, productImages){
-
+  addProduct(product, productImages) {
     const formData: FormData = new FormData();
-    for(var i =0; i<productImages.length; i++){
+    for (var i = 0; i < productImages.length; i++) {
       formData.append(`images`, productImages[i]);
     }
     formData.append('title', product.title);
@@ -49,13 +48,12 @@ export class ProductsService {
 
     return this.client.post(`${this.baseURL}`, formData);
   }
-  deleteProduct(id){
+  deleteProduct(id) {
     return this.client.delete(`${this.baseURL}/${id}`);
   }
-  updateProduct(id, product, productImages){
-
+  updateProduct(id, product, productImages) {
     const formData: FormData = new FormData();
-    for(var i =0; i<productImages.length; i++){
+    for (var i = 0; i < productImages.length; i++) {
       formData.append(`images`, productImages[i]);
     }
     formData.append('title', product.title);
@@ -70,20 +68,17 @@ export class ProductsService {
     formData.append('quantity', product.quantity);
     return this.client.patch(`${this.baseURL}/${id}`, formData);
   }
-  searchByTitle(searchText){
+  searchByTitle(searchText) {
     // this.searchQuery = searchText;
-    const payload = new HttpParams()
-    .set('title', searchText)
-    return this.client.post(`${this.baseURL}/search`,payload);
+    const payload = new HttpParams().set('title', searchText);
+    return this.client.post(`${this.baseURL}/search`, payload);
   }
-  searchByBrand(searchText){
-    const payload = new HttpParams()
-    .set('Brand', searchText)
-    return this.client.post(`${this.baseURL}/search`,payload);
+  searchByBrand(searchText) {
+    const payload = new HttpParams().set('Brand', searchText);
+    return this.client.post(`${this.baseURL}/search`, payload);
   }
-  searchByProcessor(searchText){
-    const payload = new HttpParams()
-    .set('Processor', searchText)
-    return this.client.post(`${this.baseURL}/search`,payload);
+  searchByProcessor(searchText) {
+    const payload = new HttpParams().set('Processor', searchText);
+    return this.client.post(`${this.baseURL}/search`, payload);
   }
 }

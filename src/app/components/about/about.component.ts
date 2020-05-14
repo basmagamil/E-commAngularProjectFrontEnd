@@ -4,45 +4,43 @@ import { NavbarService } from 'src/app/services/navbar.service';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+  styleUrls: ['./about.component.css'],
 })
 export class AboutComponent implements OnInit {
   team = [
     {
-      "Name": "Ashimaa",
-      "Track": "System Development",
-      "SubTrack": "Mobile Applications Cross Platform",
-      "Organization": "ITI Smart Village",
-      "Image": "http://localhost:3000/defaultfemale.jpeg"
+      Name: 'Ashimaa',
+      Track: 'System Development',
+      SubTrack: 'Mobile Applications Cross Platform',
+      Organization: 'ITI Smart Village',
+      Image: 'https://lab-shop.herokuapp.com/defaultfemale.jpeg',
     },
     {
-      "Name": "Azhar",
-      "Track": "System Development",
-      "SubTrack": "Mobile Applications Cross Platform",
-      "Organization": "ITI Smart Village",
-      "Image": "http://localhost:3000/defaultfemale.jpeg"
+      Name: 'Azhar',
+      Track: 'System Development',
+      SubTrack: 'Mobile Applications Cross Platform',
+      Organization: 'ITI Smart Village',
+      Image: 'https://lab-shop.herokuapp.com/defaultfemale.jpeg',
     },
     {
-      "Name": "Basma",
-      "Track": "System Development",
-      "SubTrack": "Mobile Applications Cross Platform",
-      "Organization": "ITI Smart Village",
-      "Image": "http://localhost:3000/defaultfemale.jpeg"
+      Name: 'Basma',
+      Track: 'System Development',
+      SubTrack: 'Mobile Applications Cross Platform',
+      Organization: 'ITI Smart Village',
+      Image: 'https://lab-shop.herokuapp.com/defaultfemale.jpeg',
     },
     {
-      "Name": "Rawan",
-      "Track": "System Development",
-      "SubTrack": "Mobile Applications Cross Platform",
-      "Organization": "ITI Smart Village",
-      "Image": "http://localhost:3000/defaultfemale.jpeg"
+      Name: 'Rawan',
+      Track: 'System Development',
+      SubTrack: 'Mobile Applications Cross Platform',
+      Organization: 'ITI Smart Village',
+      Image: 'https://lab-shop.herokuapp.com/defaultfemale.jpeg',
     },
   ];
 
-  
-  constructor(public navService:NavbarService) { }
-  
+  constructor(public navService: NavbarService) {}
+
   ngOnInit(): void {
     this.navService.show();
   }
-
 }

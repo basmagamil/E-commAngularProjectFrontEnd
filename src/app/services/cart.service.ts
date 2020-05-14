@@ -6,13 +6,12 @@ import { UsersService } from './users.service';
   providedIn: 'root',
 })
 export class CartService {
-  baseURL: string = 'http://localhost:3000/carts';
+  baseURL: string = 'https://lab-shop.herokuapp.com/carts';
 
   constructor(
     private myClient: HttpClient,
     private usersService: UsersService
-  ) {
-  }
+  ) {}
   userId = this.usersService.currentUser.id;
   getUserCart(id) {
     this.userId = id;
@@ -30,9 +29,9 @@ export class CartService {
       ],
     };
     const payload = new HttpParams()
-    .set('userId', temp.userId)
-    .set('productsList[0][productId]', temp.productsList[0].productId)
-    .set('productsList[0][quantity]', temp.productsList[0].quantity);
+      .set('userId', temp.userId)
+      .set('productsList[0][productId]', temp.productsList[0].productId)
+      .set('productsList[0][quantity]', temp.productsList[0].quantity);
     return this.myClient.post(`${this.baseURL}/user/${this.userId}`, payload);
   }
 

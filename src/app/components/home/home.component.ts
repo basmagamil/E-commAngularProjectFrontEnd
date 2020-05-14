@@ -15,9 +15,9 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   sliderImages = [
-    'http://localhost:3000/christin-hume-Hcfwew744z4-unsplash.jpg',
-    'http://localhost:3000/etienne-boulanger-aafOjsh-9jU-unsplash.jpg',
-    'http://localhost:3000/christin-hume-mfB1B1s4sMc-unsplash.jpg',
+    'https://lab-shop.herokuapp.com/christin-hume-Hcfwew744z4-unsplash.jpg',
+    'https://lab-shop.herokuapp.com/etienne-boulanger-aafOjsh-9jU-unsplash.jpg',
+    'https://lab-shop.herokuapp.com/christin-hume-mfB1B1s4sMc-unsplash.jpg',
   ];
   sliderTitles = ['Stay Home', "Don't Save Up", 'Free Shipping'];
   sliderCaptions = [
@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
   //   console.log(this.productsService.productsList);
   //   this.router.navigate(['../products']);
   // }
-  getAllProducts(){
+  getAllProducts() {
     this.subscriber = this.productsService.getAllProducts().subscribe(
       (products) => {
         if (products) {
@@ -107,6 +107,7 @@ export class HomeComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-      })
+      }
+    );
   }
 }

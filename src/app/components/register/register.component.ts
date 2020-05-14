@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
@@ -7,13 +13,16 @@ import { NavbarService } from 'src/app/services/navbar.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit, OnDestroy{
-
+export class RegisterComponent implements OnInit, OnDestroy {
   @Output() registerEvent = new EventEmitter();
 
-  constructor(public router: Router, private usersService: UsersService, public navService:NavbarService) { }
+  constructor(
+    public router: Router,
+    private usersService: UsersService,
+    public navService: NavbarService
+  ) {}
 
   ngOnInit(): void {
     this.navService.show();
@@ -23,12 +32,12 @@ export class RegisterComponent implements OnInit, OnDestroy{
     userName: new FormControl('', Validators.required),
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
     ]),
     password: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
     image: new FormControl(),
-  })
+  });
 
   get userName() {
     return this.registerForm.get('userName');
@@ -48,39 +57,34 @@ export class RegisterComponent implements OnInit, OnDestroy{
   onClickRegisterSubmit() {
     if (this.registerForm.valid) {
       let user = this.registerForm.value;
-      if(user.gender == "female"){
-        user.image = "http://localhost:3000/defaultfemale.jpeg";
-      }
-      else{
-        user.image = "http://localhost:3000/defaultmale.jpg";
+      if (user.gender == 'female') {
+        user.image = 'https://lab-shop.herokuapp.com/defaultfemale.jpeg';
+      } else {
+        user.image = 'https://lab-shop.herokuapp.com/defaultmale.jpg';
       }
       this.registerEvent.emit(user);
       this.registerUser(user);
       this.router.navigateByUrl('');
-    }
-    else{
+    } else {
       this.registerForm.markAllAsTouched();
     }
   }
 
   registerUser(user) {
     this.subscriber = this.usersService.registerUser(user).subscribe(
-      res => {
-        if (res){
-          localStorage.setItem('token', res['token']);  
+      (res) => {
+        if (res) {
+          localStorage.setItem('token', res['token']);
           this.router.navigate(['/']);
-        }
-        else{
+        } else {
           // this.invalidLogin = true;
-        }    
+        }
       },
-      err => {
+      (err) => {
         console.log(err);
       }
-    )
+    );
   }
 
-  ngOnDestroy(): void {
-  }
-
+  ngOnDestroy(): void {}
 }
