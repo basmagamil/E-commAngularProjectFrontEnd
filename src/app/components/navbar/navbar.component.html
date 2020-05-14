@@ -51,19 +51,12 @@
           name="search"
           (keyup.enter)="searchByTitle(search)"
         />
-        <!-- (keyup.enter)="GeneralSearch()"
-        (click)="GoToAllProduct()" -->
-
         <div class="input-group-append">
           <button
             type="button"
             class="btn btn-secondary"
             (click)="searchByTitle(search)"
           >
-            <!--(click)="GeneralSearch()"
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="active"
-          routerLink="../products" -->
             <fa-icon [icon]="faSearch"></fa-icon>
           </button>
         </div>
@@ -71,7 +64,6 @@
     </form>
 
     <div class="navbar-nav ml-auto">
-      <!-- 1 TODO: only show if logged in -->
       <a
         *ngIf="usersService.isLoggedIn()"
         class="d-md-none"
@@ -91,7 +83,7 @@
         class="nav-item nav-link disabled d-none d-md-inline-block"
         >Hello, {{ usersService.currentUser.userName }}!</a
       >
-      <!-- 1.a TODO: only show if user -->
+
       <a
         *ngIf="usersService.isLoggedIn() && !usersService.currentUser.isAdmin"
         [routerLinkActiveOptions]="{ exact: true }"
@@ -112,9 +104,6 @@
         <fa-icon [icon]="faShoppingCart"></fa-icon>
         <span class="d-md-none"> Cart</span>
       </a>
-      <!-- 1.a end -->
-
-      <!-- 1.b TODO: only show if admin -->
       <a
         *ngIf="usersService.isLoggedIn() && usersService.currentUser.isAdmin"
         [routerLinkActiveOptions]="{ exact: true }"

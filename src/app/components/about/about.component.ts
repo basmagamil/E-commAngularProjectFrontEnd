@@ -13,28 +13,28 @@ export class AboutComponent implements OnInit {
       Track: 'System Development',
       SubTrack: 'Mobile Applications Cross Platform',
       Organization: 'ITI Smart Village',
-      Image: 'https://lab-shop.herokuapp.com/defaultfemale.jpeg',
+      Image: 'https://lab-shop.herokuapp.com/ashimaa.jpg',
     },
     {
       Name: 'Azhar',
       Track: 'System Development',
       SubTrack: 'Mobile Applications Cross Platform',
       Organization: 'ITI Smart Village',
-      Image: 'https://lab-shop.herokuapp.com/defaultfemale.jpeg',
+      Image: 'https://lab-shop.herokuapp.com/azhar.jpg',
     },
     {
       Name: 'Basma',
       Track: 'System Development',
       SubTrack: 'Mobile Applications Cross Platform',
       Organization: 'ITI Smart Village',
-      Image: 'https://lab-shop.herokuapp.com/defaultfemale.jpeg',
+      Image: 'https://lab-shop.herokuapp.com/basma.jpg',
     },
     {
       Name: 'Rawan',
       Track: 'System Development',
       SubTrack: 'Mobile Applications Cross Platform',
       Organization: 'ITI Smart Village',
-      Image: 'https://lab-shop.herokuapp.com/defaultfemale.jpeg',
+      Image: 'https://lab-shop.herokuapp.com/rawan.jpg',
     },
   ];
 

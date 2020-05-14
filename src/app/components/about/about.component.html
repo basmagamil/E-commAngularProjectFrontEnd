@@ -1,22 +1,41 @@
 <div class="container marketing">
-    <section class="jumbotron text-center">
-        <div class="container mt-5 mb-4">
-            <h1 class="jumbotron-heading">About Us</h1>
-            <p class="lead text-muted">This is a project for the Angular Course in ITI Smart Village Intake 40. It's an
-                E-commerce website specifically for laptops.</p>
-        </div>
-    </section>
+  <section class="jumbotron text-center">
+    <div class="container mt-5 mb-4">
+      <h1 class="jumbotron-heading">About Us</h1>
+      <p class="lead text-muted">
+        This is a project for the Angular Course in ITI Smart Village Intake 40.
+        It's an E-commerce website specifically for laptops. Follow Links To Get
+        The Code
+        <a href=" https://github.com/ashimaaeldeeb/AngularProject" class="ml-2">
+          Back-End Code</a
+        >
 
-    <div class="col-10 mt-5 offset-1">
-        <div class="row">
-            <div class="jumbotron col-lg-3 text-center" *ngFor="let member of team">
-                <img class="rounded-circle" [src]=member.Image width="140" height="140">
-                <h2 class="jumbotron-heading">{{member.Name}}</h2>
-                <div class="lead text-muted">{{member.Track}}<br>
-                    {{member.SubTrack}}<br>
-                    {{member.Organization}}<br>
-                </div>
-            </div>
-        </div>
+        <a
+          href="  https://github.com/basmagamil/E-commAngularProjectFrontEnd"
+          class="ml-2"
+        >
+          Front-End Code</a
+        >
+      </p>
     </div>
+  </section>
+
+  <div class="col-10 mt-5 offset-1">
+    <div class="row">
+      <div class="jumbotron col-lg-3 text-center" *ngFor="let member of team">
+        <img
+          class="rounded-circle"
+          [src]="member.Image"
+          width="140"
+          height="140"
+        />
+        <h2 class="jumbotron-heading">{{ member.Name }}</h2>
+        <div class="lead text-muted">
+          {{ member.Track }}<br />
+          {{ member.SubTrack }}<br />
+          {{ member.Organization }}<br />
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
