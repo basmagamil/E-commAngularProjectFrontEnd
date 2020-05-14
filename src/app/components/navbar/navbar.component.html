@@ -26,7 +26,11 @@
     routerLink="home"
     class="navbar-brand"
   >
-    <img src="http://localhost:3000/logo.svg" height="28" alt="CompYou" />
+    <img
+      src="https://lab-shop.herokuapp.com/logo.svg"
+      height="28"
+      alt="CompYou"
+    />
   </a>
   <button
     type="button"
@@ -46,21 +50,17 @@
           [(ngModel)]="search"
           name="search"
           (keyup.enter)="searchByTitle(search)"
-          
         />
         <!-- (keyup.enter)="GeneralSearch()"
         (click)="GoToAllProduct()" -->
-
 
         <div class="input-group-append">
           <button
             type="button"
             class="btn btn-secondary"
             (click)="searchByTitle(search)"
-            
-            
           >
-          <!--(click)="GeneralSearch()"
+            <!--(click)="GeneralSearch()"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="active"
           routerLink="../products" -->
@@ -80,7 +80,7 @@
         [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
         routerLink="../products"
-        >
+      >
         <fa-icon class="d-md-none" [icon]="faShoppingBag"></fa-icon>
         <span class="d-md-none"> All Laptops</span>
       </a>
@@ -175,8 +175,8 @@
         routerLink="../products"
         (click)="getAllProducts()"
         >All Laptops</a
-        >
-        <!-- (click)="SearchOnAllLaptop()" -->
+      >
+      <!-- (click)="SearchOnAllLaptop()" -->
 
       <div class="dropdown d-inline-block">
         <a class="nav-link dropbtn parent-nav-link"
@@ -190,8 +190,8 @@
               class="nav-link"
               (click)="searchByBrand('HP')"
               >HP</a
-              >
-              <!-- routerLink="../products"
+            >
+            <!-- routerLink="../products"
               (click)="SearchOnHPLaptop()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
@@ -199,8 +199,8 @@
               class="nav-link"
               (click)="searchByBrand('Lenovo')"
               >Lenovo</a
-              >
-              <!-- routerLink="../products"
+            >
+            <!-- routerLink="../products"
               (click)="SearchOnLenovoLaptop()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
@@ -208,8 +208,8 @@
               class="nav-link"
               (click)="searchByBrand('Dell')"
               >Dell</a
-              >
-              <!-- routerLink="../products"
+            >
+            <!-- routerLink="../products"
               (click)="SearchOnDellLaptop()" -->
           </div>
         </div>
@@ -227,8 +227,8 @@
               class="nav-link"
               (click)="searchByProcessor('Core i3')"
               >Core i3</a
-              >
-              <!-- routerLink="../products"
+            >
+            <!-- routerLink="../products"
               (click)="SearchOnLaptopCore_i3()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
@@ -236,8 +236,8 @@
               class="nav-link"
               (click)="searchByProcessor('Core i5')"
               >Core i5</a
-              >
-              <!-- routerLink="../products"
+            >
+            <!-- routerLink="../products"
               (click)="SearchOnLaptopCore_i5()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
@@ -245,8 +245,8 @@
               class="nav-link"
               (click)="searchByProcessor('Core i7')"
               >Core i7</a
-              >
-              <!-- routerLink="../products"
+            >
+            <!-- routerLink="../products"
               (click)="SearchOnLaptopCore_i7()" -->
             <a
               [routerLinkActiveOptions]="{ exact: true }"
@@ -254,8 +254,8 @@
               class="nav-link"
               (click)="searchByProcessor('Core i9')"
               >Core i9</a
-              >
-              <!-- routerLink="../products"
+            >
+            <!-- routerLink="../products"
               (click)="SearchOnLaptopCore_i9()" -->
           </div>
         </div>
